@@ -2,7 +2,7 @@ name: YMCA Website Services
 type: profile
 description: 'YMCA Website Services Drupal distribution.'
 core_version_requirement: ^9 || ^10
-version: '9.x-2.12'
+version: '9.x-2.12.2'
 distribution:
   name: YMCA Website Services
   install:
@@ -52,6 +52,7 @@ dependencies:
   
   # Contrib modules.
   - admin_toolbar:admin_toolbar
+  - admin_toolbar:admin_toolbar_tools
   - captcha:captcha
   - ckeditor_bootstrap_buttons:ckeditor_bootstrap_buttons
   # - config_import:config_import
@@ -67,7 +68,7 @@ dependencies:
   - recaptcha:recaptcha
   - simple_menu_icons:simple_menu_icons
   - twig_tweak:twig_tweak
-  # Open Y
+  # Website Services
   - advanced_help_block:advanced_help_block
   - openy_block_custom_simple:openy_block_custom_simple
   - openy_datalayer:openy_datalayer

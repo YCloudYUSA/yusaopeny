@@ -73,7 +73,7 @@ class ConfigureProfileForm extends FormBase {
     $default_preset = $this->getDefaultPreset();
     $form['preset'] = [
       '#type' => 'select',
-      '#title' => $this->t('Select your Open Y Install'),
+      '#title' => $this->t('Select your Website Services Install'),
       '#options' => $presets,
       '#default_value' => $default_preset,
       '#required' => TRUE,
@@ -85,7 +85,7 @@ class ConfigureProfileForm extends FormBase {
     $form['preset_top_info'] = [
       '#type' => '#markup',
       '#markup' => $this->t("
-<p>Standard is the recommended version of Open Y for the majority of Y associations. If you are unsure of which version to pick, start with Standard.</p> ")
+<p>Standard is the recommended version of Website Services for the majority of Y associations. If you are unsure of which version to pick, start with Standard.</p> ")
       ,];
 
     // Preset specific content.
@@ -200,10 +200,10 @@ class ConfigureProfileForm extends FormBase {
    */
   private function getOverallPresetsDescription() {
     return $this->t("
-<p><strong>Standard</strong> is the recommended and most common Open Y installation. It contains all of the functionality used by the majority of Y associations, such as contact forms, programs, membership calculators, blogs, and news posts.</p>
+<p><strong>Standard</strong> is the recommended and most common Website Services installation. It contains all of the functionality used by the majority of Y associations, such as contact forms, programs, membership calculators, blogs, and news posts.</p>
 <p><strong>Extended</strong> contains additional features such as GroupExPro integrations.</p>
 <p>if you are unsure of what to select, please start with <strong>Standard</strong>.</p>
-<p>NOTE: You can easily add ANY of the hundreds of Open Y features after you are finished setting up your site. We have tutorials to help you through the process.</p>");
+<p>NOTE: You can easily add ANY of the hundreds of Website Services features after you are finished setting up your site. We have tutorials to help you through the process.</p>");
   }
 
   /**
@@ -341,7 +341,7 @@ class ConfigureProfileForm extends FormBase {
 
   private function getExperimentalModulesMarkup() {
     $output = '<h3>Custom and experimental modules can also be installed in the future';
-    $output .= $this->buildQuestionMark('<p>Open Y also has experimental features, but be aware that those features are experimental may not be stable.</p>');
+    $output .= $this->buildQuestionMark('<p>Website Services also has experimental features, but be aware that those features are experimental may not be stable.</p>');
     $output .= '</h3>';
     return $output;
   }

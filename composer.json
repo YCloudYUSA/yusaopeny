@@ -78,6 +78,7 @@
         "drupal/pathauto": "^1.6",
         "drupal/personify": "^1.0",
         "drupal/program_search": "^1.0",
+        "drupal/protected_pages": "^1.4",
         "drupal/plugin": "2.5 || ^2.8",
         "drupal/rabbit_hole": "^1.0@beta || ^1.0",
         "drupal/recaptcha": "^3",
@@ -116,7 +117,7 @@
         "library-jaypan/jquery_colorpicker": "1.0.1",
         "library-smonetti/btbutton": "1.0.2",
         "library-vakata/jstree": "^3.3",
-        "mpdf/mpdf": "^7 || v8.0.4 || ~v8.0.4",
+        "mpdf/mpdf": "^7 || v8.0.4 || ~v8.0.4 || ^8.1",
         "npm-asset/blazy": "^1.8",
         "npm-asset/dropzone": "^5.5",
         "npm-asset/jquery.easing": "^1.4",
@@ -140,6 +141,7 @@
         "open-y-subprojects/openy_features": "^1.5.12",
         "open-y-subprojects/openy_content_core": "^1.1",
         "open-y-subprojects/common_scss": "dev-main",
+        "ycloudyusa/y_lb": "^1",
         "symfony/console": "^4.4.30 || ^5"
     },
     "require-dev": {

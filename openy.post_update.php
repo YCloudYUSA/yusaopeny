@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Post update functions for Open Y Distribution.
+ * Post update functions for Website Services Distribution.
  */
 
 /**

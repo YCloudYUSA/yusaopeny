@@ -1,6 +1,6 @@
-# Welcome to Open Y smoke tests documentation
+# Welcome to Website Services smoke tests documentation
 
-In order for Open Y dependencies being tested in a short timeframe, please follow steps below
+In order for Website Services dependencies being tested in a short timeframe, please follow steps below
 
 # Webforms
 
@@ -17,7 +17,7 @@ Administrator
 1. Login as admin
 2. Go to Structure -> Webforms (/admin/structure/webform)
 3. Verify you see a st of pages provided via module (Forms, Submissions, Options, Configuration, Add-ons, etc)
-4. Verify by defalt Open Y has one webform called ""Contact"" with a status Open
+4. Verify by defalt Website Services has one webform called ""Contact"" with a status Open
 5. Verify you can click on the webform title and see the form as independent page (ignore styles absence)
 6. Verify you can open the following pages for a specific webform (Results, Settings). 
 7. Verify there are no errors while visiting webform related pages. 
@@ -55,7 +55,7 @@ Administrator
 1. Administrator can create webforms 
 2. Webform module provideds needed functionality to create webform and add different elements 
 
-## Check Open Y Webform paragraph
+## Check Website Services Webform paragraph
 
 ### User
 
@@ -63,7 +63,7 @@ Administrator
 
 ### Steps
 
-*Note: Open Y does not use webform pages as is insted it provides a paragraph that gives the possiblity insert webform as ablock to any page. *
+*Note: Website Services does not use webform pages as is insted it provides a paragraph that gives the possiblity insert webform as ablock to any page. *
 
 1. Login as admin
 2. Go to the Landing page creating form (Content -> Add Content -> Landing page)
@@ -184,7 +184,7 @@ Administrator
 
 ### Expected results
 
-The following Open Y Content types support the ability to schedule page publishing: 
+The following Website Services Content types support the ability to schedule page publishing: 
 - Alert
 - Blog Post
 - Class

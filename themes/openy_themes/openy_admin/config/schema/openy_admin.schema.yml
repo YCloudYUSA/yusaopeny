@@ -1,5 +1,5 @@
-# Schema for the configuration files of the Open Y admin theme.
+# Schema for the configuration files of the Website Services admin theme.
 
 openy_admin.settings:
   type: theme_settings
-  label: 'Open Y admin settings'
+  label: 'Website Services admin settings'

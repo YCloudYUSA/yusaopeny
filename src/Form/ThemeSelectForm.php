@@ -50,7 +50,7 @@ class ThemeSelectForm extends FormBase {
   }
 
   /**
-   * Loads Open Y themes for selection from openy.themes.yml file.
+   * Loads Website Services themes for selection from openy.themes.yml file.
    *
    * @return mixed
    */
@@ -66,7 +66,7 @@ class ThemeSelectForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state, array &$install_state = NULL) {
     // Get all available themes.
     $themes = $this->themeHandler->rebuildThemeData();
-    // Get Open Y themes for selection.
+    // Get Website Services themes for selection.
     $openy_themes = self::getOpenyThemes();
     $form['#title'] = $this->t('Select theme');
     foreach ($openy_themes as $key => &$theme) {
@@ -94,7 +94,7 @@ class ThemeSelectForm extends FormBase {
 
     $form['theme'] = [
       '#type' => 'select',
-      '#title' => $this->t('Select your preferred Open Y theme'),
+      '#title' => $this->t('Select your preferred Website Services theme'),
       '#options' => $themes_options,
       '#default_value' => $this->getDefaultTheme(),
     ];

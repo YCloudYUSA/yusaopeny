@@ -109,25 +109,26 @@ events:
 
 helpers:
   name: 'Helpers'
-  description: 'Helpers package provides helper modules for Open Y.'
+  description: 'Helpers package provides helper modules for Website Services.'
   help: 'Using Helpers package you can enable mappings, migrate and socrates feature that requires advanced knowledge.'
   modules:
     - openy_mappings
     - openy_migrate
     - openy_socrates
     - media_library_bulk_upload
+    - protected_pages
 
 activenet:
   name: 'Integration: ActiveNet'
   description: 'Integration with ActiveNet package provides an integration with CRM.'
-  help: "<p>Using Integration with ActiveNet you can plug in your Open Y website to the CRM.</p>"
+  help: "<p>Using Integration with ActiveNet you can plug in your Website Services website to the CRM.</p>"
   modules:
     - activenet
 
 daxko:
   name: 'Integration: Daxko'
   description: 'Integration with Daxko package provides an integration with CRM.'
-  help: "<p>Using Integration with Daxko you can plug in your Open Y website to the CRM.</p>"
+  help: "<p>Using Integration with Daxko you can plug in your Website Services website to the CRM.</p>"
   modules:
     - daxko
     - openy_daxko2
@@ -136,7 +137,7 @@ daxko:
 groupexpro:
   name: 'Integration: GroupEx Pro'
   description: 'Integration with GroupEx Pro package provides an integration with CRM.'
-  help: "<p>Using Integration with GroupEx Pro you can plug in your Open Y website to the CRM.</p>"
+  help: "<p>Using Integration with GroupEx Pro you can plug in your Website Services website to the CRM.</p>"
   modules:
     - groupex_form_cache
     - openy_group_schedules
@@ -299,7 +300,7 @@ webform:
 # Demo content package added only for uninstall purpose. It should be hidden in install lists.
 demo:
   name: 'Demo Content'
-  description: 'Demo content package allows to install sample content for Open Y Platform.'
+  description: 'Demo content package allows to install sample content for Website Services Platform.'
   help: '<p>Using Demo content package you can install sample content and populate CMS with real-world content.</p>'
   modules:
     - openy_demo_addthis
@@ -336,8 +337,8 @@ demo:
 
 integration:
   name: 'Continuous Integration'
-  description: 'Continuous Integration package helps with Continuous Integration for the Open Y distribution.'
-  help: '<p>Continuous Integration package aims to help with Continuous Integration for the Open Y distribution.
+  description: 'Continuous Integration package helps with Continuous Integration for the Website Services distribution.'
+  help: '<p>Continuous Integration package aims to help with Continuous Integration for the Website Services distribution.
   Initially, this package was used for enabling domains with different themes (design) per domain.</p>'
   modules:
     - openy_development

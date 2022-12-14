@@ -1,8 +1,8 @@
-name: Open Y Admin
+name: Website Services Admin
 type: theme
 core_version_requirement: ^8 || ^9
 base theme: seven
-package: Open Y
+package: YMCA Website Services
 version: 8.x-1.0
 libraries-override:
   seven/install-page:

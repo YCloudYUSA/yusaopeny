@@ -1,2 +1,2 @@
-## Open Y Configs
-Contains the Open Y configs.
+## Website Services Configs
+Contains the Website Services configs.

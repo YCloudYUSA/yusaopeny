@@ -1,13 +1,13 @@
 <?php
 /**
- * Open Y Robo commands. 
- * Here we are able to create an any version of Open Y for CI builds.
+ * Website Services Robo commands. 
+ * Here we are able to create an any version of Website Services for CI builds.
  *
  * @see http://robo.li/
  */
 class RoboFile extends \Robo\Tasks {
   /**
-   * Create Open Y project https://github.com/ymcatwincities/openy-project without installation.
+   * Create Website Services project https://github.com/ymcatwincities/openy-project without installation.
    *
    * @param string $path
    *   Installation path that will be used to create "openy-project" folder.
@@ -60,7 +60,7 @@ class RoboFile extends \Robo\Tasks {
   }
 
   /**
-   * Installs Open Y from fork as dependency.
+   * Installs Website Services from fork as dependency.
    *
    * @param string $path
    *   Installation path where "openy-project" is placed.

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Defines the Open Y Profile install screen by modifying the install form.
+ * Defines the Website Services Profile install screen by modifying the install form.
  */
 
 use Drupal\openy\Form\ConfigureProfileForm;
@@ -519,11 +519,11 @@ function openy_fix_configured_paragraph_blocks(array &$install_state) {
 }
 
 /**
- * Run final Open Y profile install procedures.
+ * Run final Website Services profile install procedures.
  */
 function openy_install_finish(array &$install_state) {
   // Rerun install all available optional config that appeared after
-  // installation of Open Y modules and themes.
+  // installation of Website Services modules and themes.
   // We need to run this because during a drupal installation
   // optional configuration is installed only once at the
   // end of the core installation process.
@@ -726,7 +726,7 @@ function openy_install_tasks_alter(&$tasks, &$install_state) {
  *   A T&C form if T&C has not been accepted.
  */
 function openy_terms_of_use(&$install_state) {
-  // Open Y classes are not included yet on the first installation page,
+  // Website Services classes are not included yet on the first installation page,
   // because profile is not installed.
   // That's why we should include T&C form manually.
   if (!class_exists('\Drupal\openy\Form\TermsOfUseForm')) {

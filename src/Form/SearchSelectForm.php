@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Defines a form for Open Y Search services selection during install.
+ * Defines a form for Website Services Search services selection during install.
  */
 class SearchSelectForm extends FormBase {
 
@@ -21,16 +21,16 @@ class SearchSelectForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, array &$install_state = NULL) {
-    $form['#title'] = $this->t('Select Open Y Search');
+    $form['#title'] = $this->t('Select Website Services Search');
 
     $form['service'] = [
       '#type' => 'radios',
       '#title' => $this->t('Search service'),
-      '#description' => $this->t('Select Search service provided by Open Y you are going to use.'),
+      '#description' => $this->t('Select Search service provided by Website Services you are going to use.'),
       '#options' => [
         'none' => $this->t('None'),
-        'openy_google_search' => $this->t('Open Y Google Custom Search'),
-        'openy_search_api' => $this->t('Open Y Search API'),
+        'openy_google_search' => $this->t('Website Services Google Custom Search'),
+        'openy_search_api' => $this->t('Website Services Search API'),
       ],
       '#default_value' => 'none',
     ];

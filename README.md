@@ -22,7 +22,7 @@
 
 ***
 
-The [Y USA Open Y Project](https://ycloud.y.org/open-y-association-websites) is a composer based installer for the [Y USA Open Y distribution](https://github.com/YCloudYUSA/yusaopeny).
+The [Y USA Website Services Project](https://ycloud.y.org/open-y-association-websites) is a composer based installer for the [Y USA Website Services distribution](https://github.com/YCloudYUSA/yusaopeny).
 
 
 ## Requirements
@@ -84,9 +84,9 @@ Read more details on [Docksal](https://github.com/ymcatwincities/openy-docksal) 
 
 # Use Fork for the development
 
-All development happens in the [Open Y Drupal 9 installation profile](https://github.com/ymcatwincities/openy). In order to start development:
+All development happens in the [Website Services Drupal 9 installation profile](https://github.com/ymcatwincities/openy). In order to start development:
 
-1. Create fork of [Open Y installation profile](https://github.com/YCloudYUSA/yusaopeny)
+1. Create fork of [Website Services installation profile](https://github.com/YCloudYUSA/yusaopeny)
 2. Add your repository to `composer.json`
 ```
 "repositories": [
@@ -118,11 +118,11 @@ All development happens in the [Open Y Drupal 9 installation profile](https://gi
 # Directory structure
 | Directory | Purpose |
 |-----------|---------|
-| [**Y USA Open Y**](https://github.com/ycloudyusa/yusaopeny) ||
+| [**Y USA Website Services**](https://github.com/ycloudyusa/yusaopeny) ||
 | `docroot/` | Contains Drupal core |
-| `docroot/profiles/contrib/openy/` | Contains Open Y distribution |
-| `vendor/` | Contains Y USA Open Y distribution |
-| `composer.json` | Contains Y USA Open Y distribution |
+| `docroot/profiles/contrib/openy/` | Contains Website Services distribution |
+| `vendor/` | Contains Y USA Website Services distribution |
+| `composer.json` | Contains Y USA Website Services distribution |
 | [**CIBox VM**](https://github.com/ymcatwincities/openy-cibox-vm) + [**CIBox Build**](https://github.com/ymcatwincities/openy-cibox-build)  ||
 | `cibox/` | Contains CIBox libraries |
 | `docroot/devops/` | DevOps scripts for the installation process |
@@ -135,6 +135,6 @@ All development happens in the [Open Y Drupal 9 installation profile](https://gi
 | `build.sh` | Build script for Docksal environment |
 
 # Documentation
-Documentation about Open Y is available at [docs](https://github.com/YCloudYUSA/yusaopeny_docs). For details please visit [https://ycloud.y.org/open-y-association-websites](https://ycloud.y.org/open-y-association-websites).
+Documentation about Website Services is available at [docs](https://github.com/YCloudYUSA/yusaopeny_docs). For details please visit [https://ycloud.y.org/open-y-association-websites](https://ycloud.y.org/open-y-association-websites).
 # License
 Y USA OpenY Project is licensed under the [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0-standalone.en.html). See the [License file](https://github.com/YCloudYUSA/yusaopeny-project/blob/9.2.x/LICENSE) for details.

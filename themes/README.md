@@ -1,2 +1,2 @@
-## Open Y Themes
-Contains the Open Y themes.
+## Website Services Themes
+Contains the Website Services themes.
