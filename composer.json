@@ -107,6 +107,7 @@
         "drupal/openy_carnation": "^1.1 || ^2.0@RC || ^2",
         "drupal/openy_rose": "^1.1",
         "drupal/social_feed_fetcher": "3.0.x-dev@dev || ^3.0.2",
+        "drupal/yusaopeny_ymca360": "^1.0@RC",
         "guzzlehttp/guzzle": "^6 || ^7",
         "grt107/grt-youtube-popup": "^1.0",
         "library-ckeditor/colorbutton": "4.10.1",
