@@ -2,7 +2,7 @@ name: YMCA Website Services
 type: profile
 description: 'YMCA Website Services Drupal distribution.'
 core_version_requirement: ^9 || ^10
-version: '9.x-2.12.2'
+version: '9.x-2.14'
 distribution:
   name: YMCA Website Services
   install:
@@ -86,6 +86,7 @@ dependencies:
   - openy_taxonomy:openy_taxonomy
   - openy_txnm_color:openy_txnm_color
   - openy_tour:openy_tour
+  - y_lb:y_lb
 themes:
   - openy_admin
   - seven

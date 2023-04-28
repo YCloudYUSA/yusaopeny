@@ -214,6 +214,7 @@ function openy_demo_content_configs_map($key = NULL) {
       'openy_demo_bsimple',
       'openy_demo_bamenities',
       'openy_demo_taxonomy',
+      'y_lb_demo_content', 
     ],
 
   ];
@@ -390,7 +391,7 @@ function openy_set_frontpage(array &$install_state) {
   // Set homepage by node id but checking it first by title only.
   $query = \Drupal::entityQuery('node')
     ->condition('status', 1)
-    ->condition('title', 'Open Y');
+    ->condition('title', 'YMCA Website Services');
   $nids = $query->execute();
   $config_factory = Drupal::configFactory();
   $config_factory->getEditable('system.site')->set('page.front', '/node/' . reset($nids))->save();
