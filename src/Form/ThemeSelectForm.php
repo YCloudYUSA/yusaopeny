@@ -8,7 +8,6 @@ use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 /**
  * Defines a form for selecting theme to install.
  */
@@ -55,7 +54,7 @@ class ThemeSelectForm extends FormBase {
    * @return mixed
    */
   public static function getOpenyThemes() {
-    $path = drupal_get_path('profile', 'openy');
+    $path = \Drupal::service('extension.list.profile')->getPath('openy');
     $themes = Yaml::decode(file_get_contents($path . '/openy.themes.yml'));
     return $themes;
   }
@@ -88,7 +87,7 @@ class ThemeSelectForm extends FormBase {
           break;
         }
       }
-      // Get theme description
+      // Get theme description.
       $openy_themes[$key]['description'] = $themes[$key]->info["description"];
     }
 
@@ -131,6 +130,7 @@ class ThemeSelectForm extends FormBase {
    * @param $theme
    *
    * @return array
+   *
    * @throws \Drupal\Core\Extension\MissingDependencyException
    */
   private function getSelectedThemeMarkup($theme) {

@@ -18,7 +18,7 @@ class SearchSolrForm extends ConfigFormBase {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function getEditableConfigNames() {
     return [
@@ -150,7 +150,7 @@ class SearchSolrForm extends ConfigFormBase {
     $form['auth']['username'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Username'),
-      '#default_value' =>  $backend_config['connector_config']['username'],
+      '#default_value' => $backend_config['connector_config']['username'],
     ];
 
     $form['auth']['password'] = [

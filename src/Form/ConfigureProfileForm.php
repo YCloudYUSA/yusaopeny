@@ -30,7 +30,7 @@ class ConfigureProfileForm extends FormBase {
    * @return mixed
    */
   public static function getInstallationTypes($include_hidden = FALSE) {
-    $path = drupal_get_path('profile', 'openy');
+    $path = \Drupal::service('extension.list.profile')->getPath('openy');
     $installation_types = Yaml::decode(file_get_contents($path . '/openy.installation_types.yml'));
 
     foreach ($installation_types as $key => $installation_type) {
@@ -48,7 +48,7 @@ class ConfigureProfileForm extends FormBase {
    * @return mixed
    */
   public static function getPackages() {
-    $path = drupal_get_path('profile', 'openy');
+    $path = \Drupal::service('extension.list.profile')->getPath('openy');
     $packages = Yaml::decode(file_get_contents($path . '/openy.packages.yml'));
     // Demo content package should be hidden.
     if (isset($packages['demo'])) {
@@ -85,8 +85,8 @@ class ConfigureProfileForm extends FormBase {
     $form['preset_top_info'] = [
       '#type' => '#markup',
       '#markup' => $this->t("
-<p>Standard is the recommended version of Website Services for the majority of Y associations. If you are unsure of which version to pick, start with Standard.</p> ")
-      ,];
+<p>Standard is the recommended version of Website Services for the majority of Y associations. If you are unsure of which version to pick, start with Standard.</p> "),
+    ];
 
     // Preset specific content.
     foreach ($presets as $preset => $name) {
@@ -101,9 +101,9 @@ class ConfigureProfileForm extends FormBase {
         'content' => $this->getSelectedPresetMarkup($preset),
         '#states' => [
           'visible' => [
-            ':input[name="preset"]' => array(
+            ':input[name="preset"]' => [
               'value' => $preset,
-            ),
+            ],
           ],
         ],
       ];
@@ -118,7 +118,6 @@ class ConfigureProfileForm extends FormBase {
     ];
 
     $form['#attached']['library'] = ['openy/installation_ui'];
-
 
     return $form;
   }
@@ -212,6 +211,7 @@ class ConfigureProfileForm extends FormBase {
    * @param $preset
    *
    * @return array
+   *
    * @throws \Drupal\Core\Extension\MissingDependencyException
    */
   private function getSelectedPresetMarkup($preset) {
@@ -222,7 +222,7 @@ class ConfigureProfileForm extends FormBase {
           '#type' => 'html_tag',
           '#tag' => 'h3',
           '#value' => $this->t('Choose an installation type.'),
-        ]
+        ],
       ];
     }
 
@@ -281,7 +281,7 @@ class ConfigureProfileForm extends FormBase {
           '#context' => [
             'packages' => $packages_info,
           ],
-        ]
+        ],
 
       ];
     }
@@ -332,6 +332,9 @@ class ConfigureProfileForm extends FormBase {
     return $form;
   }
 
+  /**
+   *
+   */
   private function getExtendedPackagesMarkup() {
     $output = '<h3>The following features will not be installed however they can be easily added in the future:';
     $output .= $this->buildQuestionMark('<p>You can enable these feature any time from the admin interface in the CMS.</p>');
@@ -339,6 +342,9 @@ class ConfigureProfileForm extends FormBase {
     return $output;
   }
 
+  /**
+   *
+   */
   private function getExperimentalModulesMarkup() {
     $output = '<h3>Custom and experimental modules can also be installed in the future';
     $output .= $this->buildQuestionMark('<p>Website Services also has experimental features, but be aware that those features are experimental may not be stable.</p>');
@@ -346,7 +352,9 @@ class ConfigureProfileForm extends FormBase {
     return $output;
   }
 
-
+  /**
+   *
+   */
   public static function getModulesToInstall($preset) {
     $presets_info = self::getPresetsInfo();
 
@@ -364,6 +372,9 @@ class ConfigureProfileForm extends FormBase {
     return $module_list;
   }
 
+  /**
+   *
+   */
   public static function getModulesToInstallWithDependencies($preset) {
     return self::getDependencies(self::getModulesToInstall($preset));
   }

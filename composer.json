@@ -1,114 +1,125 @@
 {
     "name": "ycloudyusa/yusaopeny",
-    "type": "drupal-profile",
     "description": "YMCA Website Services Drupal distribution",
     "license": "GPL-2.0-or-later",
+    "type": "drupal-profile",
     "require": {
         "php": ">=7.4",
-        "composer/installers": "^1.2 || ^1.9",
+        "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.5.0",
-        "drupal/address": "^1.8",
-        "drupal/advanced_help_block": "^1.0",
         "drupal/activenet": "^1.0",
+        "drupal/address": "^1.8",
         "drupal/admin_toolbar": "^3.2",
+        "drupal/advanced_help_block": "^1.0",
+        "drupal/bartik": "^1.0",
         "drupal/better_exposed_filters": "^5 || ^6",
         "drupal/blazy": "^2.4",
-        "drupal/captcha": "^1",
+        "drupal/captcha": "^2.0 || ^2.0@beta",
         "drupal/ckeditor_bootstrap_buttons": "^1.2 || ^2.0.0",
         "drupal/ckeditor_font": "^1",
+        "drupal/color": "^1.0",
         "drupal/colorapi": "^1.1",
         "drupal/colorbutton": "^1",
         "drupal/confi": "^3.0",
-        "drupal/config_update": "^1.6",
-        "drupal/core-composer-scaffold": "^9.4, !=9.5.x-dev, ^9.5",
-        "drupal/core-project-message": "^9.4, !=9.5.x-dev, ^9.5",
-        "drupal/core-recommended": "^9.4, !=9.5.x-dev, ^9.5",
-        "drupal/core": "^9.4, !=9.5.x-dev, ^9.5",
+        "drupal/config_update": "^1.6 || ^2 || ^2.0@alpha",
+        "drupal/core": "^9.5.9 || ^10.0.9",
+        "drupal/core-composer-scaffold": "^9.5.9 || ^10.0.9",
+        "drupal/core-project-message": "^9.5.9 || ^10.0.9",
+        "drupal/core-recommended": "^9.5.9 || ^10.0.9",
         "drupal/crop": "^2",
         "drupal/css_editor": "^1.3 || ^2",
-        "drupal/ctools": "3.0 || ^3.4",
-        "drupal/custom_formatters": "^3.0 || ^3.0@beta || ^4.0@beta || ^4",
-        "drupal/datalayer": "^1.0@beta || ^1.0",
+        "drupal/csv_serialization": "^3 || ^3.0@beta",
+        "drupal/ctools": "^3.13",
+        "drupal/custom_formatters": "^3.0 || ^3.0@beta || ^4 || ^4.0@beta",
+        "drupal/datalayer": "^1.0 || ^2.0 || ^2.0@RC",
         "drupal/daxko": "^1.0",
-        "drupal/domain": "^1.0@beta || ^1.0",
-        "drupal/domain_theme_switch": "^1.5",
+        "drupal/domain": "^1.0 || ^1.0@beta || 2.0.x-dev@dev",
+        "drupal/domain_theme_switch": "^1.5 || 1.x-dev@dev",
         "drupal/draggableviews": "^2.1",
         "drupal/dropzonejs": "2.1 || ^2.5",
-        "drupal/easy_breadcrumb": "^2 || ^2.0.4",
+        "drupal/easy_breadcrumb": "^2",
         "drupal/editor_advanced_link": "^1 || ^2.1",
         "drupal/embed": "^1",
         "drupal/entity": "^1",
         "drupal/entity_browser": "^2",
-        "drupal/entity_clone": "^1.0 || ^2.0@alpha || ^2",
-        "drupal/entity_embed": "^1.2 || 1.x-dev#3184cd06637e02b397c20b50c53c19835a843d21",
+        "drupal/entity_clone": "^1.0 || ^2 || ^2.0@alpha",
+        "drupal/entity_embed": "^1.2 || 1.x-dev#3184cd06637e02b397c20b50c53c19835a843d21 || 1.x-dev@dev",
         "drupal/entity_reference_revisions": "^1.6",
-        "drupal/features": "3.8 || ^3.11",
+        "drupal/features": "^5.0 || 5.0.x-dev@dev || ^5.0@alpha",
         "drupal/field_group": "^3.0",
-        "drupal/focal_point": "^2.0@alpha || ^2",
-        "drupal/fontyourface": "^3.3",
+        "drupal/focal_point": "^2 || ^2.0@alpha",
+        "drupal/fontyourface": "^3.3 || 3.x-dev@dev",
         "drupal/geolocation": "^3.0",
-        "drupal/geysir": "^1.2",
-        "drupal/google_analytics": "^2.5 || ^3.1 || ^4.0@alpha || ^4.0",
+        "drupal/google_analytics": "^2.5 || ^3.1 || ^4.0 || ^4.0@alpha",
         "drupal/google_optimize": "^1.5",
         "drupal/google_tag": "^1.4",
-        "drupal/groupexpro": "!=1.0.3, ^1.0",
+        "drupal/groupexpro": "^1.0 !=1.0.3",
+        "drupal/hal": "^2.0",
         "drupal/image_widget_crop": "^2.4",
-        "drupal/inline_entity_form": "1.0-rc1 || ^1.0",
-        "drupal/jquery_ui_touch_punch": "^1.1",
+        "drupal/inline_entity_form": "^1.0 || 1.0-rc1",
         "drupal/jquery_ui_tabs": "^2.0",
         "drupal/jquery_ui_tooltip": "^2.0",
+        "drupal/jquery_ui_touch_punch": "^1.1",
         "drupal/libraries": "^3.0 || ^4.0",
         "drupal/link_attributes": "^1",
-        "drupal/media_directories": "^2",
+        "drupal/media_directories": "dev-2.1.x",
         "drupal/media_library_bulk_upload": "^1.0",
         "drupal/metatag": "^1",
         "drupal/migrate_plus": "^5 || ^6",
         "drupal/migrate_source_csv": "^3",
+        "drupal/migrate_tools": "^5.0 || ^6",
         "drupal/openy_addthis": "^1.0",
         "drupal/openy_branch_selector": "^1.0.3",
+        "drupal/openy_carnation": "^2 || ^3",
         "drupal/openy_daxko2": "^1.0",
         "drupal/openy_er": "^1.0",
         "drupal/openy_gtranslate": "^1.0",
+        "drupal/openy_lily": "^1.1",
         "drupal/openy_mappings": "^1.0",
+        "drupal/openy_rose": "^1.1",
         "drupal/openy_socrates": "^1.0",
         "drupal/panelbutton": "^1.3",
         "drupal/paragraphs": "^1.12",
         "drupal/pathauto": "^1.6",
         "drupal/personify": "^1.0",
+        "drupal/plugin": "2.5 || ^2.8",
         "drupal/program_search": "^1.0",
         "drupal/protected_pages": "^1.4",
-        "drupal/plugin": "2.5 || ^2.8",
-        "drupal/rabbit_hole": "^1.0@beta || ^1.0",
+        "drupal/rabbit_hole": "^1.0 || ^1.0@beta",
         "drupal/recaptcha": "^3",
         "drupal/redirect": "^1",
-        "drupal/scheduler": "^2.0@RC || ^2",
+        "drupal/scheduler": "^2 || ^2.0@RC",
         "drupal/search_api": "1.17 || ^1.19",
-        "drupal/search_api_solr": "^4.1 || ^4.2",
+        "drupal/search_api_solr": "^4.1",
+        "drupal/seven": "^1 || ^1.0@alpha",
         "drupal/simple_menu_icons": "^2.2 || ^3",
         "drupal/simple_sitemap": "^3.7 || ^4.1",
         "drupal/slick": "^2",
         "drupal/slick_views": "^2",
+        "drupal/social_feed_fetcher": "^3.0.2 || 3.0.x-dev@dev",
         "drupal/token": "^1.11",
-        "drupal/token_filter": "^1",
+        "drupal/token_filter": "^1 || ^2.0",
         "drupal/twig_tweak": "^2 || ^3.1",
         "drupal/tzfield": "^1.3",
+        "drupal/upgrade_tool": "^2 || ^3",
         "drupal/vendor_stream_wrapper": "^2.0.1",
         "drupal/verf": "^2.0",
         "drupal/video": "^1.5 || ^3",
         "drupal/video_embed_field": "^2.0",
-        "drupal/views_block_filter_block": "^1.2",
-        "drupal/views_data_export": "1.0-rc1 || ^1.0",
+        "drupal/views_block_filter_block": "^1.2 || ^2.0",
+        "drupal/views_data_export": "^1.0 || 1.0-rc1",
         "drupal/views_field_formatter": "^1.11 || 1.x-dev#2cd69cc42cca27dbe90f0cc229b9c834e7a5f6d6",
         "drupal/views_infinite_scroll": "^1.7 || ^2",
-        "drupal/webform": "^6.2",
+        "drupal/webform": "^6.2 || ^6.2@beta",
         "drupal/migrate_tools": "^5.0 || ^6",
         "drupal/upgrade_tool": "^2 || ^3",
         "drupal/openy_lily": "^1.1",
-        "drupal/openy_carnation": "^1.1 || ^2.0@RC || ^2",
+        "drupal/openy_carnation": "^3",
         "drupal/openy_rose": "^1.1",
         "drupal/social_feed_fetcher": "3.0.x-dev@dev || ^3.0.2",
         "guzzlehttp/guzzle": "^6 || ^7",
         "grt107/grt-youtube-popup": "^1.0",
+        "guzzlehttp/guzzle": "^6 || ^7",
         "library-ckeditor/colorbutton": "4.10.1",
         "library-ckeditor/font": "4.12.1",
         "library-ckeditor/panelbutton": "4.10.1",
@@ -116,11 +127,11 @@
         "library-jaypan/jquery_colorpicker": "1.0.1",
         "library-smonetti/btbutton": "1.0.2",
         "library-vakata/jstree": "^3.3",
-        "mpdf/mpdf": "^7 || v8.0.4 || ~v8.0.4 || ^8.1",
+        "mpdf/mpdf": "^7 || ^8.1 || v8.0.4 || ~v8.0.4",
         "npm-asset/blazy": "^1.8",
         "npm-asset/dropzone": "^5.5",
-        "npm-asset/jquery.easing": "^1.4",
         "npm-asset/jquery-ui-touch-punch": "^0.2.3",
+        "npm-asset/jquery.easing": "^1.4",
         "npm-asset/slick-carousel": "^1.8 || ^2.7",
         "oomphinc/composer-installers-extender": "^1.1 || ^2.0.0",
         "ymcatwincities/media_entity_document": "*",
@@ -129,7 +140,7 @@
         "ynorth-projects/openy_pef_gxp_sync": "1.0.0 || ^1.1.1",
         "open-y-subprojects/openy_daxko_gxp_syncer": "^1.1.1",
         "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
-        "open-y-subprojects/openy_map": "^1.6",
+        "open-y-subprojects/openy_map": "^2.0",
         "open-y-subprojects/openy_focal_point": "^1.0 || dev-drupal10",
         "ynorth-projects/openy_repeat": "^1 || ^2.0.6",
         "ynorth-projects/openy_node_session": "^0.9 || ^1.1.0",
@@ -138,14 +149,27 @@
         "open-y-subprojects/openy_features": "^1.5.14",
         "open-y-subprojects/openy_content_core": "^1.1",
         "open-y-subprojects/common_scss": "dev-main",
+        "open-y-subprojects/openy_content_core": "^3.0",
+        "open-y-subprojects/openy_custom": "^2.0",
         "open-y-subprojects/openy_daxko_gxp_syncer": "^1.2",
+        "open-y-subprojects/openy_features": "^2.0.9",
+        "open-y-subprojects/openy_focal_point": "^1.0",
+        "open-y-subprojects/openy_hours_formatter": "^2.0",
+        "open-y-subprojects/openy_map": "^2.0",
+        "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
+        "symfony/console": "^4.4.30 || ^5 || ^6",
+        "symfony/dom-crawler": "^6.2",
         "ycloudyusa/y_lb": "^2.0",
         "ycloudyusa/y_lb_demo_content": "^1 || dev-main",
-        "symfony/console": "^4.4.30 || ^5",
-        "symfony/dom-crawler": "^6.2"
+        "ycloudyusa/yusaopeny_activity_finder": "^4.0",
+        "ymcatwincities/media_entity_document": "*",
+        "ymcatwincities/ymca_sync": "^8 || ^10",
+        "ynorth-projects/openy_node_session": "^2.0",
+        "ynorth-projects/openy_pef_gxp_sync": "1.0.0 || ^1.1.1",
+        "ynorth-projects/openy_repeat": "^2.1"
     },
     "require-dev": {
-        "consolidation/robo": "^1.1.5 || ^2",
+        "consolidation/robo": "^1.1.5 || ^2 || ^3 || ^4",
         "drush/drush": "^10.5.0 || ^11",
         "open-y-subprojects/openy_docs": "dev-main"
     },
@@ -154,92 +178,6 @@
     },
     "conflict": {
         "drupal/ctools": "3.10 || 4.0.1"
-    },
-    "config": {
-        "bin-dir": "bin/",
-        "sort-packages": true,
-        "allow-plugins":{
-           "composer/installers":true,
-           "cweagans/composer-patches":true,
-           "drupal/core-composer-scaffold":true,
-           "drupal/core-project-message":true,
-           "oomphinc/composer-installers-extender":true
-        }
-    },
-    "extra": {
-        "drupal-lenient": {
-            "allowed-list": [
-                "drupal/easy_breadcrumb",
-                "drupal/entity_embed"
-            ]
-        },
-        "drupal-scaffold": {
-            "locations": {
-                "web-root": "docroot/"
-            },
-            "allowed-packages": [
-                "drupal/core"
-            ]
-        },
-        "installer-types": ["openy-docs"],
-        "installer-paths": {
-            "docroot/core": [
-                "type:drupal-core"
-            ],
-            "docroot/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "docroot/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "docroot/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "docroot/libraries/{$name}": [
-                "type:drupal-library",
-                "type:bower-asset",
-                "type:npm-asset"
-            ],
-            "docs/": [
-                "open-y-subprojects/openy_docs"
-            ]
-        },
-        "patches": {
-            "drupal/entity_browser": {
-                "2845037 - Fixed the issue of Call to a member function getConfigDependencyKey() on null on [Widget view], and [SelectionDisplay view]": "https://www.drupal.org/files/issues/2845037_15.patch",
-                "3104901 - Entity Browser used in a entity referenced field of a layout builder custom block is not working": "https://www.drupal.org/files/issues/2020-10-16/3104901-17.patch"
-            },
-            "drupal/plugin": {
-                "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2020-07-22/2647312-32.patch"
-            },
-            "drupal/core": {
-                "1236098 - Notice: Undefined index in _color_rewrite_stylesheet()": "https://www.drupal.org/files/issues/undefined-index-in-_color_rewrite_stylesheet-1236098-37.patch",
-                "2484693 - Telephone Link field formatter InvalidArgumentException with 5 digits or fewer in the number": "https://www.drupal.org/files/issues/2484693-54.patch",
-                "2862702 - PrepareModulesEntityUninstallForm::formTitle does not exist": "https://www.drupal.org/files/issues/2862702-3.patch",
-                "2925890 - Invalid config structures can result in exceptions when saving a config entity": "https://www.drupal.org/files/issues/2022-08-22/2925890-54.patch"
-            },
-            "drupal/media_entity": {
-                "2918172 - Media Entity upgrade -> add revision fields": "https://www.drupal.org/files/issues/2918172-5.patch",
-                "2918172 - Media Entity upgrade -> core fails on absent column revision_uid": "https://www.drupal.org/files/issues/2918172-6-8.4.4.patch"
-            },
-            "drupal/media_entity_video": {
-                "3149789 - Add a 3.x branch with an update path to the video source in core.": "https://www.drupal.org/files/issues/2020-06-11/3149789-4.patch"
-            },
-            "drupal/geysir": {
-                "Adds a feature for reload a page after success paragraph add or edit": "https://raw.githubusercontent.com/ymcatwincities/openy/8.x-2.x/patches/geysir/add-reload-page.patch",
-                "Geysir throws while node Preview for content types with entity reference revisions - https://www.drupal.org/project/geysir/issues/3226195": "https://www.drupal.org/files/issues/2021-08-01/3226195-geysir-node-preview-issue.patch"
-            },
-            "drupal/jquery_colorpicker": {
-                "Use library directory instead vendor": "https://gist.githubusercontent.com/manachynskyi/3b059456ce97dd4380ff0c0e85f41696/raw/4cf7103c75849b2b474424fe9d8ad969192dd779/library_path_update.patch"
-            },
-            "drupal/colorapi": {
-                "3171235 - Add Value property": "https://www.drupal.org/files/issues/2020-09-16/3171235-2.patch",
-                "Update colorapi configs": "https://gist.githubusercontent.com/manachynskyi/a24c7898a0ed051bc077fc94cc2dc2e8/raw/9524fa2d630d2ee0e0e39316156612b33c854182/colorapi_config_patch.patch"
-            },
-            "drupal/video_embed_field": {
-                "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff"
-            }
-        }
     },
     "repositories": [
         {
@@ -356,6 +294,90 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "oomphinc/composer-installers-extender": true
+        },
+        "bin-dir": "bin/",
+        "sort-packages": true
+    },
+    "extra": {
+        "drupal-lenient": {
+            "allowed-list": [
+                "drupal/easy_breadcrumb",
+                "drupal/entity_embed"
+            ]
+        },
+        "drupal-scaffold": {
+            "allowed-packages": [
+                "drupal/core"
+            ],
+            "locations": {
+                "web-root": "docroot/"
+            }
+        },
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "docs/": [
+                "open-y-subprojects/openy_docs"
+            ]
+        },
+        "installer-types": [
+            "openy-docs"
+        ],
+        "patches": {
+            "drupal/colorapi": {
+                "3171235 - Add Value property": "https://www.drupal.org/files/issues/2020-09-16/3171235-2.patch",
+                "Update colorapi configs": "https://gist.githubusercontent.com/manachynskyi/a24c7898a0ed051bc077fc94cc2dc2e8/raw/9524fa2d630d2ee0e0e39316156612b33c854182/colorapi_config_patch.patch"
+            },
+            "drupal/core": {
+                "podarok patch for stacktrace": "https://github.com/podarok/drupal/commit/5656ba39204d105ca7c26535ed963d0be5d3066e.diff",
+                "2484693 - Telephone Link field formatter InvalidArgumentException with 5 digits or fewer in the number": "https://www.drupal.org/files/issues/2484693-54.patch",
+                "2862702 - PrepareModulesEntityUninstallForm::formTitle does not exist": "https://www.drupal.org/files/issues/2862702-3.patch",
+                "2925890 - Invalid config structures can result in exceptions when saving a config entity": "https://www.drupal.org/files/issues/2022-08-22/2925890-54.patch"
+            },
+            "drupal/entity_browser": {
+                "2845037 - Fixed the issue of Call to a member function getConfigDependencyKey() on null on [Widget view], and [SelectionDisplay view]": "https://www.drupal.org/files/issues/2845037_15.patch",
+                "3104901 - Entity Browser used in a entity referenced field of a layout builder custom block is not working": "https://www.drupal.org/files/issues/2020-10-16/3104901-17.patch"
+            },
+            "drupal/jquery_colorpicker": {
+                "Use library directory instead vendor": "https://gist.githubusercontent.com/manachynskyi/3b059456ce97dd4380ff0c0e85f41696/raw/4cf7103c75849b2b474424fe9d8ad969192dd779/library_path_update.patch"
+            },
+            "drupal/media_entity": {
+                "2918172 - Media Entity upgrade -> add revision fields": "https://www.drupal.org/files/issues/2918172-5.patch",
+                "2918172 - Media Entity upgrade -> core fails on absent column revision_uid": "https://www.drupal.org/files/issues/2918172-6-8.4.4.patch"
+            },
+            "drupal/media_entity_video": {
+                "3149789 - Add a 3.x branch with an update path to the video source in core.": "https://www.drupal.org/files/issues/2020-06-11/3149789-4.patch"
+            },
+            "drupal/plugin": {
+                "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2020-07-22/2647312-32.patch"
+            },
+            "drupal/video_embed_field": {
+                "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff"
+            }
+        }
+    },
     "scripts": {
         "post-install-cmd": [
             "@composer drupal-scaffold",
