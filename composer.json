@@ -375,6 +375,9 @@
             },
             "drupal/video_embed_field": {
                 "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff"
+            },
+            "drupal/entity_clone": {
+                "Issue #3356019: Error: Field moderation_state is unknown.": "https://www.drupal.org/files/issues/2023-04-27/3356019-error-field-moderationstate_unknown_0.patch"
             }
         }
     },
