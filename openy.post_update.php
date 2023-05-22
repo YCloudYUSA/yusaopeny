@@ -22,6 +22,7 @@ function openy_post_update_cleanup_update_path_messages(&$sandbox) {
     $sandbox['progress'] = 0;
     $sandbox['current'] = 0;
     $sandbox['max'] = \Drupal::entityQuery('openy_upgrade_log')
+      ->accessCheck(FALSE)
       ->condition('name', 'core.entity_form_display.node', 'STARTS_WITH')
       ->condition('created', $range, '>')
       ->count()
@@ -34,6 +35,7 @@ function openy_post_update_cleanup_update_path_messages(&$sandbox) {
   }
 
   $ids = \Drupal::entityQuery('openy_upgrade_log')
+    ->accessCheck(FALSE)
     ->condition('name', 'core.entity_form_display.node', 'STARTS_WITH')
     ->condition('created', $range, '>')
     ->range(0, 20)

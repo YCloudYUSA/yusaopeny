@@ -139,12 +139,13 @@ class TermsOfUseForm extends FormBase {
           ],
         ],
       ];
-    } else {
+    }
+    else {
       $form['submit'] = [
         '#type' => 'submit',
         '#value' => $this->t('Accept Terms and Conditions'),
         '#weight' => 15,
-        '#button_type' => 'primary'
+        '#button_type' => 'primary',
       ];
     }
 

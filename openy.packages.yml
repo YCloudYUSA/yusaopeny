@@ -40,6 +40,38 @@ camps:
     - openy_prgf_camp_menu
     - openy_loc_camp
 
+y_layout_builder:
+  name: Layout Builder
+  description: 'Layout Builder package provides UI components that  allow building flexible content pages in a convenient way with a good UX for Content Editors'
+  help: 'Drupal Layout Builder allows content editors and site builders to create visual layouts for displaying content. Users can customize how content is arranged on a single page, across types of content, or even create custom landing pages with an easy to use drag-and-drop interface.'
+  modules:
+  - y_lb
+  - lb_accordion
+  - y_lb_article
+  - lb_branch_amenities_blocks
+  - lb_branch_hours_blocks
+  - lb_branch_social_links_blocks
+  - lb_cards
+  - lb_carousel
+  - ws_code_block
+  - ws_event
+  - lb_grid_cta
+  - lb_hero
+  - lb_related_articles_blocks
+  - lb_related_events_blocks
+  - lb_modal
+  - openy_map_lb
+  - lb_partners_blocks
+  - lb_ping_pong
+  - lb_promo
+  - lb_simple_menu
+  - lb_staff_members_blocks
+  - lb_statistics
+  - lb_table
+  - ws_lb_tabs
+  - lb_testimonials
+  - lb_webform
+
 editorial:
   name: 'Editorial'
   description: 'Editorial package provides content components that allow building flexible pages.'
@@ -89,7 +121,6 @@ editorial_adv:
     - openy_prgf_story_card
     - openy_block_flexible_content
     - openy_prgf_microsites_menu
-    - openy_inline_editing
 
 embeddable_header_footer:
   name: 'Embeddable header & footer'

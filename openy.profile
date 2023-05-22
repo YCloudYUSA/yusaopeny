@@ -24,7 +24,7 @@ function openy_install_tasks(&$install_state) {
     'openy_terms_of_use' => [
       'display_name' => t('Terms and Conditions'),
       'display' => TRUE,
-      'run' => INSTALL_TASK_RUN_IF_REACHED
+      'run' => INSTALL_TASK_RUN_IF_REACHED,
     ],
     'openy_select_search' => [
       'display_name' => t('Select search service'),
@@ -214,7 +214,7 @@ function openy_demo_content_configs_map($key = NULL) {
       'openy_demo_bsimple',
       'openy_demo_bamenities',
       'openy_demo_taxonomy',
-      'y_lb_demo_content', 
+      'y_lb_demo_content',
     ],
 
   ];
@@ -274,7 +274,7 @@ function openy_install_search(array &$install_state) {
   foreach ($modules as $module) {
     $module_operations[] = ['openy_enable_module', (array) $module];
   }
-  // todo: install search_api_solr_legacy.
+  // @todo install search_api_solr_legacy.
   $module_operations[] = ['openy_enable_search_api_solr_legacy', []];
 
   return ['operations' => $module_operations];
@@ -312,7 +312,7 @@ function openy_install_theme(array &$install_state) {
   $uninstall_operations[] = ['openy_uninstall_module', (array) 'openy_demo_bfooter'];
 
   $theme = $install_state['openy']['theme'];
-  if (function_exists(  'drush_print')) {
+  if (function_exists('drush_print')) {
     drush_print(dt('Theme: %theme', ['%theme' => $theme]));
   }
   $config_factory = Drupal::configFactory();
@@ -390,6 +390,7 @@ function openy_import_content(array &$install_state) {
 function openy_set_frontpage(array &$install_state) {
   // Set homepage by node id but checking it first by title only.
   $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
     ->condition('status', 1)
     ->condition('title', 'YMCA Website Services');
   $nids = $query->execute();
@@ -480,7 +481,7 @@ function openy_discover_broken_paragraphs(array &$install_state) {
 /**
  * Add Block configuration to Branch demo content Group Schedules paragraphs.
  *
- * @see openy_discover_broken_paragraphs().
+ * @see openy_discover_broken_paragraphs()
  */
 function openy_fix_configured_paragraph_blocks(array &$install_state) {
   $tables = [
@@ -618,7 +619,7 @@ function openy_import_migration($migration_tag) {
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  * @param $form_id
  */
-function openy_form_system_site_information_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function openy_form_system_site_information_settings_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['site_information']['site_slogan']['#description'] = t("This will display your association name in the header as per Y USA brand guidelines. Try to use less than 27 characters. The text may get cut off on smaller devices.");
 }
 
@@ -628,7 +629,7 @@ function openy_form_system_site_information_settings_alter(&$form, \Drupal\Core\
 function openy_preprocess_block(&$variables) {
   $variables['base_path'] = base_path();
 
-  // Prevent some blocks from caching
+  // Prevent some blocks from caching.
   $preventCacheBlocks = [
     'system_breadcrumb_block',
   ];
@@ -659,7 +660,7 @@ function openy_form_system_theme_settings_alter(&$form, FormStateInterface $form
       - .path-frontpage.<br/><br/>
       The existing node types are: ' . implode(', ', $css_node_selectors) . '.
       '),
-      '#suffix' => '</div>'
+      '#suffix' => '</div>',
     ];
     $form['css_editor']['css_editor_info'] = $css_editor_info;
   }
@@ -701,7 +702,7 @@ function openy_install_tasks_alter(&$tasks, &$install_state) {
   if (!empty(\Drupal::state()->get('openy_preset')) &&
     \Drupal::state()->get('openy_preset') == 'standard' &&
     isset($tasks["openy_third_party_services"])) {
-      unset($tasks["openy_third_party_services"]);
+    unset($tasks["openy_third_party_services"]);
   }
   // Remove Solr configure installation task for non search_api sorl service.
   if (!\Drupal::state()->get('openy_show_solr_config')) {
@@ -709,7 +710,7 @@ function openy_install_tasks_alter(&$tasks, &$install_state) {
   }
 
   if (isset($install_state['openy']['search']['service']) &&
-    $install_state['openy']['search']['service'] == 'none' ) {
+    $install_state['openy']['search']['service'] == 'none') {
     unset($tasks["openy_install_search"]);
     unset($tasks["openy_solr_search"]);
   }
@@ -731,7 +732,7 @@ function openy_terms_of_use(&$install_state) {
   // because profile is not installed.
   // That's why we should include T&C form manually.
   if (!class_exists('\Drupal\openy\Form\TermsOfUseForm')) {
-    $path = drupal_get_path('profile', 'openy');
+    $path = \Drupal::service('extension.list.profile')->getPath('openy');
     require_once $path . '/src/Form/TermsOfUseForm.php';
   }
 

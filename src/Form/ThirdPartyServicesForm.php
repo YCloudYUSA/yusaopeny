@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use \Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Defines a form for setting Third party services parameters during install.

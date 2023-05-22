@@ -1,9 +1,9 @@
 name: Website Services Admin
 type: theme
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 base theme: seven
 package: YMCA Website Services
-version: 8.x-1.0
+version: 10.x-1.0
 libraries-override:
   seven/install-page:
     css:

@@ -4,9 +4,6 @@ namespace Drupal\openy\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use GuzzleHttp\Exception\ClientException;
-use Drupal\Core\Database\Database;
-use Drupal\Core\Url;
 
 /**
  * Defines a form for setting Google Maps API Key during install.
@@ -35,11 +32,11 @@ class UploadFontMessageForm extends FormBase {
       View <a href=\'@font_instructions\'>tutorial for how to do this</a>. <br/>
       <img src="../profiles/contrib/openy/src/Form/uploadfont.png">',
                             [
-                              '@config_url' => "$base_url/admin/appearance/font/local_font_config_entity", 
+                              '@config_url' => "$base_url/admin/appearance/font/local_font_config_entity",
                               '@brand_resource' => "https://theybrand.org/wordpress/cachet",
-                              '@font_instructions' => "https://youtu.be/Kl1lwYSg3ww"
+                              '@font_instructions' => "https://youtu.be/Kl1lwYSg3ww",
                             ]
-                           ),
+      ),
     ];
 
     $form['actions'] = [
@@ -58,4 +55,5 @@ class UploadFontMessageForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
   }
+
 }

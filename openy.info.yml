@@ -2,7 +2,7 @@ name: YMCA Website Services
 type: profile
 description: 'YMCA Website Services Drupal distribution.'
 core_version_requirement: ^9 || ^10
-version: '9.x-2.14'
+version: '10.2.x'
 distribution:
   name: YMCA Website Services
   install:
@@ -16,7 +16,7 @@ dependencies:
   - drupal:block_content
   - drupal:breakpoint
   - drupal:ckeditor
-  - drupal:color
+  # - drupal:color
   - drupal:config
   - drupal:contact
   - drupal:contextual
@@ -36,8 +36,8 @@ dependencies:
   - drupal:options
   - drupal:path
   - drupal:path_alias
-  - drupal:quickedit
-  - drupal:rdf
+  # - drupal:quickedit
+  # - drupal:rdf
   - drupal:shortcut
   - drupal:system
   - drupal:taxonomy
