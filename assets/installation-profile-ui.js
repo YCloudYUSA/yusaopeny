@@ -2,7 +2,7 @@
  * @file
  * Profile presets and configuration UI.
  */
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, drupalSettings, once) {
 
   'use strict';
 
@@ -59,14 +59,16 @@
    */
   Drupal.behaviors.iframe_wrapper = {
     attach: function (context, settings) {
-      $("iframe", context).once('iframe-wrapper').each(function() {
-        var height = $(this).height();
-        var width = $(this).width();
-        var $wrapper = $(this).wrap("<div class='iframe-wrapper'></div>");
-        $wrapper.css('padding-bottom', 100 * height / width + '%');
-      });
+      once('iframeWrapper', 'iframe', context)
+        .forEach((iframe) => {
+          const $iframe = $(iframe);
+          const height = $iframe.height();
+          const width = $iframe.width();
+          const $wrapper = $iframe.wrap("<div class='iframe-wrapper'></div>");
+          $wrapper.css('padding-bottom', 100 * height / width + '%');
+        });
     }
 
   };
 
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, drupalSettings, once);

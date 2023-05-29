@@ -33,8 +33,6 @@
         "drupal/custom_formatters": "^3.0 || ^3.0@beta || ^4 || ^4.0@beta",
         "drupal/datalayer": "^1.0 || ^2.0 || ^2.0@RC",
         "drupal/daxko": "^1.0",
-        "drupal/domain": "^1.0 || ^1.0@beta || 2.0.x-dev@dev",
-        "drupal/domain_theme_switch": "^1.5 || 1.x-dev@dev",
         "drupal/draggableviews": "^2.1",
         "drupal/dropzonejs": "2.1 || ^2.5",
         "drupal/easy_breadcrumb": "^2",
@@ -378,6 +376,9 @@
             },
             "drupal/entity_clone": {
                 "Issue #3356019: Error: Field moderation_state is unknown.": "https://www.drupal.org/files/issues/2023-04-27/3356019-error-field-moderationstate_unknown_0.patch"
+            },
+            "drupal/media_library_form_element": {
+                "Issue #3341978: TypeError: explode(): Argument #2 ($string) must be of type string, array given in explode().": "https://www.drupal.org/files/issues/2023-05-10/check-default-value-not-array-15044301-16.patch"
             }
         }
     },
