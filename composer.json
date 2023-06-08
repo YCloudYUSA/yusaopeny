@@ -106,7 +106,7 @@
         "drupal/video_embed_field": "^2.0",
         "drupal/views_block_filter_block": "^1.2 || ^2.0",
         "drupal/views_data_export": "^1.0 || 1.0-rc1",
-        "drupal/views_field_formatter": "^1.11 || 1.x-dev#2cd69cc42cca27dbe90f0cc229b9c834e7a5f6d6",
+        "drupal/views_field_formatter": "^4.0",
         "drupal/views_infinite_scroll": "^1.7 || ^2",
         "drupal/webform": "^6.2 || ^6.2@beta",
         "drupal/migrate_tools": "^5.0 || ^6",

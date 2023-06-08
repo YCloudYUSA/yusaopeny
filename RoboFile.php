@@ -56,6 +56,8 @@ class RoboFile extends \Robo\Tasks {
       ->dependency('ycloudyusa/yusaopeny', $branch)
       ->dev()
       ->ansi(TRUE)
+      ->noInteraction()
+      ->option('--with-all-dependencies')
       ->run();
   }
 
