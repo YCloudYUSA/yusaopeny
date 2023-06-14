@@ -7,4 +7,5 @@ installation_ui:
     assets/installation-profile-ui.js: {}
   dependencies:
     - jquery_ui_tooltip/tooltip
-    - core/jquery.ui.dialog
+    - core/drupal.dialog
+    - core/once

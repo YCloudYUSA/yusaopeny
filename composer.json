@@ -4,7 +4,7 @@
     "license": "GPL-2.0-or-later",
     "type": "drupal-profile",
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.1",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.5.0",
         "drupal/activenet": "^1.0",
@@ -22,10 +22,10 @@
         "drupal/colorbutton": "^1",
         "drupal/confi": "^3.0",
         "drupal/config_update": "^1.6 || ^2 || ^2.0@alpha",
-        "drupal/core": "^9.5.9 || ^10.0.9",
-        "drupal/core-composer-scaffold": "^9.5.9 || ^10.0.9",
-        "drupal/core-project-message": "^9.5.9 || ^10.0.9",
-        "drupal/core-recommended": "^9.5.9 || ^10.0.9",
+        "drupal/core": "^9.5.9 || ^10.0.9, <10.1",
+        "drupal/core-composer-scaffold": "^9.5.9 || ^10.0.9, <10.1",
+        "drupal/core-project-message": "^9.5.9 || ^10.0.9, <10.1",
+        "drupal/core-recommended": "^9.5.9 || ^10.0.9, <10.1",
         "drupal/crop": "^2",
         "drupal/css_editor": "^1.3 || ^2",
         "drupal/csv_serialization": "^3 || ^3.0@beta",
@@ -33,8 +33,6 @@
         "drupal/custom_formatters": "^3.0 || ^3.0@beta || ^4 || ^4.0@beta",
         "drupal/datalayer": "^1.0 || ^2.0 || ^2.0@RC",
         "drupal/daxko": "^1.0",
-        "drupal/domain": "^1.0 || ^1.0@beta || 2.0.x-dev@dev",
-        "drupal/domain_theme_switch": "^1.5 || 1.x-dev@dev",
         "drupal/draggableviews": "^2.1",
         "drupal/dropzonejs": "2.1 || ^2.5",
         "drupal/easy_breadcrumb": "^2",
@@ -108,7 +106,7 @@
         "drupal/video_embed_field": "^2.0",
         "drupal/views_block_filter_block": "^1.2 || ^2.0",
         "drupal/views_data_export": "^1.0 || 1.0-rc1",
-        "drupal/views_field_formatter": "^1.11 || 1.x-dev#2cd69cc42cca27dbe90f0cc229b9c834e7a5f6d6",
+        "drupal/views_field_formatter": "^4.0",
         "drupal/views_infinite_scroll": "^1.7 || ^2",
         "drupal/webform": "^6.2 || ^6.2@beta",
         "drupal/migrate_tools": "^5.0 || ^6",
@@ -140,7 +138,7 @@
         "ynorth-projects/openy_pef_gxp_sync": "1.0.0 || ^1.1.1",
         "open-y-subprojects/openy_daxko_gxp_syncer": "^1.1.1",
         "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
-        "open-y-subprojects/openy_map": "^2.0",
+        "open-y-subprojects/openy_map": "^3.0",
         "open-y-subprojects/openy_focal_point": "^1.0 || dev-drupal10",
         "ynorth-projects/openy_repeat": "^1 || ^2.0.6",
         "ynorth-projects/openy_node_session": "^0.9 || ^1.1.0",
@@ -155,7 +153,6 @@
         "open-y-subprojects/openy_features": "^2.0.9",
         "open-y-subprojects/openy_focal_point": "^1.0",
         "open-y-subprojects/openy_hours_formatter": "^2.0",
-        "open-y-subprojects/openy_map": "^2.0",
         "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
         "symfony/console": "^4.4.30 || ^5 || ^6",
         "symfony/dom-crawler": "^6.2",
@@ -375,6 +372,12 @@
             },
             "drupal/video_embed_field": {
                 "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff"
+            },
+            "drupal/entity_clone": {
+                "Issue #3356019: Error: Field moderation_state is unknown.": "https://www.drupal.org/files/issues/2023-04-27/3356019-error-field-moderationstate_unknown_0.patch"
+            },
+            "drupal/media_library_form_element": {
+                "Issue #3341978: TypeError: explode(): Argument #2 ($string) must be of type string, array given in explode().": "https://www.drupal.org/files/issues/2023-05-10/check-default-value-not-array-15044301-16.patch"
             }
         }
     },

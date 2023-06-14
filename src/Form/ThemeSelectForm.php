@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class ThemeSelectForm extends FormBase {
 
-  const DEFAULT_THEME = 'openy_rose';
+  const DEFAULT_THEME = 'openy_carnation';
 
   /**
    * The theme handler.
