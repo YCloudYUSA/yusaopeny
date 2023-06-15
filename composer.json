@@ -133,7 +133,7 @@
         "npm-asset/slick-carousel": "^1.8 || ^2.7",
         "oomphinc/composer-installers-extender": "^1.1 || ^2.0.0",
         "ymcatwincities/media_entity_document": "*",
-        "ycloudyusa/yusaopeny_activity_finder": "^4.0 || ^4.1.4",
+        "ycloudyusa/yusaopeny_activity_finder": "^4.1 || ^4.2",
         "ymcatwincities/ymca_sync": "^8 || ^10",
         "ynorth-projects/openy_pef_gxp_sync": "1.0.0 || ^1.1.1",
         "open-y-subprojects/openy_daxko_gxp_syncer": "^1.1.1",
