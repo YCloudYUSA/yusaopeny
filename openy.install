@@ -1215,3 +1215,15 @@ function openy_update_8090() {
 function openy_update_8091() {
   \Drupal::service('module_installer')->install(['admin_toolbar_tools']);
 }
+
+/**
+ * Update Ckeditor5 toolbar.
+ */
+function openy_update_8092() {
+  $config_dir = \Drupal::service('extension.list.profile')->getPath('openy') . '/config/optional';
+  $config_importer = \Drupal::service('openy_upgrade_tool.importer');
+  $config_importer->setDirectory($config_dir);
+  $config_importer->importConfigs([
+    'editor.editor.full_html',
+  ]);
+}

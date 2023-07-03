@@ -14,7 +14,9 @@ dependencies:
   - drupal:action
   - drupal:block_content
   - drupal:breakpoint
-  - drupal:ckeditor
+  - drupal:ckeditor5
+  - drupal:ckeditor5_font
+  # - drupal:color
   - drupal:config
   - drupal:contact
   - drupal:contextual
@@ -44,7 +46,6 @@ dependencies:
   # Compatibility
   - jquery_ui_tooltip:jquery_ui_tooltip
   - jquery_ui_tabs:jquery_ui_tabs
-  
   # Contrib modules.
   - admin_toolbar:admin_toolbar
   - admin_toolbar:admin_toolbar_tools

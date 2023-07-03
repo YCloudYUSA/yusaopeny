@@ -15,6 +15,7 @@
         "drupal/better_exposed_filters": "^5 || ^6",
         "drupal/blazy": "^2.4",
         "drupal/captcha": "^2.0 || ^2.0@beta",
+        "drupal/ckeditor5_font": "^1.1@beta",
         "drupal/ckeditor_bootstrap_buttons": "^1.2 || ^2.0.0",
         "drupal/ckeditor_font": "^1",
         "drupal/color": "^1.0",
@@ -115,6 +116,7 @@
         "drupal/openy_carnation": "^3",
         "drupal/openy_rose": "^1.1",
         "drupal/social_feed_fetcher": "3.0.x-dev@dev || ^3.0.2",
+        "drupal/y_donate": "^1.0",
         "guzzlehttp/guzzle": "^6 || ^7",
         "grt107/grt-youtube-popup": "^1.0",
         "guzzlehttp/guzzle": "^6 || ^7",
@@ -144,13 +146,12 @@
         "ynorth-projects/openy_node_session": "^0.9 || ^1.1.0",
         "open-y-subprojects/openy_custom": "^1.0",
         "open-y-subprojects/openy_hours_formatter": "^1.2",
-        "open-y-subprojects/openy_features": "^1.5.14",
+        "open-y-subprojects/openy_features": "^2.1.0",
         "open-y-subprojects/openy_content_core": "^1.1",
         "open-y-subprojects/common_scss": "dev-main",
         "open-y-subprojects/openy_content_core": "^3.0",
         "open-y-subprojects/openy_custom": "^2.0",
         "open-y-subprojects/openy_daxko_gxp_syncer": "^1.2",
-        "open-y-subprojects/openy_features": "^2.0.9",
         "open-y-subprojects/openy_focal_point": "^1.0",
         "open-y-subprojects/openy_hours_formatter": "^2.0",
         "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
@@ -381,6 +382,9 @@
             },
             "drupal/media_library_form_element": {
                 "Issue #3341978: TypeError: explode(): Argument #2 ($string) must be of type string, array given in explode().": "https://www.drupal.org/files/issues/2023-05-10/check-default-value-not-array-15044301-16.patch"
+            },
+            "drupal/ckeditor5_font": {
+                "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch"
             }
         }
     },
