@@ -21,7 +21,7 @@
         "drupal/color": "^1.0",
         "drupal/colorapi": "^1.1",
         "drupal/colorbutton": "^1",
-        "drupal/confi": "^3.0",
+        "drupal/confi": "^3.1",
         "drupal/config_update": "^1.6 || ^2 || ^2.0@alpha",
         "drupal/core": "^9.5.9 || ^10.0.9, <10.1",
         "drupal/core-composer-scaffold": "^9.5.9 || ^10.0.9, <10.1",
