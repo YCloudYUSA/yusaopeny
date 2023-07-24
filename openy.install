@@ -54,6 +54,12 @@ function openy_update_dependencies() {
     ],
   ];
 
+  $dependencies['y_lb'] = [
+    9005 => [
+      'openy' => 8093,
+    ],
+  ];
+
   $dependencies['openy_node_alert'] = [
     8009 => [
       'system' => 8501,
@@ -1226,4 +1232,11 @@ function openy_update_8092() {
   $config_importer->importConfigs([
     'editor.editor.full_html',
   ]);
+}
+
+/**
+ * Enable ckeditor5 module.
+ */
+function openy_update_8093() {
+  \Drupal::service('module_installer')->install(['ckeditor5']);
 }
