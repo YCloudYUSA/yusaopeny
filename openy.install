@@ -1240,3 +1240,21 @@ function openy_update_8092() {
 function openy_update_8093() {
   \Drupal::service('module_installer')->install(['ckeditor5']);
 }
+
+/**
+ * Remove stray theme config since themes are helpless on their own.
+ */
+function openy_update_8094() {
+  $configs = [
+    'block.block.openy_carnation_webform',
+    'block.block.openy_rose_webform',
+    'block.block.openy_lily_webform'
+  ];
+
+  foreach ($configs as $config) {
+    $editable = \Drupal::configFactory()->getEditable($config);
+    if ($editable instanceof \Drupal\Core\Config\Config) {
+      $editable->delete();
+    }
+  }
+}

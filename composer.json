@@ -53,7 +53,7 @@
         "drupal/google_optimize": "^1.5",
         "drupal/google_tag": "^1.4",
         "drupal/groupexpro": "^1.0 !=1.0.3",
-        "drupal/hal": "^2.0",
+        "drupal/hal": "^2.0 || ^1.0",
         "drupal/image_widget_crop": "^2.4",
         "drupal/inline_entity_form": "^2.0 || ^2.0@RC",
         "drupal/jquery_ui_tabs": "^2.0",
