@@ -41,7 +41,7 @@
         "drupal/embed": "^1",
         "drupal/entity": "^1",
         "drupal/entity_browser": "^2",
-        "drupal/entity_clone": "^1.0 || ^2 || ^2.0@alpha",
+        "drupal/entity_clone": "^1.0 || ^2 || ^2.0@beta",
         "drupal/entity_embed": "^1.2 || 1.x-dev#3184cd06637e02b397c20b50c53c19835a843d21 || 1.x-dev@dev",
         "drupal/entity_reference_revisions": "^1.6",
         "drupal/features": "^5.0 || 5.0.x-dev@dev || ^5.0@alpha",
@@ -378,7 +378,8 @@
                 "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff"
             },
             "drupal/entity_clone": {
-                "Issue #3356019: Error: Field moderation_state is unknown.": "https://www.drupal.org/files/issues/2023-04-27/3356019-error-field-moderationstate_unknown_0.patch"
+                "Issue #3356019: Error: Field moderation_state is unknown.": "https://www.drupal.org/files/issues/2023-04-27/3356019-error-field-moderationstate_unknown_0.patch",
+                "3050027: Entity clone does not work properly with Layout Builder block": "https://git.drupalcode.org/project/entity_clone/-/merge_requests/42.diff"
             },
             "drupal/media_library_form_element": {
                 "Issue #3341978: TypeError: explode(): Argument #2 ($string) must be of type string, array given in explode().": "https://www.drupal.org/files/issues/2023-05-10/check-default-value-not-array-15044301-16.patch"
