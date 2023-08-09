@@ -157,7 +157,7 @@
         "symfony/console": "^4.4.30 || ^5 || ^6",
         "symfony/dom-crawler": "^6.2",
         "ycloudyusa/useless_machines": "dev-main",
-        "ycloudyusa/y_lb": "^2.3",
+        "ycloudyusa/y_lb": "^2.4",
         "ycloudyusa/y_lb_demo_content": "^1 || dev-main",
         "ycloudyusa/yusaopeny_activity_finder": "^4.0",
         "ymcatwincities/media_entity_document": "*",
