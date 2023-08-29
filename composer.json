@@ -145,7 +145,7 @@
         "ynorth-projects/openy_repeat": "^1 || ^2.0.6",
         "ynorth-projects/openy_node_session": "^0.9 || ^1.1.0",
         "open-y-subprojects/openy_hours_formatter": "^1.2",
-        "open-y-subprojects/openy_features": "^2.5.0",
+        "open-y-subprojects/openy_features": "^2.6.0",
         "open-y-subprojects/openy_content_core": "^1.1",
         "open-y-subprojects/common_scss": "dev-main",
         "open-y-subprojects/openy_content_core": "^3.0",
