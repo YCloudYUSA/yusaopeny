@@ -356,7 +356,8 @@
                 "2862702 - PrepareModulesEntityUninstallForm::formTitle does not exist": "https://www.drupal.org/files/issues/2862702-3.patch",
                 "2925890 - Invalid config structures can result in exceptions when saving a config entity": "https://www.drupal.org/files/issues/2022-08-22/2925890-54.patch",
                 "2922677 - Uncaught TypeError: Cannot read property 'replace' of undefined": "https://www.drupal.org/files/issues/2023-02-15/2922677-33.patch",
-                "3354876 - Media Thumbnail Formatter: alt and title null": "https://git.drupalcode.org/project/drupal/-/merge_requests/4291.diff"
+                "3354876 - Media Thumbnail Formatter: alt and title null": "https://git.drupalcode.org/project/drupal/-/merge_requests/4291.diff",
+                "3291764 - The [0] hatch in misc/vertical-tabs.js causes issues if there are multiple forms with vertical tabs.": "https://www.drupal.org/files/issues/2023-04-27/3291764-8.patch"
 
             },
             "drupal/entity_browser": {
