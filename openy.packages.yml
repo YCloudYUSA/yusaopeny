@@ -71,6 +71,12 @@ y_layout_builder:
   - ws_lb_tabs
   - lb_testimonials
   - lb_webform
+  - y_camp
+  - y_facility
+  - y_lb_main_menu_cta_block
+  - layout_builder_restrictions_by_region
+  - lb_grid_icon
+  
 
 editorial:
   name: 'Editorial'
@@ -380,3 +386,19 @@ egym_iwatch:
   help: ''
   modules:
     - openy_egym_iwatch
+
+activity_finder:
+  name: 'Activity Finder'
+  description: 'Framework for Activity Finder functionality'
+  help: 'Embeds the Activity Finder program search experience on your website, which helps users pre-filter the activities they want to search for. See <a href="https://ds-docs.y.org/docs/user-documentation/paragraphs/activity-finder/">more documentation about Activity Finder</a>'
+  modules:
+    - openy_activity_finder
+    - openy_prgf_activity_finder_4
+    - lb_activity_finder
+    
+home_branch:
+  name: 'Home Branch'
+  description: 'Home Branch personalisation package'
+  help: 'Allows end user to choose favorite branch in order to get personalized experience across the site'
+  modules:
+    - ws_home_branch
