@@ -76,7 +76,8 @@ y_layout_builder:
   - y_lb_main_menu_cta_block
   - layout_builder_restrictions_by_region
   - lb_grid_icon
-  
+  - lb_donate
+  - y_donate
 
 editorial:
   name: 'Editorial'
