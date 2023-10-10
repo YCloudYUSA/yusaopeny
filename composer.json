@@ -41,7 +41,7 @@
         "drupal/embed": "^1",
         "drupal/entity": "^1",
         "drupal/entity_browser": "^2",
-        "drupal/entity_clone": "^1.0 || ^2 || ^2.0@beta",
+        "drupal/entity_clone": ">=2.0.0-beta4 || ^2",
         "drupal/entity_embed": "^1.2 || 1.x-dev#3184cd06637e02b397c20b50c53c19835a843d21 || 1.x-dev@dev",
         "drupal/entity_reference_revisions": "^1.6",
         "drupal/features": "^5.0 || 5.0.x-dev@dev || ^5.0@alpha",
@@ -157,10 +157,9 @@
         "symfony/console": "^4.4.30 || ^5 || ^6",
         "symfony/dom-crawler": "^6.2",
         "ycloudyusa/useless_machines": "dev-main",
-        "ycloudyusa/y_lb": "^2.4",
+        "ycloudyusa/y_lb": ">=2.5.1, <2.6.0",
         "ycloudyusa/y_lb_demo_content": "^1 || dev-main",
         "ycloudyusa/yusaopeny_activity_finder": "^4.0",
-        "ymcatwincities/media_entity_document": "*",
         "ymcatwincities/ymca_sync": "^8 || ^10",
         "ynorth-projects/openy_node_session": "^2.0",
         "ynorth-projects/openy_pef_gxp_sync": "1.0.0 || ^1.1.1",
@@ -384,7 +383,6 @@
                 "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff"
             },
             "drupal/entity_clone": {
-                "Issue #3356019: Error: Field moderation_state is unknown.": "https://www.drupal.org/files/issues/2023-04-27/3356019-error-field-moderationstate_unknown_0.patch",
                 "3050027: Entity clone does not work properly with Layout Builder block": "https://git.drupalcode.org/project/entity_clone/-/merge_requests/42.diff"
             },
             "drupal/media_library_form_element": {
