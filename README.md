@@ -11,7 +11,7 @@
   https://ycloud.y.org/open-y-association-websites
 </p>
 <p align="center">
-  An open source platform for YMCAs, by YMCAs built on <a href="https://drupal.org">Drupal</a>.
+  An open-source platform for YMCAs, by YMCAs built on <a href="https://drupal.org">Drupal</a>.
 </p>
 
 <p align="center">
