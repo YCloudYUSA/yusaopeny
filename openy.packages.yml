@@ -372,6 +372,7 @@ demo:
     - openy_demo_tfitness
     - openy_demo_tnews
     - openy_demo_webform
+    - y_lb_demo_content
 
 integration:
   name: 'Continuous Integration'

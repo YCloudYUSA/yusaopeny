@@ -116,7 +116,7 @@
         "drupal/openy_carnation": "^3",
         "drupal/openy_rose": "^1.1",
         "drupal/social_feed_fetcher": "3.0.x-dev@dev || ^3.0.2",
-        "drupal/y_donate": "^1.0",
+        "drupal/y_donate": "^2.0",
         "guzzlehttp/guzzle": "^6 || ^7",
         "grt107/grt-youtube-popup": "^1.0",
         "guzzlehttp/guzzle": "^6 || ^7",
@@ -145,7 +145,7 @@
         "ynorth-projects/openy_repeat": "^1 || ^2.0.6",
         "ynorth-projects/openy_node_session": "^0.9 || ^1.1.0",
         "open-y-subprojects/openy_hours_formatter": "^1.2",
-        "open-y-subprojects/openy_features": "^2.6.0",
+        "open-y-subprojects/openy_features": "^3.0",
         "open-y-subprojects/openy_content_core": "^1.1",
         "open-y-subprojects/common_scss": "dev-main",
         "open-y-subprojects/openy_content_core": "^3.0",
@@ -157,8 +157,8 @@
         "symfony/console": "^4.4.30 || ^5 || ^6",
         "symfony/dom-crawler": "^6.2",
         "ycloudyusa/useless_machines": "dev-main",
-        "ycloudyusa/y_lb": ">=2.5.1, <2.6.0",
-        "ycloudyusa/y_lb_demo_content": "^1 || dev-main",
+        "ycloudyusa/y_lb": "^3.0.9",
+        "ycloudyusa/y_lb_demo_content": "^3.0",
         "ycloudyusa/yusaopeny_activity_finder": "^4.0",
         "ymcatwincities/ymca_sync": "^8 || ^10",
         "ynorth-projects/openy_node_session": "^2.0",
@@ -167,7 +167,7 @@
     },
     "require-dev": {
         "consolidation/robo": "^1.1.5 || ^2 || ^3 || ^4",
-        "drush/drush": "^10.5.0 || ^11",
+        "drush/drush": "^10.5.0 || ^11 || ^12",
         "open-y-subprojects/openy_docs": "dev-main"
     },
     "replace": {
@@ -380,7 +380,8 @@
                 "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2020-07-22/2647312-32.patch"
             },
             "drupal/video_embed_field": {
-                "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff"
+                "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff",
+                "Add support for Ckeditor 5, see https://www.drupal.org/project/video_embed_field/issues/3311063#comment-15227318": "https://www.drupal.org/files/issues/2023-09-12/3311063-35.patch"
             },
             "drupal/entity_clone": {
                 "3050027: Entity clone does not work properly with Layout Builder block": "https://git.drupalcode.org/project/entity_clone/-/merge_requests/42.diff"
@@ -390,6 +391,12 @@
             },
             "drupal/ckeditor5_font": {
                 "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch"
+            },
+            "drupal/admin_toolbar": {
+                "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch"
+            },
+            "ynorth-projects/openy_repeat": {
+                "Fix for openy_repeat so it can be used as a Schedules page filter https://yusa.atlassian.net/browse/DS-1100": "https://github.com/ynorth-projects/openy_repeat/compare/9.x-2.x...seattleymca:YGSSLA-396.diff"
             }
         }
     },
