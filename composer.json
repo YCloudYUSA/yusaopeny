@@ -84,6 +84,7 @@
         "drupal/plugin": "2.5 || ^2.8",
         "drupal/program_search": "^1.0",
         "drupal/protected_pages": "^1.4",
+        "drupal/ws_promotion": "^1.0",
         "drupal/rabbit_hole": "^1.0 || ^1.0@beta",
         "drupal/recaptcha": "^3",
         "drupal/redirect": "^1",
