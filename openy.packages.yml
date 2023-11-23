@@ -5,7 +5,7 @@ alerts:
   modules:
     - openy_txnm_color
     - openy_node_alert
-    
+
 
 analytics:
   name: 'Analytics'
@@ -304,10 +304,10 @@ social:
 
 social_sharing:
   name: 'Social Sharing'
-  description: 'Social Sharing package provides integration with AddThis service.'
-  help: '<p>Using Social Sharing package you can enable social sharing buttons from <a href="http://www.addthis.com" target="_blank">www.addthis.com</a>.</p>'
+  description: 'Social Sharing package provides integration with AddToAny service.'
+  help: '<p>Using Social Sharing package you can enable social sharing buttons from <a href="https://www.addtoany.com/" target="_blank">www.addtoany.com</a>.</p>'
   modules:
-    - openy_addthis
+    - addtoany
 
 theme_customization:
   name: 'Theme customization'
@@ -397,7 +397,7 @@ activity_finder:
     - openy_activity_finder
     - openy_prgf_activity_finder_4
     - lb_activity_finder
-    
+
 home_branch:
   name: 'Home Branch'
   description: 'Home Branch personalisation package'

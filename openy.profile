@@ -176,7 +176,6 @@ function openy_demo_content_configs_map($key = NULL) {
       'openy_demo_tfacility',
       'openy_demo_tamenities',
       'openy_demo_bmicrosites_menu',
-      'openy_demo_addthis',
       'openy_demo_bsimple',
       'openy_demo_bamenities',
       'openy_demo_tfitness',
@@ -194,6 +193,7 @@ function openy_demo_content_configs_map($key = NULL) {
       'openy_demo_tcolor',
       'openy_demo_tamenities',
       'openy_demo_taxonomy',
+      'y_lb_demo_content',
     ],
     'extended' => [
       'openy_demo_nalert',
@@ -211,7 +211,6 @@ function openy_demo_content_configs_map($key = NULL) {
       'openy_demo_tcolor',
       'openy_demo_tarea',
       'openy_demo_tamenities',
-      'openy_demo_addthis',
       'openy_demo_bsimple',
       'openy_demo_bamenities',
       'openy_demo_taxonomy',

@@ -39,13 +39,13 @@ cd MY_PROJECT
 
 
 
-#### Latest DEVELOPMENT version (Drupal 9 2.x)
+#### Latest DEVELOPMENT version (Drupal 10+ 2.x)
 ```
-composer create-project ycloudyusa/yusaopeny-project:9.2.x-development-dev MY_PROJECT --no-interaction --no-dev
+composer create-project ycloudyusa/yusaopeny-project:dev-main-development MY_PROJECT --no-interaction --no-dev
 cd MY_PROJECT
 ```
 
-This command will build project based on the [**Drupal 9 development branch**](https://github.com/ycloudyusa/yusaopeny/commits/9.x-2.x) release.
+This command will build project based on the [**Drupal 9/10 development branch**](https://github.com/ycloudyusa/yusaopeny/commits/main) release.
 
 See https://youtu.be/jRlinjpTl0c how to video for the whole process of this command usage.
 
@@ -56,7 +56,7 @@ You should use composer command without `--no-dev` if you would like to get envi
 So it should look like this:
 
 ```
-composer create-project ycloudyusa/yusaopeny-project:9.2.x-development-dev MY_PROJECT --no-interaction
+composer create-project ycloudyusa/yusaopeny-project:dev-main-development MY_PROJECT --no-interaction
 cd MY_PROJECT
 ```
 
@@ -83,7 +83,7 @@ Read more details on [Docksal](https://github.com/ymcatwincities/openy-docksal) 
 
 # Use Fork for the development
 
-All development happens in the [Website Services Drupal 9 installation profile](https://github.com/ymcatwincities/openy). In order to start development:
+All development happens in the [Website Services Drupal 9/10 installation profile](https://github.com/ycloudyusa/yusaopeny). In order to start development:
 
 1. Create fork of [Website Services installation profile](https://github.com/YCloudYUSA/yusaopeny)
 2. Add your repository to `composer.json`
@@ -96,13 +96,13 @@ All development happens in the [Website Services Drupal 9 installation profile](
 ]
 ```
 
-3. Change a version for `ycloudyusa/yusaopeny` to `dev-9.x-2.x` or any other branch. E.g.:
+3. Change a version for `ycloudyusa/yusaopeny` to `dev-main` or any other branch. E.g.:
 - branch name "bugfix" - version name `dev-bugfix`
 - branch name "feature/workflow" - version name `dev-feature/workflow`
 
 ```
 "require": {
-    "ycloudyusa/yusaopeny": "dev-9.x-2.x",
+    "ycloudyusa/yusaopeny": "dev-main",
 }
 ```
 ```
