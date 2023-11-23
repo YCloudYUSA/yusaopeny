@@ -389,7 +389,7 @@
                 "Issue #3308035: Drupal 10 & CKEditor 5 Support.": "https://git.drupalcode.org/project/ckeditor_bootstrap_buttons/-/merge_requests/4.patch"
             },
             "drupal/inline_entity_form": {
-                "Issue #3403113: fixed save sub-block": "   https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/94.diff"
+                "Issue #3403113: fixed save sub-block": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/94.diff"
             }
         }
     },
