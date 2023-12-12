@@ -78,6 +78,8 @@ y_layout_builder:
   - lb_grid_icon
   - lb_donate
   - y_donate
+  - y_program
+  - y_program_subcategory
 
 editorial:
   name: 'Editorial'
