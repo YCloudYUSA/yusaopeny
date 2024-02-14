@@ -176,10 +176,10 @@ function openy_demo_content_configs_map($key = NULL) {
       'openy_demo_tfacility',
       'openy_demo_tamenities',
       'openy_demo_bmicrosites_menu',
-      'openy_demo_addthis',
       'openy_demo_bsimple',
       'openy_demo_bamenities',
       'openy_demo_tfitness',
+      'y_lb_demo_content',
     ],
     'standard' => [
       'openy_demo_nalert',
@@ -193,6 +193,7 @@ function openy_demo_content_configs_map($key = NULL) {
       'openy_demo_tcolor',
       'openy_demo_tamenities',
       'openy_demo_taxonomy',
+      'y_lb_demo_content',
     ],
     'extended' => [
       'openy_demo_nalert',
@@ -210,7 +211,6 @@ function openy_demo_content_configs_map($key = NULL) {
       'openy_demo_tcolor',
       'openy_demo_tarea',
       'openy_demo_tamenities',
-      'openy_demo_addthis',
       'openy_demo_bsimple',
       'openy_demo_bamenities',
       'openy_demo_taxonomy',
@@ -392,7 +392,7 @@ function openy_set_frontpage(array &$install_state) {
   $query = \Drupal::entityQuery('node')
     ->accessCheck(FALSE)
     ->condition('status', 1)
-    ->condition('title', 'YMCA Website Services');
+    ->condition('title', 'Demo - Home Page');
   $nids = $query->execute();
   $config_factory = Drupal::configFactory();
   $config_factory->getEditable('system.site')->set('page.front', '/node/' . reset($nids))->save();

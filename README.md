@@ -6,13 +6,12 @@
 
 <h3 align="center">
   YMCA’s Website Service
-
 </h3>
 <p align="center">
   https://ycloud.y.org/open-y-association-websites
 </p>
 <p align="center">
-  An open source platform for YMCAs, by YMCAs built on <a href="https://drupal.org">Drupal</a>.
+  An open-source platform for YMCAs, by YMCAs, built on <a href="https://drupal.org">Drupal</a>.
 </p>
 
 <p align="center">
@@ -22,7 +21,7 @@
 
 ***
 
-The [Y USA Website Services Project](https://ycloud.y.org/open-y-association-websites) is a composer based installer for the [Y USA Website Services distribution](https://github.com/YCloudYUSA/yusaopeny).
+The [Y USA Website Services Project](https://ycloud.y.org/open-y-association-websites) is a composer-based installer for the [Y USA Website Services distribution](https://github.com/YCloudYUSA/yusaopeny).
 
 
 ## Requirements
@@ -32,61 +31,65 @@ If you do not have [Composer](http://getcomposer.org/), you may install it by fo
 
 ## Installation
 
+### Clean install
+
+If you are using internal tooling or only want the required code with no development environment, follow these steps.
+
 #### Latest STABLE version
+
 ```
 composer create-project ycloudyusa/yusaopeny-project MY_PROJECT --no-interaction
 cd MY_PROJECT
 ```
 
+#### Latest DEVELOPMENT version (Drupal 10+ 2.x)
 
-
-#### Latest DEVELOPMENT version (Drupal 9 2.x)
 ```
-composer create-project ycloudyusa/yusaopeny-project:9.2.x-development-dev MY_PROJECT --no-interaction --no-dev
+composer create-project ycloudyusa/yusaopeny-project:dev-main-development MY_PROJECT --no-interaction --no-dev
 cd MY_PROJECT
 ```
 
-This command will build project based on the [**Drupal 9 development branch**](https://github.com/ycloudyusa/yusaopeny/commits/9.x-2.x) release.
+This command will build a project based on the [**Drupal 9/10 development branch**](https://github.com/ycloudyusa/yusaopeny/commits/main) release.
 
-See https://youtu.be/jRlinjpTl0c how to video for the whole process of this command usage.
+See [a how-to video](https://youtu.be/jRlinjpTl0c) for the whole process of this command usage.
 
+### Development environment
 
-## Development environment
+To get an environment that was configured especially for development with the distribution, remove `--no-dev` from the composer command.
 
-You should use composer command without `--no-dev` if you would like to get environment that was configured especially for OpenY. This means you'd remove Vagrant/Docksal from the code tree.
 So it should look like this:
 
 ```
-composer create-project ycloudyusa/yusaopeny-project:9.2.x-development-dev MY_PROJECT --no-interaction
+composer create-project ycloudyusa/yusaopeny-project:dev-main-development MY_PROJECT --no-interaction
 cd MY_PROJECT
 ```
 
-See https://youtu.be/jRlinjpTl0c how to video for the whole process of this command usage.
-=======
+See [a how-to video](https://youtu.be/jRlinjpTl0c) for the whole process of this command usage.
 
-
-### CIBox VM
-[CIBox VM](http://cibox.tools) allows you to make a contribution into OpenY in a few minutes. Just follow steps and then you'll know how to do it.
-
-- [Pre Requirements](https://github.com/ymcatwincities/openy-cibox-vm#pre-requirements)
-- [Installation](https://github.com/ymcatwincities/openy-cibox-vm#usage)
-- [Local build](https://github.com/ymcatwincities/openy-cibox-vm#reinstall-options)
-  
-Read more details on [CIBox VM](https://github.com/ymcatwincities/openy-cibox-vm) repo.
-
-### Docksal
+#### Docksal
 [Docksal](http://docksal.io) is a tool for defining and managing development environments.
 
 - [How to develop](https://github.com/ymcatwincities/openy-docksal#how-to-develop)
-- [How to run behat tests](https://github.com/ymcatwincities/openy-docksal#how-to-run-behat-tests)
   
 Read more details on [Docksal](https://github.com/ymcatwincities/openy-docksal) repo.
 
-# Use Fork for the development
+### Drupal install
 
-All development happens in the [Website Services Drupal 9 installation profile](https://github.com/ymcatwincities/openy). In order to start development:
+The distribution has a full user interface for step-by-step installation. Simply visit your site after building your dev environment to be taken through the installation process.
 
-1. Create fork of [Website Services installation profile](https://github.com/YCloudYUSA/yusaopeny)
+For developers who want a kick-start, you can pass many configuration options in the install process through to [drush site:install](https://www.drush.org/12.x/commands/site_install/).
+
+For example, a "complete" install with the "Carnation" theme might look like:
+
+```shell
+drush -vy si openy openy_configure_profile.preset=complete openy_theme_select.theme=openy_carnation openy_terms_of_use.agree_openy_terms=1 install_configure_form.enable_update_status_emails=NULL --account-name=admin --site-name='YMCA Website Services sandbox'
+```
+
+## Use Fork for the development
+
+All development happens in the [Website Services Drupal 9/10 installation profile](https://github.com/ycloudyusa/yusaopeny). To start development:
+
+1. Create a fork of [Website Services installation profile](https://github.com/YCloudYUSA/yusaopeny)
 2. Add your repository to `composer.json`
 ```
 "repositories": [
@@ -97,13 +100,13 @@ All development happens in the [Website Services Drupal 9 installation profile](
 ]
 ```
 
-3. Change a version for `ycloudyusa/yusaopeny` to `dev-9.x-2.x` or any other branch. E.g.:
+3. Change a version for `ycloudyusa/yusaopeny` to `dev-main` or any other branch. E.g.:
 - branch name "bugfix" - version name `dev-bugfix`
 - branch name "feature/workflow" - version name `dev-feature/workflow`
 
 ```
 "require": {
-    "ycloudyusa/yusaopeny": "dev-9.x-2.x",
+    "ycloudyusa/yusaopeny": "dev-main",
 }
 ```
 ```
@@ -113,9 +116,10 @@ All development happens in the [Website Services Drupal 9 installation profile](
 ```
 
 4. Run `composer update` to update packages
-5. Add and commits changes in `docroot/profiles/contrib/openy`. Now it should be pointed to your fork.
+5. Add and commit changes in `docroot/profiles/contrib/openy`. Now it should be pointed to your fork.
 
-# Directory structure
+## Directory structure
+
 | Directory | Purpose |
 |-----------|---------|
 | [**Y USA Website Services**](https://github.com/ycloudyusa/yusaopeny) ||
@@ -134,7 +138,10 @@ All development happens in the [Website Services Drupal 9 installation profile](
 | `.docksal/` | Docksal configuration |
 | `build.sh` | Build script for Docksal environment |
 
-# Documentation
+## Documentation
+
 Documentation about Website Services is available at [docs](https://github.com/YCloudYUSA/yusaopeny_docs). For details please visit [https://ycloud.y.org/open-y-association-websites](https://ycloud.y.org/open-y-association-websites).
-# License
+
+## License
+
 Y USA OpenY Project is licensed under the [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0-standalone.en.html). See the [License file](https://github.com/YCloudYUSA/yusaopeny-project/blob/9.2.x/LICENSE) for details.
