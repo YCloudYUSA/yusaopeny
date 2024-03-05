@@ -1293,3 +1293,21 @@ function openy_update_8096() {
     $messenger->addMessage($message, 'warning');
   }
 }
+
+/**
+ * Install Responsive Favicons module and set config for new favicons
+ */
+function openy_update_8097() {
+  if (!\Drupal::service('module_handler')->moduleExists('responsive_favicons')) {
+    \Drupal::service('module_installer')->install(['responsive_favicons']);
+  }
+  $path = \Drupal::service('extension.list.profile')->getPath('openy') . '/config/optional';
+  /** @var \Drupal\config_import\ConfigImporterService $config_importer */
+  $config_importer = \Drupal::service('config_import.importer');
+  $config_importer->setDirectory($path);
+  $config_importer->importConfigs([
+    'responsive_favicons.settings',
+  ]);
+  // Clear all cache to rebuild cached favicon
+  drupal_flush_all_caches();
+}

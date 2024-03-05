@@ -61,6 +61,7 @@ dependencies:
   - recaptcha:recaptcha
   - simple_menu_icons:simple_menu_icons
   - twig_tweak:twig_tweak
+  - responsive_favicons:responsive_favicons
   # Website Services
   - advanced_help_block:advanced_help_block
   - openy_block_custom_simple:openy_block_custom_simple
