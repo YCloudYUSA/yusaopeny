@@ -1311,3 +1311,16 @@ function openy_update_8097() {
   // Clear all cache to rebuild cached favicon
   drupal_flush_all_caches();
 }
+
+/**
+ * Update favicon config.
+ */
+function openy_update_8098() {
+  $path = \Drupal::service('extension.list.profile')->getPath('openy') . '/config/optional';
+  /** @var \Drupal\config_import\ConfigImporterService $config_importer */
+  $config_importer = \Drupal::service('config_import.importer');
+  $config_importer->setDirectory($path);
+  $config_importer->importConfigs([
+    'responsive_favicons.settings',
+  ]);
+}
