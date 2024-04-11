@@ -103,6 +103,11 @@ function openy_update_dependencies() {
       'lb_cards' => 9008,
     ],
   ];
+  $dependencies['lb_carousel'] = [
+    9002 => [
+      'lb_cards' => 9008,
+    ],
+  ];
   return $dependencies;
 }
 
