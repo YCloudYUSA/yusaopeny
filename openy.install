@@ -94,7 +94,7 @@ function openy_update_dependencies() {
 
   // Run lb_accordion config import after ws_event_update_9020 enabled smart_date modules.
   $dependencies['lb_accordion'] = [
-    9020 => [
+    9002 => [
       'ws_event' => 9020,
     ],
   ];
