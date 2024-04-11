@@ -142,7 +142,7 @@
         "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
         "symfony/console": "^4.4.30 || ^5 || ^6",
         "symfony/dom-crawler": "^6.2",
-        "ycloudyusa/useless_machines": "dev-main",
+        "ycloudyusa/useless_machines": "<1.1 || dev-main",
         "ycloudyusa/y_lb": "^3.0.9",
         "ycloudyusa/y_lb_demo_content": "^3.0",
         "ycloudyusa/yusaopeny_activity_finder": "^4.3",
