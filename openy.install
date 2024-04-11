@@ -98,7 +98,11 @@ function openy_update_dependencies() {
       'ws_event' => 9020,
     ],
   ];
-
+  $dependencies['lb_grid_icon'] = [
+    9002 => [
+      'lb_cards' => 9008,
+    ],
+  ];
   return $dependencies;
 }
 
