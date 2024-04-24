@@ -5,7 +5,7 @@ alerts:
   modules:
     - openy_txnm_color
     - openy_node_alert
-    
+
 
 analytics:
   name: 'Analytics'
@@ -71,6 +71,15 @@ y_layout_builder:
   - ws_lb_tabs
   - lb_testimonials
   - lb_webform
+  - y_camp
+  - y_facility
+  - y_lb_main_menu_cta_block
+  - layout_builder_restrictions_by_region
+  - lb_grid_icon
+  - lb_donate
+  - y_donate
+  - y_program
+  - y_program_subcategory
 
 editorial:
   name: 'Editorial'
@@ -297,10 +306,10 @@ social:
 
 social_sharing:
   name: 'Social Sharing'
-  description: 'Social Sharing package provides integration with AddThis service.'
-  help: '<p>Using Social Sharing package you can enable social sharing buttons from <a href="http://www.addthis.com" target="_blank">www.addthis.com</a>.</p>'
+  description: 'Social Sharing package provides integration with AddToAny service.'
+  help: '<p>Using Social Sharing package you can enable social sharing buttons from <a href="https://www.addtoany.com/" target="_blank">www.addtoany.com</a>.</p>'
   modules:
-    - openy_addthis
+    - addtoany
 
 theme_customization:
   name: 'Theme customization'
@@ -365,6 +374,7 @@ demo:
     - openy_demo_tfitness
     - openy_demo_tnews
     - openy_demo_webform
+    - y_lb_demo_content
 
 integration:
   name: 'Continuous Integration'
@@ -380,3 +390,19 @@ egym_iwatch:
   help: ''
   modules:
     - openy_egym_iwatch
+
+activity_finder:
+  name: 'Activity Finder'
+  description: 'Framework for Activity Finder functionality'
+  help: 'Embeds the Activity Finder program search experience on your website, which helps users pre-filter the activities they want to search for. See <a href="https://ds-docs.y.org/docs/user-documentation/paragraphs/activity-finder/">more documentation about Activity Finder</a>'
+  modules:
+    - openy_activity_finder
+    - openy_prgf_activity_finder_4
+    - lb_activity_finder
+
+home_branch:
+  name: 'Home Branch'
+  description: 'Home Branch personalisation package'
+  help: 'Allows end user to choose favorite branch in order to get personalized experience across the site'
+  modules:
+    - ws_home_branch

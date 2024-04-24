@@ -14,7 +14,7 @@ class RoboFile extends \Robo\Tasks {
    */
   function OpenyCreateProject($path) {
     $this->taskComposerCreateProject()
-      ->source('ycloudyusa/yusaopeny-project:dev-y_fonts')
+      ->source('ycloudyusa/yusaopeny-project:dev-y_fonts_y_lb_3')
       ->target($path . '/yusaopeny-project')
       ->ansi(TRUE)
       ->dev()
