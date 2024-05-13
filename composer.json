@@ -138,7 +138,7 @@
         "open-y-subprojects/openy_features": "^3.2.0",
         "open-y-subprojects/openy_focal_point": "^1.0",
         "open-y-subprojects/openy_hours_formatter": "^2.0",
-        "open-y-subprojects/openy_map": "^4.16 || ^5.0",
+        "open-y-subprojects/openy_map": "^5.2",
         "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
         "symfony/console": "^4.4.30 || ^5 || ^6",
         "symfony/dom-crawler": "^6.2",
