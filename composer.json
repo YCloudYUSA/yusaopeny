@@ -363,7 +363,7 @@
                 "Issue #3341978: TypeError: explode(): Argument #2 ($string) must be of type string, array given in explode().": "https://www.drupal.org/files/issues/2023-05-10/check-default-value-not-array-15044301-16.patch"
             },
             "drupal/plugin": {
-                "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2020-07-22/2647312-32.patch"
+                "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch"
             },
             "drupal/video_embed_field": {
                 "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff",
