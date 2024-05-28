@@ -145,7 +145,7 @@
         "ycloudyusa/useless_machines": "<1.1 || dev-main",
         "ycloudyusa/y_lb": "^3.0.9 || ^3.4 || ^3.5",
         "ycloudyusa/y_lb_demo_content": "^3.0",
-        "ycloudyusa/yusaopeny_activity_finder": "^4.3 || ^4.4",
+        "ycloudyusa/yusaopeny_activity_finder": "^5.0",
         "ymcatwincities/media_entity_document": "*",
         "ymcatwincities/ymca_sync": "^8 || ^10",
         "ynorth-projects/openy_node_session": "^2.0",
