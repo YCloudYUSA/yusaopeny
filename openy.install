@@ -1275,3 +1275,52 @@ function openy_update_8095() {
     pathauto_update_8108();
   };
 }
+
+/**
+ * Uninstall Open Y AddThis and guide the user to using AddToAny as a replacement.
+ */
+function openy_update_8096() {
+  $messenger = \Drupal::messenger();
+  if (\Drupal::service('module_handler')->moduleExists('openy_addthis')) {
+    \Drupal::service('module_installer')->uninstall(['openy_addthis']);
+    $message = t(
+      'The Open Y AddThis module ceased functioning on May 31, 2023, with the <a href=":addthis">discontinuation of the AddThis service</a>. We recommend <a href=":addtoany">enabling the AddToAny module</a> if you wish to restore sharing capabilities.',
+      [
+        ':addthis' => 'https://www.addthis.com/',
+        ':addtoany' => 'https://ds-docs.y.org/docs/howto/add-social-feeds/#how-to-share-content-from-your-site-to-social-media'
+      ]
+    );
+    $messenger->addMessage($message, 'warning');
+  }
+}
+
+/**
+ * Install Responsive Favicons module and set config for new favicons
+ */
+function openy_update_8097() {
+  if (!\Drupal::service('module_handler')->moduleExists('responsive_favicons')) {
+    \Drupal::service('module_installer')->install(['responsive_favicons']);
+  }
+  $path = \Drupal::service('extension.list.profile')->getPath('openy') . '/config/optional';
+  /** @var \Drupal\config_import\ConfigImporterService $config_importer */
+  $config_importer = \Drupal::service('config_import.importer');
+  $config_importer->setDirectory($path);
+  $config_importer->importConfigs([
+    'responsive_favicons.settings',
+  ]);
+  // Clear all cache to rebuild cached favicon
+  drupal_flush_all_caches();
+}
+
+/**
+ * Update favicon config.
+ */
+function openy_update_8098() {
+  $path = \Drupal::service('extension.list.profile')->getPath('openy') . '/config/optional';
+  /** @var \Drupal\config_import\ConfigImporterService $config_importer */
+  $config_importer = \Drupal::service('config_import.importer');
+  $config_importer->setDirectory($path);
+  $config_importer->importConfigs([
+    'responsive_favicons.settings',
+  ]);
+}
