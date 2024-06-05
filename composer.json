@@ -150,7 +150,7 @@
         "ymcatwincities/ymca_sync": "^8 || ^10",
         "ynorth-projects/openy_node_session": "^2.0",
         "ynorth-projects/openy_pef_gxp_sync": "1.0.0 || ^1.1.1",
-        "ynorth-projects/openy_repeat": "^2.2 || ^2.3"
+        "ynorth-projects/openy_repeat": "^2.2 || ^2.3 || ^2.4"
     },
     "require-dev": {
         "consolidation/robo": "^1.1.5 || ^2 || ^3 || ^4",
@@ -368,9 +368,6 @@
             "drupal/video_embed_field": {
                 "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff",
                 "Add support for Ckeditor 5, see https://www.drupal.org/project/video_embed_field/issues/3311063#comment-15227318": "https://www.drupal.org/files/issues/2023-09-12/3311063-35.patch"
-            },
-            "ynorth-projects/openy_repeat": {
-                "Fix for openy_repeat so it can be used as a Schedules page filter https://yusa.atlassian.net/browse/DS-1100": "https://github.com/ynorth-projects/openy_repeat/compare/main...seattleymca:YGSSLA-396.diff"
             },
             "drupal/ckeditor5_font": {
                 "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch"
