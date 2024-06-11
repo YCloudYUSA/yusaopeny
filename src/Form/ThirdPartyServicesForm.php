@@ -2,7 +2,7 @@
 
 namespace Drupal\openy\Form;
 
-use Drupal\Core\Asset\JsCollectionOptimizer;
+use Drupal\Core\Asset\JsCollectionOptimizerLazy;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -34,10 +34,10 @@ class ThirdPartyServicesForm extends FormBase {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration factory.
-   * @param \Drupal\Core\Asset\JsCollectionOptimizer $collection_optimizer
+   * @param \Drupal\Core\Asset\JsCollectionOptimizerLazy $collection_optimizer
    *   The JS Collection Optimizer.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, JsCollectionOptimizer $collection_optimizer) {
+  public function __construct(ConfigFactoryInterface $config_factory, JsCollectionOptimizerLazy $collection_optimizer) {
     $this->configFactory = $config_factory;
     $this->collectionOptimizer = $collection_optimizer;
   }
