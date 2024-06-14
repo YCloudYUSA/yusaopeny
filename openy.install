@@ -92,6 +92,22 @@ function openy_update_dependencies() {
     ],
   ];
 
+  // Run lb_accordion config import after ws_event_update_9020 enabled smart_date modules.
+  $dependencies['lb_accordion'] = [
+    9002 => [
+      'ws_event' => 9020,
+    ],
+  ];
+  $dependencies['lb_grid_icon'] = [
+    9002 => [
+      'lb_cards' => 9008,
+    ],
+  ];
+  $dependencies['lb_carousel'] = [
+    9002 => [
+      'lb_cards' => 9008,
+    ],
+  ];
   return $dependencies;
 }
 
