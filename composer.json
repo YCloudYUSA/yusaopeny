@@ -60,6 +60,7 @@
         "drupal/jquery_ui_tabs": "^2.0",
         "drupal/jquery_ui_tooltip": "^2.0",
         "drupal/jquery_ui_touch_punch": "^1.1",
+        "drupal/lb_copy_section": "^1.0",
         "drupal/libraries": "^3.0 || ^4.0",
         "drupal/link_attributes": "^1",
         "drupal/media_directories": "dev-2.1.x",
