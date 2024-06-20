@@ -51,6 +51,7 @@ dependencies:
   - admin_toolbar:admin_toolbar_tools
   - captcha:captcha
   - ckeditor_bootstrap_buttons:ckeditor_bootstrap_buttons
+  - ckeditor5_paste_filter:ckeditor5_paste_filter
   - editor_advanced_link:editor_advanced_link
   - features:features
   - image_captcha:image_captcha
