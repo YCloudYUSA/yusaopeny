@@ -152,7 +152,7 @@
         "ymcatwincities/ymca_sync": "^8 || ^10",
         "ynorth-projects/openy_node_session": "^2.0",
         "ynorth-projects/openy_pef_gxp_sync": "1.0.0 || ^1.1.1",
-        "ynorth-projects/openy_repeat": "^2.2 || ^2.3 || ^2.4"
+        "ynorth-projects/openy_repeat": "^2.5.0"
     },
     "require-dev": {
         "consolidation/robo": "^1.1.5 || ^2 || ^3 || ^4",
