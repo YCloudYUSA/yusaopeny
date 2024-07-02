@@ -6,7 +6,7 @@
     "require": {
         "php": ">=8.1",
         "composer/installers": "^1.2",
-        "cweagans/composer-patches": "^1.5.0",
+        "cweagans/composer-patches": "^1.0",
         "drupal/activenet": "^1.0",
         "drupal/address": "^1.8",
         "drupal/addtoany": "^2.0",
@@ -17,17 +17,18 @@
         "drupal/blazy": "^2.4",
         "drupal/captcha": "^1.10 || ^2.0 || ^2.0@beta",
         "drupal/ckeditor5_font": "^1.1@beta",
+        "drupal/ckeditor5_paste_filter": "^1.0",
         "drupal/ckeditor_bootstrap_buttons": "^1.2 || ^2.0.0",
         "drupal/ckeditor_font": "^1",
         "drupal/color": "^1.0",
-        "drupal/colorapi": "^1.1",
+        "drupal/colorapi": "^1.1 || ^2.0",
         "drupal/colorbutton": "^1",
         "drupal/confi": "^3.1",
         "drupal/config_update": "^1.6 || ^2 || ^2.0@alpha",
-        "drupal/core": "^9.5.9 || ^10.0.9 <10.1",
-        "drupal/core-composer-scaffold": "^9.5.9 || ^10.0.9 <10.1",
-        "drupal/core-project-message": "^9.5.9 || ^10.0.9 <10.1",
-        "drupal/core-recommended": "^9.5.9 || ^10.0.9 <10.1",
+        "drupal/core": "^10.0.9, <10.3",
+        "drupal/core-composer-scaffold": "^10.1, <10.3",
+        "drupal/core-project-message": "^10.1, <10.3",
+        "drupal/core-recommended": "^10.1, <10.3",
         "drupal/crop": "^2",
         "drupal/css_editor": "^1.3 || ^2",
         "drupal/csv_serialization": "^3 || ^3.0@beta",
@@ -91,8 +92,8 @@
         "drupal/redirect": "^1",
         "drupal/responsive_favicons": "^2.0",
         "drupal/scheduler": "^2 || ^2.0@RC",
-        "drupal/search_api": "1.17 || ^1.19",
-        "drupal/search_api_solr": "^4.1",
+        "drupal/search_api": "^1.31",
+        "drupal/search_api_solr": "^4.3.1",
         "drupal/seven": "^1 || ^1.0@alpha",
         "drupal/simple_menu_icons": "^2.2 || ^3",
         "drupal/simple_sitemap": "^3.7 || ^4.1",
@@ -134,24 +135,25 @@
         "oomphinc/composer-installers-extender": "^1.1 || ^2.0.0",
         "open-y-subprojects/common_scss": "dev-main",
         "open-y-subprojects/openy_content_core": "^3.0",
-        "open-y-subprojects/openy_custom": "^2.0",
+        "open-y-subprojects/openy_custom": "^2.6.0",
         "open-y-subprojects/openy_daxko_gxp_syncer": "^1.2",
-        "open-y-subprojects/openy_features": "^3.2.0",
+        "open-y-subprojects/openy_features": "^3.3.1",
         "open-y-subprojects/openy_focal_point": "^1.0",
         "open-y-subprojects/openy_hours_formatter": "^2.0",
         "open-y-subprojects/openy_map": "^5.2",
         "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
         "symfony/console": "^4.4.30 || ^5 || ^6",
         "symfony/dom-crawler": "^6.2",
-        "ycloudyusa/useless_machines": "<1.1 || dev-main",
-        "ycloudyusa/y_lb": "^3.0.9 || ^3.4 || ^3.5",
-        "ycloudyusa/y_lb_demo_content": "^3.0",
-        "ycloudyusa/yusaopeny_activity_finder": "^4.3 || ^4.4",
+        "ycloudyusa/useless_machines": "^1.1 || dev-main",
+        "ycloudyusa/y_lb_demo_content": "^3.3",
+        "drupal/lb_testimonial_blocks": "^1.0",
+        "ycloudyusa/y_lb": "^3.5 || ^3.6",
+        "ycloudyusa/yusaopeny_activity_finder": "^5.0",
         "ymcatwincities/media_entity_document": "*",
         "ymcatwincities/ymca_sync": "^8 || ^10",
         "ynorth-projects/openy_node_session": "^2.0",
         "ynorth-projects/openy_pef_gxp_sync": "1.0.0 || ^1.1.1",
-        "ynorth-projects/openy_repeat": "^2.2 || ^2.3"
+        "ynorth-projects/openy_repeat": "^2.5.0"
     },
     "require-dev": {
         "consolidation/robo": "^1.1.5 || ^2 || ^3 || ^4",
@@ -337,6 +339,7 @@
                 "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch"
             },
             "drupal/ckeditor5_font": {
+                "Issue #3368736: no config schema' Error after update to Drupal 10.1.0": "https://www.drupal.org/files/issues/2024-01-11/ckeditor5_font-schema-fix-10.2.1-3368736-37.patch",
                 "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch"
             },
             "drupal/colorapi": {
@@ -370,11 +373,9 @@
                 "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff",
                 "Add support for Ckeditor 5, see https://www.drupal.org/project/video_embed_field/issues/3311063#comment-15227318": "https://www.drupal.org/files/issues/2023-09-12/3311063-35.patch"
             },
-            "ynorth-projects/openy_repeat": {
-                "Fix for openy_repeat so it can be used as a Schedules page filter https://yusa.atlassian.net/browse/DS-1100": "https://github.com/ynorth-projects/openy_repeat/compare/main...seattleymca:YGSSLA-396.diff"
-            },
             "drupal/ckeditor5_font": {
-                "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch"
+                "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch",
+                "Issue #3368736: no config schema' Error after update to Drupal 10.1.0": "https://www.drupal.org/files/issues/2024-01-11/ckeditor5_font-schema-fix-10.2.1-3368736-37.patch"
             },
             "drupal/inline_entity_form": {
                 "Issue #3403113: fixed save sub-block": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/94.diff",
@@ -388,6 +389,16 @@
             },
             "drupal/scheduler": {
                 "Issue #3446881: Unhandled Warning: Undefined array key 'translatable'": "https://git.drupalcode.org/project/scheduler/-/merge_requests/140.diff"
+            },
+            "drupal/redirect": {
+                "Issue #3373123: Setting 'Enforce clean and canonical URLs.' breaks CSS aggregation on multilingual Drupal 10.1.x with browser caching enabled": "https://git.drupalcode.org/project/redirect/-/merge_requests/93.patch"
+            },
+            "drupal/search_api": {
+                "First https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://www.drupal.org/files/issues/2024-06-17/3454939-search-api-solr-core-10.patch",
+                "Second https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://git.drupalcode.org/project/search_api/-/merge_requests/148.diff"
+            },
+            "drupal/search_api_solr": {
+                "https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://www.drupal.org/files/issues/2024-06-17/search-api-solr-fatal-error-declaration-of-sleep-3449292-12.patch"
             }
         }
     },
