@@ -338,7 +338,7 @@
                 "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch"
             },
             "drupal/ckeditor5_font": {
-                "Issue #3368736: no config schema' Error after update to Drupal 10.1.0": "https://www.drupal.org/files/issues/2024-01-11/ckeditor5_font-schema-fix-10.2.1-3368736-37.patch",
+                "Issue #3368736: no config schema' Error after update to Drupal 10.1.0": "https://www.drupal.org/files/issues/2024-06-25/ckeditor5_font-schema-fix-10.3.x-3368736-48_0.patch",
                 "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch"
             },
             "drupal/colorapi": {
