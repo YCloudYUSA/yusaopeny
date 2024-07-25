@@ -143,6 +143,7 @@
         "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
         "symfony/console": "^4.4.30 || ^5 || ^6",
         "symfony/dom-crawler": "^6.2",
+        "ycloudyusa/y_pef_schedule": "^1.0",
         "ycloudyusa/useless_machines": "^1.1 || dev-main",
         "ycloudyusa/y_lb_demo_content": "^3.3",
         "drupal/lb_testimonial_blocks": "^1.0",
