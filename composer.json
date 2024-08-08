@@ -40,7 +40,7 @@
         "drupal/dropzonejs": "2.1 || ^2.5",
         "drupal/easy_breadcrumb": "^2",
         "drupal/editor_advanced_link": "^1 || ^2.1",
-        "drupal/embed": "^1",
+        "drupal/embed": "<1.8",
         "drupal/entity": "^1",
         "drupal/entity_browser": "^2",
         "drupal/entity_clone": ">=2.0.0-beta5 || ^2",
