@@ -143,6 +143,7 @@
         "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
         "symfony/console": "^4.4.30 || ^5 || ^6",
         "symfony/dom-crawler": "^6.2",
+        "ycloudyusa/y_pef_schedule": "^1.0",
         "ycloudyusa/useless_machines": "^1.1 || dev-main",
         "ycloudyusa/y_lb_demo_content": "^3.3",
         "drupal/lb_testimonial_blocks": "^1.0",
@@ -338,7 +339,7 @@
                 "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch"
             },
             "drupal/ckeditor5_font": {
-                "Issue #3368736: no config schema' Error after update to Drupal 10.1.0": "https://www.drupal.org/files/issues/2024-01-11/ckeditor5_font-schema-fix-10.2.1-3368736-37.patch",
+                "Issue #3368736: no config schema' Error after update to Drupal 10.1.0": "https://www.drupal.org/files/issues/2024-06-25/ckeditor5_font-schema-fix-10.3.x-3368736-48_0.patch",
                 "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch"
             },
             "drupal/colorapi": {
