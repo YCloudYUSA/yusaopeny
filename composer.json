@@ -373,10 +373,6 @@
                 "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff",
                 "Add support for Ckeditor 5, see https://www.drupal.org/project/video_embed_field/issues/3311063#comment-15227318": "https://www.drupal.org/files/issues/2023-09-12/3311063-35.patch"
             },
-            "drupal/ckeditor5_font": {
-                "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch",
-                "Issue #3368736: no config schema' Error after update to Drupal 10.1.0": "https://www.drupal.org/files/issues/2024-01-11/ckeditor5_font-schema-fix-10.2.1-3368736-37.patch"
-            },
             "drupal/inline_entity_form": {
                 "Issue #3403113: fixed save sub-block": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/94.diff",
                 "Issue #3398615: Save is broken in modal": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/95.diff"
