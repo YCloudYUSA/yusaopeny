@@ -2,7 +2,7 @@ name: YMCA Website Services
 type: profile
 description: 'YMCA Website Services Drupal distribution.'
 core_version_requirement: ^9 || ^10
-version: '10.3.3.5-dev'
+version: '10.3.3.5'
 distribution:
   name: YMCA Website Services
   install:
