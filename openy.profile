@@ -216,6 +216,9 @@ function openy_demo_content_configs_map($key = NULL) {
       'openy_demo_taxonomy',
       'y_lb_demo_content',
     ],
+    'small_y' => [
+      'small_y_demo_content',
+    ],
 
   ];
 
@@ -346,6 +349,7 @@ function openy_import_content(array &$install_state) {
     'standard' => 'openy_standard_installation',
     'extended' => 'openy_extended_installation',
     'complete' => 'openy_complete_installation',
+    'small_y' => 'openy_small_y_installation',
   ];
   $migration_tag = $preset_tags[$preset];
   // Add core demo content.

@@ -64,3 +64,19 @@ complete:
     - y_layout_builder
     - home_branch
     - activity_finder
+
+small_y:
+  name: "Small Y"
+  packages:
+    - alerts
+    - analytics
+    - editorial
+    - locations
+    - locations_ext
+    - scheduler
+    - search
+    - seo
+    - small_y
+    - translation
+    - webform
+    - y_layout_builder
