@@ -80,6 +80,7 @@ y_layout_builder:
   - y_donate
   - y_program
   - y_program_subcategory
+  - lb_copy_section
 
 editorial:
   name: 'Editorial'
