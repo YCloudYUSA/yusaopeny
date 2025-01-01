@@ -1324,3 +1324,12 @@ function openy_update_8098() {
     'responsive_favicons.settings',
   ]);
 }
+
+/**
+ * Install Copy Layout Builder section module.
+ */
+function openy_update_91001() {
+  if (!\Drupal::service('module_handler')->moduleExists('lb_copy_section')) {
+    \Drupal::service('module_installer')->install(['lb_copy_section']);
+  }
+}
