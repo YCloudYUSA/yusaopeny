@@ -718,6 +718,10 @@ function openy_install_tasks_alter(&$tasks, &$install_state) {
     unset($tasks["openy_install_search"]);
     unset($tasks["openy_solr_search"]);
   }
+  // The trick to keep profile installation works for Drupal Core > 10.3.
+  if (isset($tasks['install_bootstrap_full'])) {
+    openy_register_profile();
+  }
 
 }
 
@@ -799,4 +803,23 @@ function openy_enable_search_api_solr_legacy() {
   }
 
   return FALSE;
+}
+
+/**
+ * The profile name should exist in the 'core.extension.module' list.
+ *
+ * @see https://git.drupalcode.org/project/drupal/-/commit/bd13fb1a9091996e526110851c73137a01e78cb3#a96e18f6425fb567a1083b3c6f8afcfaa94b8522_133_134
+ */
+function openy_register_profile(): void {
+  $config_factory = Drupal::configFactory();
+  $extension_config = $config_factory->getEditable('core.extension');
+  // Set the default and admin theme.
+  $config_factory
+    ->getEditable('system.theme')
+    ->set('admin', 'claro');
+  // Enable the admin theme.
+  $config_factory
+    ->getEditable('node.settings')
+    ->set('use_admin_theme', TRUE);
+  $extension_config->set('module.openy', 1000);
 }
