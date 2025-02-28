@@ -800,3 +800,4 @@ function openy_enable_search_api_solr_legacy() {
 
   return FALSE;
 }
+
