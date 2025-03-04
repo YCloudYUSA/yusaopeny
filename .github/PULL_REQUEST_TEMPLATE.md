@@ -1,5 +1,6 @@
 Original Issue, this PR is going to fix: REPLACE WITH A LINK TO ISSUE ( publicly available )
 
+If you need to post fixed to 10.3 Drupal core - use respective branch https://github.com/YCloudYUSA/yusaopeny/tree/drupal10.3bugfixes
 
 Make sure these boxes are checked before asking for review of your pull request - thank you!
 
