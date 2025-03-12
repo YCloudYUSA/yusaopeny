@@ -396,6 +396,9 @@
             },
             "drupal/search_api_solr": {
                 "https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://www.drupal.org/files/issues/2024-06-17/search-api-solr-fatal-error-declaration-of-sleep-3449292-12.patch"
+            },
+            "ycloudyusa/y_lb": {
+                "Fix burger button for mobile": "https://patch-diff.githubusercontent.com/raw/YCloudYUSA/y_lb/pull/265.diff"
             }
         }
     },
