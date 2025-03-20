@@ -154,7 +154,7 @@
         "ymcatwincities/ymca_sync": "^8 || ^10",
         "ynorth-projects/openy_node_session": "^2.0",
         "ynorth-projects/openy_pef_gxp_sync": "1.0.0 || ^1.1.1",
-        "drupal/openy_repeat": "2.7.2"
+        "drupal/openy_repeat": "^2.7.2"
     },
     "require-dev": {
         "consolidation/robo": "^1.1.5 || ^2 || ^3 || ^4",
