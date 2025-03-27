@@ -398,6 +398,9 @@
             },
             "drupal/search_api_solr": {
                 "https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://www.drupal.org/files/issues/2024-06-17/search-api-solr-fatal-error-declaration-of-sleep-3449292-12.patch"
+            },
+            "drupal/core": {
+                "Fix contextual links disappear intermittently leading to console errors https://www.drupal.org/project/drupal/issues/3458067": "https://git.drupalcode.org/project/drupal/-/merge_requests/8585.diff"
             }
         }
     },
