@@ -137,7 +137,7 @@
         "open-y-subprojects/openy_content_core": "^3.0",
         "open-y-subprojects/openy_custom": "^2.6.0",
         "open-y-subprojects/openy_daxko_gxp_syncer": "^1.2",
-        "open-y-subprojects/openy_features": "^3.6.0",
+        "open-y-subprojects/openy_features": "^3.6.2",
         "open-y-subprojects/openy_focal_point": "^1.0",
         "open-y-subprojects/openy_hours_formatter": "^2.0",
         "open-y-subprojects/openy_map": "^5.2",
@@ -148,13 +148,13 @@
         "ycloudyusa/useless_machines": "^1.1 || dev-main",
         "ycloudyusa/y_lb_demo_content": "^3.3",
         "drupal/lb_testimonial_blocks": "^1.0",
-        "ycloudyusa/y_lb": "^3.10.0",
+        "ycloudyusa/y_lb": "^3.10.1",
         "ycloudyusa/yusaopeny_activity_finder": "^5.0",
         "ymcatwincities/media_entity_document": "*",
         "ymcatwincities/ymca_sync": "^8 || ^10",
         "ynorth-projects/openy_node_session": "^2.0",
         "ynorth-projects/openy_pef_gxp_sync": "1.0.0 || ^1.1.1",
-        "ynorth-projects/openy_repeat": "^2.5.0"
+        "drupal/openy_repeat": "^2.7.2"
     },
     "require-dev": {
         "consolidation/robo": "^1.1.5 || ^2 || ^3 || ^4",
@@ -396,6 +396,10 @@
             },
             "drupal/search_api_solr": {
                 "https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://www.drupal.org/files/issues/2024-06-17/search-api-solr-fatal-error-declaration-of-sleep-3449292-12.patch"
+            },
+            "drupal/core": {
+                "Fix contextual links disappear intermittently leading to console errors https://www.drupal.org/project/drupal/issues/3458067": "https://git.drupalcode.org/project/drupal/-/merge_requests/8585.diff",
+                "Url only outputs the last value of a query parameter": "https://www.drupal.org/files/issues/2024-02-28/3038774-51-10.2.3-reroll.patch"
             }
         }
     },
