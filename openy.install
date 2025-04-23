@@ -135,15 +135,6 @@ function openy_update_8003() {
 }
 
 /**
- * Fix tour config dependencies.
- */
-function openy_update_8004() {
-  $config = \Drupal::service('extension.list.theme')->getPath('openy_rose') . '/config/optional/tour.tour.openy-theme-overview.yml';
-  $config_importer = \Drupal::service('openy_upgrade_tool.param_updater');
-  $config_importer->update($config, 'tour.tour.openy-theme-overview', 'dependencies');
-}
-
-/**
  * Enable Data layer modules & revert needed configuration.
  */
 function openy_update_8005() {
@@ -318,20 +309,6 @@ function openy_update_8019() {
 function openy_update_8020() {
   // Enable module.
   \Drupal::service('module_installer')->install(['openy_branch_selector']);
-}
-
-/**
- * Fix typos in theme settings.
- */
-function openy_update_8021() {
-  // Get config data.
-  $config = \Drupal::configFactory()->getEditable('openy_rose.settings');
-  $data = $config->get('oepny_rose_image_fields');
-
-  // Update config data.
-  $config->clear('oepny_rose_image_fields');
-  $config->set('openy_rose_image_fields', $data);
-  $config->save();
 }
 
 /**
@@ -764,46 +741,6 @@ function openy_update_8050() {
 }
 
 /**
- * Enable CSS Editor module and import the settings.
- */
-function openy_update_8051() {
-  \Drupal::service('module_installer')->install(['css_editor'], TRUE);
-
-  $config_importer = \Drupal::service('openy_upgrade_tool.param_updater');
-  $config_manager = \Drupal::service('config.manager');
-  $config_factory = $config_manager->getConfigFactory();
-
-  $themes_list = [
-    'openy_rose',
-    'openy_lily',
-  ];
-
-  $update_fields = [
-    'css_enabled',
-    'css',
-    'plaintext_enabled',
-    'autopreview_enabled',
-    'preview_path',
-  ];
-
-  foreach ($themes_list as $theme) {
-    foreach ($update_fields as $field) {
-      $config_name = $theme . '.settings';
-      $config = \Drupal::service('extension.list.theme')->getPath($theme);
-      $config .= '/config/install/';
-      $config .= $config_name . '.yml';
-
-      $configObj = $config_factory->getEditable($config_name);
-      if ($configObj->isNew() && empty($configObj->getOriginal())) {
-        continue;
-      }
-
-      $config_importer->update($config, $config_name, $field);
-    }
-  }
-}
-
-/**
  * Enable Website Services Paragraph Location By Amenities.
  */
 function openy_update_8052() {
@@ -824,8 +761,6 @@ function openy_update_8054() {
   \Drupal::service('module_installer')->install(['openy_gtranslate']);
 
   $themes_list = [
-    'openy_rose' => '5a698466-f499-4dda-a084-4d61c1d0e902',
-    'openy_lily' => '5a698466-f499-4dda-a084-4d61c1d0e777',
     'openy_carnation' => '32fa8958-20d7-41e0-9e7c-a5768bf6dfac',
   ];
   /** @var \Drupal\Core\Entity\EntityTypeManager $entityTypeManager */
@@ -951,52 +886,6 @@ function openy_update_8063() {
 }
 
 /**
- * Breadcrumbs config rename.
- */
-function openy_update_8064() {
-  \Drupal::configFactory()
-    ->rename('block.block.breadcrumbs', 'block.block.openy_rose_breadcrumbs');
-  \Drupal::configFactory()->getEditable('block.block.openy_rose_breadcrumbs')
-    ->set('id', 'openy_rose_breadcrumbs')
-    ->save(TRUE);
-}
-
-/**
- * Rename mainnavigation and useraccountmenu block configs.
- */
-function openy_update_8065() {
-  $configs = [
-    'mainnavigation' => 'openy_rose_mainnavigation',
-    'useraccountmenu' => 'openy_rose_useraccountmenu',
-  ];
-  foreach ($configs as $old_id => $new_id) {
-    \Drupal::configFactory()
-      ->rename('block.block.' . $old_id, 'block.block.' . $new_id);
-    \Drupal::configFactory()->getEditable('block.block.' . $new_id)
-      ->set('id', $new_id)
-      ->save(TRUE);
-  }
-}
-
-/**
- * Fix incorrect ids in footer blocks configs according to config name.
- */
-function openy_update_8066() {
-  $configs = [
-    'footermenucenter' => 'openy_rose_fmenu_center',
-    'footermenuleft' => 'openy_rose_fmenu_left',
-    'footermenuright' => 'openy_rose_fmenu_right',
-  ];
-  foreach ($configs as $old_id => $new_id) {
-    \Drupal::configFactory()
-      ->rename('block.block.' . $old_id, 'block.block.' . $new_id);
-    \Drupal::configFactory()->getEditable('block.block.' . $new_id)
-      ->set('id', $new_id)
-      ->save(TRUE);
-  }
-}
-
-/**
  * Enable PEF paragraphs.
  */
 function openy_update_8067() {
@@ -1008,23 +897,6 @@ function openy_update_8067() {
     \Drupal::service('module_installer')->install([
       $module,
     ]);
-  }
-}
-
-/**
- * Update footer blocks config names and ids.
- */
-function openy_update_8068() {
-  $configs = [
-    'footercopyrightblock' => 'openy_rose_footercopyrightblock',
-    'footersocialblock' => 'openy_rose_footersocialblock',
-  ];
-  foreach ($configs as $old_id => $new_id) {
-    \Drupal::configFactory()
-      ->rename('block.block.' . $old_id, 'block.block.' . $new_id);
-    \Drupal::configFactory()->getEditable('block.block.' . $new_id)
-      ->set('id', $new_id)
-      ->save(TRUE);
   }
 }
 
@@ -1125,9 +997,7 @@ function openy_update_8078() {
  */
 function openy_update_8079() {
   $themes_list = [
-    'openy_lily',
     'openy_carnation',
-    'openy_rose',
   ];
   foreach ($themes_list as $theme) {
     if (\Drupal::service('theme_handler')->themeExists($theme)) {
@@ -1170,38 +1040,10 @@ function openy_update_8083() {
 }
 
 /**
- * Enable jquery_ui_tabs module.
- */
-function openy_update_8084() {
-  $enabled_themes = array_keys(\Drupal::service('theme_handler')->listInfo());
-  if (count(array_intersect(['openy_lily', 'openy_rose'], $enabled_themes)) > 0) {
-    \Drupal::service('module_installer')->install(['jquery_ui_tabs']);
-  }
-}
-
-/**
  * Uninstall openy_autocomplete_path module.
  */
 function openy_update_8086() {
   \Drupal::service('module_installer')->uninstall(['openy_autocomplete_path']);
-}
-
-/**
- * Update themes settings with display_search_form.
- */
-function openy_update_8087() {
-  $themes_list = [
-    'openy_lily',
-    'openy_rose',
-  ];
-  foreach ($themes_list as $theme) {
-    if (\Drupal::service('theme_handler')->themeExists($theme)) {
-      $config = \Drupal::service('extension.list.theme')->getPath($theme) . '/config/install/' . $theme . '.settings.yml';
-      /** @var Drupal\openy_upgrade_tool\ConfigParamUpgradeTool $config_importer */
-      $config_importer = \Drupal::service('openy_upgrade_tool.param_updater');
-      $config_importer->update($config, $theme . '.settings', 'display_search_form');
-    }
-  }
 }
 
 /**
@@ -1253,9 +1095,7 @@ function openy_update_8093() {
  */
 function openy_update_8094() {
   $configs = [
-    'block.block.openy_carnation_webform',
-    'block.block.openy_rose_webform',
-    'block.block.openy_lily_webform'
+    'block.block.openy_carnation_webform'
   ];
 
   foreach ($configs as $config) {
