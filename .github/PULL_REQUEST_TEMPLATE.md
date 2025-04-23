@@ -1,7 +1,5 @@
 Original Issue, this PR is going to fix: REPLACE WITH A LINK TO ISSUE ( publicly available )
 
-If you need to post fixed to 10.3 Drupal core - use respective branch https://github.com/YCloudYUSA/yusaopeny/tree/drupal10.3bugfixes
-
 Make sure these boxes are checked before asking for review of your pull request - thank you!
 
 If there is a new feature or this is a bug fix - use `main` branch. We'll tag for release if the bug is critical ASAP or tag for release next bug fix release until the critical issue arrives.
