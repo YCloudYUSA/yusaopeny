@@ -470,6 +470,7 @@
       },
       "drupal/features": {
         "Drupal 11 compat": "https://git.drupalcode.org/project/features/-/merge_requests/39.diff"
+      }
     }
   },
   "scripts": {
