@@ -48,7 +48,7 @@
     "drupal/entity_clone": ">=2.0.0-beta5 || ^2",
     "drupal/entity_embed": "^1.5",
     "drupal/entity_reference_revisions": "^1.6",
-    "drupal/features": "^5.0 || 5.0.x-dev@dev || ^5.0@alpha",
+    "drupal/features": "3.x-dev@dev",
     "drupal/field_group": "^3.0",
     "drupal/focal_point": "^2 || ^2.0@alpha",
     "drupal/fontyourface": "^3.3 || 3.x-dev@dev",
@@ -467,7 +467,9 @@
       "drupal/core": {
         "Fix contextual links disappear intermittently leading to console errors https://www.drupal.org/project/drupal/issues/3458067": "https://git.drupalcode.org/project/drupal/-/merge_requests/8585.diff",
         "Url only outputs the last value of a query parameter": "https://www.drupal.org/files/issues/2024-02-28/3038774-51-10.2.3-reroll.patch"
-      }
+      },
+      "drupal/features": {
+        "Drupal 11 compat": "https://git.drupalcode.org/project/features/-/merge_requests/39.diff"
     }
   },
   "scripts": {
