@@ -58,7 +58,7 @@
     "drupal/groupexpro": "^1.0 !=1.0.3",
     "drupal/hal": "^1.0 || ^2.0",
     "drupal/image_widget_crop": "^2.4",
-    "drupal/inline_entity_form": "^2.0 || ^2.0@RC",
+    "drupal/inline_entity_form": "^2.0 || ^2.0@RC || ^3.0@RC",
     "drupal/jquery_ui_tabs": "^2.0",
     "drupal/jquery_ui_tooltip": "^2.0",
     "drupal/jquery_ui_touch_punch": "^1.1",
