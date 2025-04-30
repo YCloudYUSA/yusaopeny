@@ -22,7 +22,6 @@
     "drupal/ckeditor5_font": "^1.1@beta",
     "drupal/ckeditor5_paste_filter": "^1.0",
     "drupal/ckeditor_bootstrap_buttons": "^1.2 || ^2.0.0",
-    "drupal/ckeditor_font": "^1",
     "drupal/colorapi": "^1.1 || ^2.0",
     "drupal/colorbutton": "^1",
     "drupal/confi": "^3.1",
