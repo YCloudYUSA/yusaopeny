@@ -5,6 +5,7 @@
   "type": "drupal-profile",
   "require": {
     "php": ">=8.3",
+    "mglaman/composer-drupal-lenient": "^1.0",
     "composer/installers": "^1.2",
     "cweagans/composer-patches": "^1.0",
     "drupal/activenet": "^1.0",
