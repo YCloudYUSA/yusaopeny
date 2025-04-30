@@ -97,7 +97,6 @@
     "drupal/scheduler": "^2 || ^2.0@RC",
     "drupal/search_api": "^1.31",
     "drupal/search_api_solr": "^4.3.1",
-    "drupal/seven": "^1 || ^1.0@alpha",
     "drupal/simple_menu_icons": "^2.2 || ^3",
     "drupal/simple_sitemap": "^3.7 || ^4.1",
     "drupal/slick": "^2",
