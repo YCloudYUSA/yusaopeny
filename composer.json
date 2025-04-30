@@ -146,9 +146,9 @@
     "symfony/dom-crawler": "^6.2",
     "ycloudyusa/y_pef_schedule": "^1.0",
     "ycloudyusa/useless_machines": "^1.1 || dev-main",
-    "ycloudyusa/y_lb_demo_content": "^3.3",
+    "ycloudyusa/y_lb_demo_content": "^3.3 || ~4.0.0",
     "drupal/lb_testimonial_blocks": "^1.0",
-    "ycloudyusa/y_lb": "^3.10.1",
+    "ycloudyusa/y_lb": "^3.10.1 || ~4.0.0",
     "ycloudyusa/yusaopeny_activity_finder": "^5.0",
     "ymcatwincities/media_entity_document": "*",
     "ymcatwincities/ymca_sync": "^8 || ^10"
