@@ -9,7 +9,7 @@
     "composer/installers": "^1.2",
     "cweagans/composer-patches": "^1.0",
     "drupal/activenet": "^1.0",
-    "drupal/address": "^1.8",
+    "drupal/address": "^1.8 || ^2.0",
     "drupal/addtoany": "^2.0",
     "drupal/admin_toolbar": "^3.2",
     "drupal/advanced_help_block": "^1.0",
