@@ -150,8 +150,8 @@
     "ymcatwincities/ymca_sync": "^8 || ^10"
   },
   "require-dev": {
-    "consolidation/robo": "^1.1.5 || ^2 || ^3 || ^4",
-    "drush/drush": "^10.5.0 || ^11 || ^12",
+    "consolidation/robo": "^3 || ^4 || ~5.0.0",
+    "drush/drush": "^12 || ~13.0.0",
     "open-y-subprojects/openy_docs": "dev-main"
   },
   "replace": {
