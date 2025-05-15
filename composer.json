@@ -139,7 +139,8 @@
     "ycloudyusa/y_lb": "^3.10.1 || ~4.0.0",
     "ycloudyusa/yusaopeny_activity_finder": "^5.0",
     "ymcatwincities/media_entity_document": "*",
-    "ymcatwincities/ymca_sync": "^8 || ^10"
+    "ymcatwincities/ymca_sync": "^8 || ^10",
+    "ycloudyusa/ws_outsiders": "dev-main"
   },
   "require-dev": {
     "consolidation/robo": "^3 || ^4 || ~5.0.0",
