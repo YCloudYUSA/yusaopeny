@@ -25,6 +25,7 @@
     "drupal/core-composer-scaffold": "~11.0.13",
     "drupal/core-project-message": "~11.0.13",
     "drupal/core-recommended": "~11.0.13",
+    "drupal/core": "~11.0.13",
     "drupal/crop": "^2",
     "drupal/css_editor": "^1.3 || ^2",
     "drupal/csv_serialization": "^3 || ^3.0@beta || ^4.0",
