@@ -11,7 +11,7 @@ php: 8.3
 # Required modules
 install:
   # Core modules.
-  - drupal:action
+  # - drupal:action
   - drupal:block_content
   - drupal:breakpoint
   - drupal:ckeditor5
@@ -42,7 +42,7 @@ install:
   - drupal:text
   - drupal:toolbar
   - drupal:views
-  - drupal:tour
+  # - drupal:tour
   # Compatibility
   - jquery_ui_tooltip:jquery_ui_tooltip
   - jquery_ui_tabs:jquery_ui_tabs
@@ -50,10 +50,10 @@ install:
   - admin_toolbar:admin_toolbar
   - admin_toolbar:admin_toolbar_tools
   - captcha:captcha
-  - ckeditor_bootstrap_buttons:ckeditor_bootstrap_buttons
+  # - ckeditor_bootstrap_buttons:ckeditor_bootstrap_buttons
   - ckeditor5_paste_filter:ckeditor5_paste_filter
   - editor_advanced_link:editor_advanced_link
-  - features:features
+  # - features:features
   - image_captcha:image_captcha
   - link_attributes:link_attributes
   - metatag:metatag
