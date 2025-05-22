@@ -400,6 +400,9 @@
             "drupal/core": {
                 "Fix contextual links disappear intermittently leading to console errors https://www.drupal.org/project/drupal/issues/3458067": "https://git.drupalcode.org/project/drupal/-/merge_requests/8585.diff",
                 "Url only outputs the last value of a query parameter": "https://www.drupal.org/files/issues/2024-02-28/3038774-51-10.2.3-reroll.patch"
+            },
+            "drupal/openy_repeat": {
+                "Convert uri to query": "https://git.drupalcode.org/project/openy_repeat/-/merge_requests/7.diff"
             }
         }
     },
