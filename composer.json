@@ -148,12 +148,11 @@
         "symfony/console": "^4.4.30 || ^5 || ^6",
         "symfony/dom-crawler": "^6.2",
         "ycloudyusa/y_pef_schedule": "^1.0",
-        "ycloudyusa/useless_machines": "^1.1 || dev-main",
+        "ycloudyusa/useless_machines": "^1.2 || dev-main",
         "ycloudyusa/y_lb_demo_content": "^3.3",
         "drupal/lb_testimonial_blocks": "^1.0",
         "ycloudyusa/y_lb": "^3.10.1",
         "ycloudyusa/yusaopeny_activity_finder": "^5.0",
-        "ymcatwincities/media_entity_document": "*",
         "ymcatwincities/ymca_sync": "^8 || ^10"
     },
     "require-dev": {
