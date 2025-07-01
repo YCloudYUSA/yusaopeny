@@ -145,3 +145,4 @@ Documentation about Website Services is available at [docs](https://github.com/Y
 ## License
 
 Y USA OpenY Project is licensed under the [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0-standalone.en.html). See the [License file](https://github.com/YCloudYUSA/yusaopeny-project/blob/9.2.x/LICENSE) for details.
+
