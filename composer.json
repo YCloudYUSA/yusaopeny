@@ -153,7 +153,7 @@
         "drupal/lb_testimonial_blocks": "^1.0",
         "ycloudyusa/y_lb": "^3.10.1",
         "ycloudyusa/yusaopeny_activity_finder": "^5.0",
-        "ymcatwincities/ymca_sync": "^8 || ^10"
+        "drupal/ymca_sync": "^8 || ^10"
     },
     "require-dev": {
         "consolidation/robo": "^1.1.5 || ^2 || ^3 || ^4",
