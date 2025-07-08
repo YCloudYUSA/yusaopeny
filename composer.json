@@ -132,7 +132,7 @@
     "ycloudyusa/useless_machines": "^1.1 || dev-main",
     "ycloudyusa/y_lb_demo_content": "^3.3 || ~4.0.0",
     "drupal/lb_testimonial_blocks": "^1.0",
-    "ycloudyusa/y_lb": "^4",
+    "ycloudyusa/y_lb": "^4.0.0",
     "ycloudyusa/yusaopeny_activity_finder": "^5.0",
     "ymcatwincities/media_entity_document": "*",
     "drupal/ymca_sync": "^10 || ^11",
