@@ -1,415 +1,384 @@
 {
-    "name": "ycloudyusa/yusaopeny",
-    "description": "YMCA Website Services Drupal distribution",
-    "license": "GPL-2.0-or-later",
-    "type": "drupal-profile",
-    "require": {
-        "php": ">=8.3",
-        "composer/installers": "^1.2",
-        "cweagans/composer-patches": "^1.0",
-        "drupal/activenet": "^1.0",
-        "drupal/address": "^1.8",
-        "drupal/addtoany": "^2.0",
-        "drupal/admin_toolbar": "^3.2",
-        "drupal/advanced_help_block": "^1.0",
-        "drupal/bartik": "^1.0",
-        "drupal/better_exposed_filters": "^5 || ^6",
-        "drupal/blazy": "^2.4",
-        "drupal/bootstrap_layout_builder": ">=2.1.4",
-        "drupal/bootstrap_styles": "<=1.1.6",
-        "drupal/captcha": "^1.10 || ^2.0 || ^2.0@beta",
-        "drupal/ckeditor5_font": "^1.1@beta",
-        "drupal/ckeditor5_paste_filter": "^1.0",
-        "drupal/ckeditor_bootstrap_buttons": "^1.2 || ^2.0.0",
-        "drupal/ckeditor_font": "^1",
-        "drupal/color": "^1.0",
-        "drupal/colorapi": "^1.1 || ^2.0",
-        "drupal/colorbutton": "^1",
-        "drupal/confi": "^3.1",
-        "drupal/config_update": "^1.6 || ^2 || ^2.0@alpha",
-        "drupal/core": "^11.0, <12",
-        "drupal/core-composer-scaffold": "^11.0, <12",
-        "drupal/core-project-message": "^11.0, <12",
-        "drupal/core-recommended": "^11.0, <12",
-        "drupal/crop": "^2",
-        "drupal/css_editor": "^1.3 || ^2",
-        "drupal/csv_serialization": "^3 || ^3.0@beta",
-        "drupal/ctools": "^3.13 || ^4",
-        "drupal/custom_formatters": "^3.0 || ^3.0@beta || ^4 || ^4.0@beta",
-        "drupal/datalayer": "^1.0 || ^2.0 || ^2.0@RC",
-        "drupal/daxko": "^1.0",
-        "drupal/draggableviews": "^2.1",
-        "drupal/dropzonejs": "2.1 || ^2.5",
-        "drupal/easy_breadcrumb": "^2",
-        "drupal/editor_advanced_link": "^1 || ^2.1",
-        "drupal/embed": ">=1.8",
-        "drupal/entity": "^1",
-        "drupal/entity_browser": "^2",
-        "drupal/entity_clone": ">=2.0.0-beta5 || ^2",
-        "drupal/entity_embed": "^1.5",
-        "drupal/entity_reference_revisions": "^1.6",
-        "drupal/features": "^5.0 || 5.0.x-dev@dev || ^5.0@alpha",
-        "drupal/field_group": "^3.0",
-        "drupal/focal_point": "^2 || ^2.0@alpha",
-        "drupal/fontyourface": "^3.3 || 3.x-dev@dev",
-        "drupal/geolocation": "^3.0",
-        "drupal/google_analytics": "^2.5 || ^3.1 || ^4.0 || ^4.0@alpha",
-        "drupal/google_optimize": "^1.5",
-        "drupal/google_tag": "^1.4",
-        "drupal/groupexpro": "^1.0 !=1.0.3",
-        "drupal/hal": "^1.0 || ^2.0",
-        "drupal/image_widget_crop": "^2.4",
-        "drupal/inline_entity_form": "^2.0 || ^2.0@RC",
-        "drupal/jquery_ui_tabs": "^2.0",
-        "drupal/jquery_ui_tooltip": "^2.0",
-        "drupal/jquery_ui_touch_punch": "^1.1",
-        "drupal/libraries": "^3.0 || ^4.0",
-        "drupal/link_attributes": "^1 || ^2",
-        "drupal/media_directories": "dev-2.1.x",
-        "drupal/media_library_bulk_upload": "^1.0",
-        "drupal/metatag": "^1 || ^2",
-        "drupal/migrate_plus": "^5 || ^6",
-        "drupal/migrate_source_csv": "^3",
-        "drupal/migrate_tools": "^5.0 || ^6",
-        "drupal/openy_addthis": "^1.0",
-        "drupal/openy_branch_selector": "^1.0.3",
-        "drupal/openy_carnation": "^2 || ^3",
-        "drupal/openy_daxko2": "^1.0",
-        "drupal/openy_er": "^1.0",
-        "drupal/openy_gtranslate": "^1.0",
-        "drupal/openy_mappings": "^1.0",
-        "drupal/openy_node_session": "^2.1.2",
-        "drupal/openy_pef_gxp_sync": "^1.1.10",
-        "drupal/openy_repeat": "^2.7.2",
-        "drupal/openy_socrates": "^1.0",
-        "drupal/panelbutton": "^1.3",
-        "drupal/paragraphs": "^1.12",
-        "drupal/pathauto": "^1.6",
-        "drupal/personify": "^1.0",
-        "drupal/plugin": "2.5 || ^2.8",
-        "drupal/program_search": "^1.0",
-        "drupal/protected_pages": "^1.4",
-        "drupal/rabbit_hole": "^1.0 || ^1.0@beta",
-        "drupal/recaptcha": "^3",
-        "drupal/redirect": "^1",
-        "drupal/responsive_favicons": "^2.0",
-        "drupal/scheduler": "^2 || ^2.0@RC",
-        "drupal/search_api": "^1.31",
-        "drupal/search_api_solr": "^4.3.1",
-        "drupal/seven": "^1 || ^1.0@alpha",
-        "drupal/simple_menu_icons": "^2.2 || ^3",
-        "drupal/simple_sitemap": "^3.7 || ^4.1",
-        "drupal/slick": "^2",
-        "drupal/slick_views": "^2",
-        "drupal/ws_small_y": "^1.0.48",
-        "drupal/social_feed_fetcher": "^3.0.2 || 3.0.x-dev@dev",
-        "drupal/token": "^1.11",
-        "drupal/token_filter": "^1 || ^2.0",
-        "drupal/twig_tweak": "^2 || ^3.1",
-        "drupal/tzfield": "^1.3",
-        "drupal/upgrade_tool": "^2 || ^3",
-        "drupal/vendor_stream_wrapper": "^2.0.1",
-        "drupal/verf": "^2.0",
-        "drupal/video": "^1.5 || ^3",
-        "drupal/video_embed_field": "^2.0",
-        "drupal/views_block_filter_block": "^1.2 || ^2.0",
-        "drupal/views_data_export": "^1.0 || 1.0-rc1",
-        "drupal/views_field_formatter": "^4.0",
-        "drupal/views_infinite_scroll": "^1.7 || ^2",
-        "drupal/webform": "^6.2 || ^6.2@beta",
-        "drupal/y_donate": "^2.0",
-        "drupal/yusaopeny_ymca360": "^1.0@RC",
-        "grt107/grt-youtube-popup": "^1.0",
-        "guzzlehttp/guzzle": "^6 || ^7",
-        "league/csv": "^9.11.0 !=9.12.0",
-        "library-ckeditor/colorbutton": "4.10.1",
-        "library-ckeditor/font": "4.12.1",
-        "library-ckeditor/panelbutton": "4.10.1",
-        "library-davekoelle/alphanum": "1.0.0",
-        "library-jaypan/jquery_colorpicker": "1.0.1",
-        "library-smonetti/btbutton": "1.0.2",
-        "library-vakata/jstree": "^3.3",
-        "mpdf/mpdf": "^7 || ^8.1 || v8.0.4 || ~v8.0.4",
-        "npm-asset/blazy": "^1.8",
-        "npm-asset/dropzone": "^5.5",
-        "npm-asset/jquery-ui-touch-punch": "^0.2.3",
-        "npm-asset/jquery.easing": "^1.4",
-        "npm-asset/slick-carousel": "^1.8 || ^2.7",
-        "oomphinc/composer-installers-extender": "^1.1 || ^2.0.0",
-        "open-y-subprojects/common_scss": "dev-main",
-        "open-y-subprojects/openy_content_core": "^3.0",
-        "open-y-subprojects/openy_custom": "^2.6.0",
-        "open-y-subprojects/openy_daxko_gxp_syncer": "^1.2",
-        "open-y-subprojects/openy_features": "^3.6.2",
-        "open-y-subprojects/openy_focal_point": "^1.0",
-        "open-y-subprojects/openy_hours_formatter": "^2.0",
-        "open-y-subprojects/openy_map": "^5.2",
-        "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
-        "symfony/console": "^4.4.30 || ^5 || ^6",
-        "symfony/dom-crawler": "^6.2",
-        "ycloudyusa/y_pef_schedule": "^1.0",
-        "ycloudyusa/useless_machines": "^1.1 || dev-main",
-        "ycloudyusa/y_lb_demo_content": "^3.3",
-        "drupal/lb_testimonial_blocks": "^1.0",
-        "ycloudyusa/y_lb": "^3.10.1",
-        "ycloudyusa/yusaopeny_activity_finder": "^5.0",
-        "ymcatwincities/media_entity_document": "*",
-        "ymcatwincities/ymca_sync": "^8 || ^10"
+  "name": "ycloudyusa/yusaopeny",
+  "description": "YMCA Website Services Drupal distribution",
+  "license": "GPL-2.0-or-later",
+  "type": "drupal-profile",
+  "require": {
+    "php": ">=8.3",
+    "composer/installers": "^1.2",
+    "cweagans/composer-patches": "^1.0",
+    "drupal/activenet": "^1.0",
+    "drupal/address": "^1.8 || ^2.0",
+    "drupal/addtoany": "^2.0",
+    "drupal/admin_toolbar": "^3.2",
+    "drupal/advanced_help_block": "^1.0",
+    "drupal/better_exposed_filters": "^7.0.5",
+    "drupal/blazy": "^2.4 || ~3.0.0 || ~3.1.0",
+    "drupal/bootstrap_layout_builder": ">=2.1.4",
+    "drupal/bootstrap_styles": "<=1.1.6 || ~1.2.1",
+    "drupal/captcha": "^1.10 || ^2.0 || ^2.0@beta",
+    "drupal/ckeditor5_paste_filter": "~1.1.0",
+    "drupal/colorapi": "^1.1 || ^2.0",
+    "drupal/confi": "^3.1",
+    "drupal/config_update": "^1.6 || ^2 || ^2.0@alpha",
+    "drupal/core": "~11.0.13",
+    "drupal/crop": "^2",
+    "drupal/css_editor": "^1.3 || ^2",
+    "drupal/csv_serialization": "^3 || ^3.0@beta || ^4.0",
+    "drupal/ctools": "^3.13 || ^4",
+    "drupal/custom_formatters": "^4.0@beta || ^4.1@beta",
+    "drupal/datalayer": "^1.0 || ^2.0 || ^2.0@RC",
+    "drupal/daxko": "^1.0",
+    "drupal/draggableviews": "^2.1",
+    "drupal/dropzonejs": "2.1 || ^2.5",
+    "drupal/easy_breadcrumb": "^2",
+    "drupal/editor_advanced_link": "^1 || ^2.1",
+    "drupal/embed": ">=1.8",
+    "drupal/entity": "^1",
+    "drupal/entity_browser": "^2",
+    "drupal/entity_clone": ">=2.0.0-beta5 || ^2",
+    "drupal/entity_embed": "^1.5",
+    "drupal/entity_reference_revisions": "^1.6",
+    "drupal/field_group": "^3.0",
+    "drupal/focal_point": "^2 || ^2.0@alpha",
+    "drupal/fontyourface": "^3.3 || 3.x-dev@dev || ^4.0 || ~5.0.0",
+    "drupal/geolocation": "^3.0",
+    "drupal/google_analytics": "^2.5 || ^3.1 || ^4.0 || ^4.0@alpha",
+    "drupal/google_tag": "^1.4 || ^2.0",
+    "drupal/hal": "^1.0 || ^2.0",
+    "drupal/image_widget_crop": "^2.4",
+    "drupal/inline_entity_form": "3.0.0-rc21 as 2.0.0-rc10",
+    "drupal/jquery_ui_tabs": "^2.0",
+    "drupal/jquery_ui_tooltip": "^2.0",
+    "drupal/jquery_ui_touch_punch": "^1.1",
+    "drupal/libraries": "^3.0 || ^4.0",
+    "drupal/link_attributes": "^1 || ^2",
+    "drupal/media_directories": "^2.2@beta || ~2.2.0",
+    "drupal/metatag": "^1 || ^2",
+    "drupal/migrate_plus": "^5 || ^6",
+    "drupal/migrate_source_csv": "^3",
+    "drupal/migrate_tools": "^5.0 || ^6",
+    "drupal/openy_branch_selector": "^1.0.3",
+    "drupal/openy_carnation": "^2 || ^3",
+    "drupal/openy_daxko2": "^1.0",
+    "drupal/openy_er": "^1.0",
+    "drupal/openy_gtranslate": "^1.0",
+    "drupal/openy_mappings": "^1.0",
+    "drupal/openy_node_session": "^2.1.2",
+    "drupal/openy_pef_gxp_sync": "^2.0.0",
+    "drupal/openy_repeat": "^2.7.2",
+    "drupal/openy_socrates": "^1.0",
+    "drupal/paragraphs": "^1.12",
+    "drupal/pathauto": "^1.6",
+    "drupal/personify": "^1.0",
+    "drupal/plugin": "2.5 || ^2.8",
+    "drupal/program_search": "^1.0",
+    "drupal/protected_pages": "^1.4",
+    "drupal/rabbit_hole": "^1.0 || ^1.0@beta",
+    "drupal/recaptcha": "^3",
+    "drupal/redirect": "^1",
+    "drupal/responsive_favicons": "^2.0 || ^3.0",
+    "drupal/scheduler": "^2 || ^2.0@RC",
+    "drupal/search_api": "^1.31",
+    "drupal/search_api_solr": "^4.3.1",
+    "drupal/simple_menu_icons": "^2.2 || ^3",
+    "drupal/simple_sitemap": "^3.7 || ^4.1",
+    "drupal/slick": "^2 || ^3.0",
+    "drupal/slick_views": "^2 || ^3.0",
+    "drupal/ws_small_y": "^1.2.1",
+    "drupal/social_feed_fetcher": "^3.1",
+    "drupal/token": "^1.11",
+    "drupal/token_filter": "^1 || ^2.0",
+    "drupal/twig_tweak": "^3.4",
+    "drupal/tzfield": "^1.3",
+    "drupal/upgrade_tool": "^2 || ^3",
+    "drupal/vendor_stream_wrapper": "^2.0.1",
+    "drupal/verf": "^2.0",
+    "drupal/video": "^1.5 || ^3",
+    "drupal/video_embed_field": "^2.0 || ^3.0@beta || ~3.0.0",
+    "drupal/views_block_filter_block": "^1.2 || ^2.0",
+    "drupal/views_data_export": "^1.0 || 1.0-rc1",
+    "drupal/views_infinite_scroll": "^1.7 || ^2",
+    "drupal/webform": "^6.2 || ^6.2@beta",
+    "drupal/y_donate": "^2.0",
+    "grt107/grt-youtube-popup": "^1.0",
+    "guzzlehttp/guzzle": "^6 || ^7",
+    "league/csv": "^9.11.0 !=9.12.0",
+    "library-ckeditor/colorbutton": "4.10.1",
+    "library-ckeditor/font": "4.12.1",
+    "library-ckeditor/panelbutton": "4.10.1",
+    "library-davekoelle/alphanum": "1.0.0",
+    "library-jaypan/jquery_colorpicker": "1.0.1",
+    "library-smonetti/btbutton": "1.0.2",
+    "library-vakata/jstree": "^3.3",
+    "mpdf/mpdf": "^7 || ^8.1 || v8.0.4 || ~v8.0.4",
+    "npm-asset/blazy": "^1.8",
+    "npm-asset/dropzone": "^5.5",
+    "npm-asset/jquery-ui-touch-punch": "^0.2.3",
+    "npm-asset/jquery.easing": "^1.4",
+    "npm-asset/slick-carousel": "^1.8 || ^2.7",
+    "oomphinc/composer-installers-extender": "^1.1 || ^2.0.0",
+    "open-y-subprojects/common_scss": "dev-main",
+    "open-y-subprojects/openy_content_core": "^3.0",
+    "open-y-subprojects/openy_custom": "^2.6.0",
+    "open-y-subprojects/openy_daxko_gxp_syncer": "^1.2",
+    "open-y-subprojects/openy_features": "^3.6.2 || ~4.0.0",
+    "open-y-subprojects/openy_focal_point": "^1.0",
+    "open-y-subprojects/openy_hours_formatter": "^2.0",
+    "open-y-subprojects/openy_map": "^5",
+    "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
+    "symfony/dom-crawler": "^6.2",
+    "ycloudyusa/y_pef_schedule": "^1.0",
+    "ycloudyusa/useless_machines": "^1.1 || dev-main",
+    "ycloudyusa/y_lb_demo_content": "^3.3 || ~4.0.0",
+    "drupal/lb_testimonial_blocks": "^1.0",
+    "ycloudyusa/y_lb": "^4.0.0",
+    "ycloudyusa/yusaopeny_activity_finder": "^5.0",
+    "ymcatwincities/media_entity_document": "*",
+    "drupal/ymca_sync": "^10 || ^11",
+    "ycloudyusa/ws_outsiders": "dev-main"
+  },
+  "require-dev": {
+    "consolidation/robo": "^3 || ^4 || ~5.0.0",
+    "drush/drush": "^12 || ~13.0.0",
+    "open-y-subprojects/openy_docs": "dev-main"
+  },
+  "replace": {
+    "ymcatwincities/openy": "*"
+  },
+  "conflict": {
+    "drupal/ctools": "3.10 || 4.0.1"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
     },
-    "require-dev": {
-        "consolidation/robo": "^1.1.5 || ^2 || ^3 || ^4",
-        "drush/drush": "^10.5.0 || ^11 || ^12",
-        "open-y-subprojects/openy_docs": "dev-main"
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
     },
-    "replace": {
-        "ymcatwincities/openy": "*"
-    },
-    "conflict": {
-        "drupal/ctools": "3.10 || 4.0.1"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        },
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "library-jaypan/jquery_colorpicker",
-                "type": "drupal-library",
-                "version": "1.0.1",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/jaypan/jquery_colorpicker",
-                    "reference": "da978ae124c57817021b3166a31881876882f5f9"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "library-ckeditor/panelbutton",
-                "type": "drupal-library",
-                "version": "4.10.1",
-                "dist": {
-                    "type": "zip",
-                    "url": "https://download.ckeditor.com/panelbutton/releases/panelbutton_4.10.1.zip"
-                }
-            }
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/open-y-subprojects/openy_docs"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "library-ckeditor/colorbutton",
-                "type": "drupal-library",
-                "version": "4.10.1",
-                "dist": {
-                    "type": "zip",
-                    "url": "https://download.ckeditor.com/colorbutton/releases/colorbutton_4.10.1.zip"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "library-ckeditor/font",
-                "type": "drupal-library",
-                "version": "4.12.1",
-                "dist": {
-                    "type": "zip",
-                    "url": "https://download.ckeditor.com/font/releases/font_4.12.1.zip"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "library-smonetti/btbutton",
-                "type": "drupal-library",
-                "version": "1.0.2",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/smonetti/btbutton",
-                    "reference": "ee1fc396231a63201373cb580684e699a696ed62"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "grt107/grt-youtube-popup",
-                "type": "drupal-library",
-                "version": "1.0.0",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/grt107/grt-youtube-popup",
-                    "reference": "d5cb51ae5dbe526dba7d82c646ec0f46791fa7a0"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "library-davekoelle/alphanum",
-                "type": "drupal-library",
-                "version": "1.0.0",
-                "dist": {
-                    "type": "zip",
-                    "url": "https://github.com/AndreyMaximov/alphanum/archive/1.0.0.zip"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "library-vakata/jstree",
-                "type": "drupal-library",
-                "version": "3.3.8",
-                "dist": {
-                    "type": "zip",
-                    "url": "https://github.com/vakata/jstree/archive/3.3.8.zip"
-                }
-            }
+    {
+      "type": "package",
+      "package": {
+        "name": "library-jaypan/jquery_colorpicker",
+        "type": "drupal-library",
+        "version": "1.0.1",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/jaypan/jquery_colorpicker",
+          "reference": "da978ae124c57817021b3166a31881876882f5f9"
         }
-    ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "allow-plugins": {
-            "composer/installers": true,
-            "cweagans/composer-patches": true,
-            "drupal/core-composer-scaffold": true,
-            "drupal/core-project-message": true,
-            "oomphinc/composer-installers-extender": true
-        },
-        "bin-dir": "bin/",
-        "sort-packages": true
+      }
     },
-    "extra": {
-        "drupal-lenient": {
-            "allowed-list": [
-                "drupal/easy_breadcrumb",
-                "drupal/entity_embed",
-                "drupal/commerce_cart_api",
-                "drupal/ckeditor_bootstrap_buttons"
-            ]
-        },
-        "drupal-scaffold": {
-            "allowed-packages": [
-                "drupal/core"
-            ],
-            "locations": {
-                "web-root": "docroot/"
-            }
-        },
-        "installer-paths": {
-            "docroot/core": [
-                "type:drupal-core"
-            ],
-            "docroot/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "docroot/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "docroot/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "docroot/libraries/{$name}": [
-                "type:drupal-library",
-                "type:bower-asset",
-                "type:npm-asset"
-            ],
-            "docs/": [
-                "open-y-subprojects/openy_docs"
-            ]
-        },
-        "installer-types": [
-            "openy-docs"
-        ],
-        "patches": {
-            "drupal/admin_toolbar": {
-                "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch"
-            },
-            "drupal/ckeditor5_font": {
-                "Issue #3368736: no config schema' Error after update to Drupal 10.1.0": "https://www.drupal.org/files/issues/2024-06-25/ckeditor5_font-schema-fix-10.3.x-3368736-48_0.patch",
-                "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch"
-            },
-            "drupal/colorapi": {
-                "3171235 - Add Value property": "https://www.drupal.org/files/issues/2020-09-16/3171235-2.patch",
-                "Update colorapi configs": "https://gist.githubusercontent.com/manachynskyi/a24c7898a0ed051bc077fc94cc2dc2e8/raw/9524fa2d630d2ee0e0e39316156612b33c854182/colorapi_config_patch.patch"
-            },
-            "drupal/commerce_cart_api": {
-                "Allow Drupal 10": "https://git.drupalcode.org/project/commerce_cart_api/-/merge_requests/3.patch"
-            },
-            "drupal/entity_browser": {
-                "2845037 - Fixed the issue of Call to a member function getConfigDependencyKey() on null on [Widget view], and [SelectionDisplay view]": "https://www.drupal.org/files/issues/2845037_15.patch",
-                "3104901 - Entity Browser used in a entity referenced field of a layout builder custom block is not working": "https://www.drupal.org/files/issues/2020-10-16/3104901-17.patch"
-            },
-            "drupal/jquery_colorpicker": {
-                "Use library directory instead vendor": "https://gist.githubusercontent.com/manachynskyi/3b059456ce97dd4380ff0c0e85f41696/raw/4cf7103c75849b2b474424fe9d8ad969192dd779/library_path_update.patch"
-            },
-            "drupal/media_entity": {
-                "2918172 - Media Entity upgrade -> add revision fields": "https://www.drupal.org/files/issues/2918172-5.patch",
-                "2918172 - Media Entity upgrade -> core fails on absent column revision_uid": "https://www.drupal.org/files/issues/2918172-6-8.4.4.patch"
-            },
-            "drupal/media_entity_video": {
-                "3149789 - Add a 3.x branch with an update path to the video source in core.": "https://www.drupal.org/files/issues/2020-06-11/3149789-4.patch"
-            },
-            "drupal/media_library_form_element": {
-                "Issue #3341978: TypeError: explode(): Argument #2 ($string) must be of type string, array given in explode().": "https://www.drupal.org/files/issues/2023-05-10/check-default-value-not-array-15044301-16.patch"
-            },
-            "drupal/plugin": {
-                "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch"
-            },
-            "drupal/video_embed_field": {
-                "Issue #3215817: Presentational attributes such as 'border', 'align', or 'bgcolor' are used. CSS should be used for styling instead.": "https://git.drupalcode.org/project/video_embed_field/-/merge_requests/3.diff",
-                "Add support for Ckeditor 5, see https://www.drupal.org/project/video_embed_field/issues/3311063#comment-15227318": "https://www.drupal.org/files/issues/2023-09-12/3311063-35.patch"
-            },
-            "drupal/inline_entity_form": {
-                "Issue #3403113: fixed save sub-block": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/94.diff",
-                "Issue #3398615: Save is broken in modal": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/95.diff"
-            },
-            "drupal/responsive_favicons": {
-                "Issue #3376766: Incorrect path if Drupal is installed in subfolder": "https://git.drupalcode.org/project/responsive_favicons/-/merge_requests/6.diff"
-            },
-            "drupal/editor_advanced_link": {
-                "Issue #3423208: Integrate a functionality of the CKEditor Bootstrap Buttons module": "https://git.drupalcode.org/project/editor_advanced_link/-/merge_requests/19.diff"
-            },
-            "drupal/scheduler": {
-                "Issue #3446881: Unhandled Warning: Undefined array key 'translatable'": "https://git.drupalcode.org/project/scheduler/-/merge_requests/140.diff"
-            },
-            "drupal/redirect": {
-                "Issue #3373123: Setting 'Enforce clean and canonical URLs.' breaks CSS aggregation on multilingual Drupal 10.1.x with browser caching enabled": "https://git.drupalcode.org/project/redirect/-/merge_requests/93.patch"
-            },
-            "drupal/search_api": {
-                "First https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://www.drupal.org/files/issues/2024-06-17/3454939-search-api-solr-core-10.patch",
-                "Second https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://git.drupalcode.org/project/search_api/-/merge_requests/148.diff"
-            },
-            "drupal/search_api_solr": {
-                "https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://www.drupal.org/files/issues/2024-06-17/search-api-solr-fatal-error-declaration-of-sleep-3449292-12.patch"
-            },
-            "drupal/core": {
-                "Fix contextual links disappear intermittently leading to console errors https://www.drupal.org/project/drupal/issues/3458067": "https://git.drupalcode.org/project/drupal/-/merge_requests/8585.diff",
-                "Url only outputs the last value of a query parameter": "https://www.drupal.org/files/issues/2024-02-28/3038774-51-10.2.3-reroll.patch"
-            }
+    {
+      "type": "package",
+      "package": {
+        "name": "library-ckeditor/panelbutton",
+        "type": "drupal-library",
+        "version": "4.10.1",
+        "dist": {
+          "type": "zip",
+          "url": "https://download.ckeditor.com/panelbutton/releases/panelbutton_4.10.1.zip"
         }
+      }
     },
-    "scripts": {
-        "post-install-cmd": [
-            "@composer drupal-scaffold",
-            "bash scripts/remove_openy_docroot_folder.sh || :"
-        ],
-        "post-update-cmd": [
-            "bash scripts/remove_openy_docroot_folder.sh || :"
-        ]
+    {
+      "type": "git",
+      "url": "https://github.com/open-y-subprojects/openy_docs"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-ckeditor/colorbutton",
+        "type": "drupal-library",
+        "version": "4.10.1",
+        "dist": {
+          "type": "zip",
+          "url": "https://download.ckeditor.com/colorbutton/releases/colorbutton_4.10.1.zip"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-ckeditor/font",
+        "type": "drupal-library",
+        "version": "4.12.1",
+        "dist": {
+          "type": "zip",
+          "url": "https://download.ckeditor.com/font/releases/font_4.12.1.zip"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-smonetti/btbutton",
+        "type": "drupal-library",
+        "version": "1.0.2",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/smonetti/btbutton",
+          "reference": "ee1fc396231a63201373cb580684e699a696ed62"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "grt107/grt-youtube-popup",
+        "type": "drupal-library",
+        "version": "1.0.0",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/grt107/grt-youtube-popup",
+          "reference": "d5cb51ae5dbe526dba7d82c646ec0f46791fa7a0"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-davekoelle/alphanum",
+        "type": "drupal-library",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://github.com/AndreyMaximov/alphanum/archive/1.0.0.zip"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-vakata/jstree",
+        "type": "drupal-library",
+        "version": "3.3.8",
+        "dist": {
+          "type": "zip",
+          "url": "https://github.com/vakata/jstree/archive/3.3.8.zip"
+        }
+      }
     }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "drupal/core-composer-scaffold": true,
+      "drupal/core-project-message": true,
+      "oomphinc/composer-installers-extender": true
+    },
+    "bin-dir": "bin/",
+    "sort-packages": true
+  },
+  "extra": {
+    "drupal-lenient": {
+      "allowed-list": ["drupal/groupexpro", "drupal/colorapi", "drupal/ckeditor5_font", "drupal/blazy", "drupal/bartik", "drupal/y_branch_menu", "drupal/ws_event", "drupal/ws_code_block", "drupal/ws_lb_tabs", "drupal/lb_webform", "drupal/lb_table", "drupal/activenet", "drupal/advanced_help_block", "drupal/better_exposed_filters", "drupal/ckeditor_bootstrap_buttons", "drupal/colorapi", "drupal/commerce_cart_api", "drupal/confi", "drupal/daxko", "drupal/easy_breadcrumb", "drupal/entity_embed", "drupal/layout_builder_save_and_edit", "drupal/lb_accordion", "drupal/lb_branch_amenities_blocks", "drupal/lb_branch_hours_blocks", "drupal/lb_branch_social_links_blocks", "drupal/lb_cards", "drupal/lb_carousel", "drupal/lb_grid_cta", "drupal/lb_hero", "drupal/lb_modal", "drupal/lb_partners_blocks", "drupal/lb_ping_pong", "drupal/lb_promo", "drupal/lb_related_articles_blocks", "drupal/lb_related_events_blocks", "drupal/lb_simple_menu", "drupal/lb_staff_members_blocks", "drupal/lb_statistics", "drupal/lb_table", "drupal/lb_testimonial_blocks", "drupal/lb_webform", "drupal/openy_addthis", "drupal/openy_branch_selector", "drupal/openy_daxko2", "drupal/openy_daxko_gxp_syncer", "drupal/openy_er", "drupal/openy_focal_point", "drupal/openy_gtranslate", "drupal/openy_hours_formatter", "drupal/openy_map", "drupal/openy_mappings", "drupal/openy_node_alert", "drupal/openy_node_session", "drupal/openy_pef_gxp_sync", "drupal/openy_repeat", "drupal/openy_socrates", "drupal/personify", "drupal/program_search", "drupal/simple_menu_icons", "drupal/upgrade_tool", "drupal/views_block_filter_block", "drupal/views_field_formatter", "drupal/webform", "drupal/ws_code_block", "drupal/ws_colorway_canada", "drupal/ws_event", "drupal/ws_lb_tabs", "drupal/ws_promotion", "drupal/y_branch", "drupal/y_branch_menu", "drupal/y_camp", "drupal/y_donate", "drupal/y_facility", "drupal/y_lb", "drupal/y_lb_article", "drupal/y_lb_demo_content", "drupal/y_pef_schedule", "drupal/y_program", "drupal/y_program_subcategory", "drupal/ynorth_gxp_spots_proxy", "drupal/yusaopeny_activity_finder", "drupal/color", "drupal/seven", "drupal/feature", "drupal/features", "drupal/features", "drupal/ws_promotion", "ycloudyusa/yusaopeny_activity_finder", "drupal/y_lb", "drupal/seven", "drupal/lb_testimonial_blocks"]
+    },
+    "drupal-scaffold": {
+      "allowed-packages": [
+        "drupal/core"
+      ],
+      "locations": {
+        "web-root": "docroot/"
+      }
+    },
+    "installer-paths": {
+      "docroot/core": [
+        "type:drupal-core"
+      ],
+      "docroot/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "docroot/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "docroot/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "docroot/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      ],
+      "docs/": [
+        "open-y-subprojects/openy_docs"
+      ]
+    },
+    "installer-types": [
+      "openy-docs"
+    ],
+    "patches": {
+      "drupal/admin_toolbar": {
+        "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch"
+      },
+      "drupal/ckeditor5_font": {
+        "Issue #3368736: no config schema' Error after update to Drupal 10.1.0": "https://www.drupal.org/files/issues/2024-06-25/ckeditor5_font-schema-fix-10.3.x-3368736-48_0.patch",
+        "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch"
+      },
+      "drupal/colorapi": {
+        "3171235 - Add Value property": "https://www.drupal.org/files/issues/2020-09-16/3171235-2.patch",
+        "Update colorapi configs": "https://gist.githubusercontent.com/manachynskyi/a24c7898a0ed051bc077fc94cc2dc2e8/raw/9524fa2d630d2ee0e0e39316156612b33c854182/colorapi_config_patch.patch"
+      },
+      "drupal/commerce_cart_api": {
+        "Allow Drupal 10": "https://git.drupalcode.org/project/commerce_cart_api/-/merge_requests/3.patch"
+      },
+      "drupal/entity_browser": {
+        "2845037 - Fixed the issue of Call to a member function getConfigDependencyKey() on null on [Widget view], and [SelectionDisplay view]": "https://www.drupal.org/files/issues/2845037_15.patch",
+        "3104901 - Entity Browser used in a entity referenced field of a layout builder custom block is not working": "https://www.drupal.org/files/issues/2020-10-16/3104901-17.patch"
+      },
+      "drupal/jquery_colorpicker": {
+        "Use library directory instead vendor": "https://gist.githubusercontent.com/manachynskyi/3b059456ce97dd4380ff0c0e85f41696/raw/4cf7103c75849b2b474424fe9d8ad969192dd779/library_path_update.patch"
+      },
+      "drupal/media_entity": {
+        "2918172 - Media Entity upgrade -> add revision fields": "https://www.drupal.org/files/issues/2918172-5.patch",
+        "2918172 - Media Entity upgrade -> core fails on absent column revision_uid": "https://www.drupal.org/files/issues/2918172-6-8.4.4.patch"
+      },
+      "drupal/media_entity_video": {
+        "3149789 - Add a 3.x branch with an update path to the video source in core.": "https://www.drupal.org/files/issues/2020-06-11/3149789-4.patch"
+      },
+      "drupal/media_library_form_element": {
+        "Issue #3341978: TypeError: explode(): Argument #2 ($string) must be of type string, array given in explode().": "https://www.drupal.org/files/issues/2023-05-10/check-default-value-not-array-15044301-16.patch"
+      },
+      "drupal/plugin": {
+        "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch"
+      },
+      "drupal/inline_entity_form": {
+        "Issue #3403113: fixed save sub-block": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/94.diff",
+        "Issue #3398615: Save is broken in modal": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/95.diff"
+      },
+      "drupal/responsive_favicons": {
+        "Issue #3376766: Incorrect path if Drupal is installed in subfolder": "https://git.drupalcode.org/project/responsive_favicons/-/merge_requests/6.diff"
+      },
+      "drupal/editor_advanced_link": {
+        "Issue #3423208: Integrate a functionality of the CKEditor Bootstrap Buttons module": "https://git.drupalcode.org/project/editor_advanced_link/-/merge_requests/19.diff"
+      },
+      "drupal/scheduler": {
+        "Issue #3446881: Unhandled Warning: Undefined array key 'translatable'": "https://git.drupalcode.org/project/scheduler/-/merge_requests/140.diff"
+      },
+      "drupal/redirect": {
+        "Issue #3373123: Setting 'Enforce clean and canonical URLs.' breaks CSS aggregation on multilingual Drupal 10.1.x with browser caching enabled": "https://git.drupalcode.org/project/redirect/-/merge_requests/93.patch"
+      },
+      "drupal/search_api_solr": {
+        "https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://www.drupal.org/files/issues/2024-06-17/search-api-solr-fatal-error-declaration-of-sleep-3449292-12.patch"
+      },
+      "drupal/core": {
+        "Fix contextual links disappear intermittently leading to console errors https://www.drupal.org/project/drupal/issues/3458067": "https://git.drupalcode.org/project/drupal/-/merge_requests/8585.diff",
+        "Url only outputs the last value of a query parameter": "https://www.drupal.org/files/issues/2024-02-28/3038774-51-10.2.3-reroll.patch"
+      }
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "@composer drupal-scaffold",
+      "bash scripts/remove_openy_docroot_folder.sh || :"
+    ],
+    "post-update-cmd": [
+      "bash scripts/remove_openy_docroot_folder.sh || :"
+    ]
+  }
 }
