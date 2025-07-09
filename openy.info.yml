@@ -15,7 +15,6 @@ install:
   - drupal:block_content
   - drupal:breakpoint
   - drupal:ckeditor5
-  - drupal:ckeditor5_font
   # - drupal:color
   - drupal:config
   - drupal:contact
