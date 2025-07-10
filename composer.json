@@ -125,7 +125,7 @@
     "open-y-subprojects/openy_daxko_gxp_syncer": "^1.2",
     "open-y-subprojects/openy_features": "^4.1.0",
     "open-y-subprojects/openy_focal_point": "^1.0",
-    "open-y-subprojects/openy_hours_formatter": "^2.0",
+    "open-y-subprojects/openy_hours_formatter": "^2.0 || ^3.0.0",
     "open-y-subprojects/openy_map": "^5",
     "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
     "symfony/dom-crawler": "^6.2",
