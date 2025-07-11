@@ -79,7 +79,6 @@ install:
   - openy_system:openy_system
   - openy_taxonomy:openy_taxonomy
   - openy_txnm_color:openy_txnm_color
-  - openy_tour:openy_tour
   - y_lb:y_lb
 themes:
   - openy_admin

@@ -155,7 +155,7 @@ helpers:
     - openy_mappings
     - openy_migrate
     - openy_socrates
-    - media_library_bulk_upload
+    # - media_library_bulk_upload
     - protected_pages
 
 activenet:
@@ -245,8 +245,7 @@ optimize:
   name: 'Optimize'
   description: 'Optimize package provides an ability to integrate the website with Google Optimize tool.'
   help: '<p>Using Optimize package you can configure an integration with <a href="https://optimize.google.com/" target="_blank">Google Optimize</a>.</p>'
-  modules:
-    - google_optimize
+  modules: []
 
 popups:
   name: 'Popups'
@@ -320,7 +319,7 @@ theme_customization:
                    frameborder="0" allow="autoplay; encrypted-media"
                    allowfullscreen></iframe>'
   modules:
-    - color
+    # - color
     - openy_branch_selector
 
 translation:

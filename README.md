@@ -42,14 +42,14 @@ composer create-project ycloudyusa/yusaopeny-project MY_PROJECT --no-interaction
 cd MY_PROJECT
 ```
 
-#### Latest DEVELOPMENT version (Drupal 10+ 2.x)
+#### Latest DEVELOPMENT version (Drupal 11+ 2.x)
 
 ```
 composer create-project ycloudyusa/yusaopeny-project:dev-main-development MY_PROJECT --no-interaction --no-dev
 cd MY_PROJECT
 ```
 
-This command will build a project based on the [**Drupal 9/10 development branch**](https://github.com/ycloudyusa/yusaopeny/commits/main) release.
+This command will build a project based on the [**Drupal 10/11 development branch**](https://github.com/ycloudyusa/yusaopeny/commits/main) release.
 
 See [a how-to video](https://youtu.be/jRlinjpTl0c) for the whole process of this command usage.
 
