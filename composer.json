@@ -60,7 +60,7 @@
     "drupal/migrate_source_csv": "^3",
     "drupal/migrate_tools": "^5.0 || ^6",
     "drupal/openy_branch_selector": "^1.0.3",
-    "drupal/openy_carnation": "^2 || ^3",
+    "drupal/openy_carnation": "^3 || ^4.0@alpha",
     "drupal/openy_daxko2": "^1.0",
     "drupal/openy_er": "^1.0",
     "drupal/openy_gtranslate": "^1.0",
