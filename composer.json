@@ -131,7 +131,7 @@
     "open-y-subprojects/openy_map": "^6@beta || ^6.0.0",
     "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
     "ycloudyusa/y_pef_schedule": "^1.0",
-    "ycloudyusa/useless_machines": "^1.1 || dev-main",
+    "ycloudyusa/useless_machines": "^2.0.1",
     "ycloudyusa/y_lb_demo_content": "^3.3 || ~4.0.0",
     "drupal/lb_testimonial_blocks": "^1.0",
     "ycloudyusa/y_lb": "^4.0.0",
@@ -370,7 +370,8 @@
       },
       "drupal/core": {
         "Fix contextual links disappear intermittently leading to console errors https://www.drupal.org/project/drupal/issues/3458067": "https://git.drupalcode.org/project/drupal/-/merge_requests/8585.diff",
-        "Url only outputs the last value of a query parameter": "https://www.drupal.org/files/issues/2024-02-28/3038774-51-10.2.3-reroll.patch"
+        "Url only outputs the last value of a query parameter": "https://www.drupal.org/files/issues/2024-02-28/3038774-51-10.2.3-reroll.patch",
+        "Class is not added to MediaLibrary dialog https://www.drupal.org/project/drupal/issues/3474018": "https://git.drupalcode.org/project/drupal/-/merge_requests/12597.diff"
       },
       "drupal/migrate_tools": {
         "hook_config_schema_info_alter injected optional migrate_plus config schema https://www.drupal.org/project/migrate_tools/issues/3534606":"https://git.drupalcode.org/project/migrate_tools/-/merge_requests/89.diff"
