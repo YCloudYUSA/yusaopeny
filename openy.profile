@@ -799,3 +799,16 @@ function openy_enable_search_api_solr_legacy() {
   return FALSE;
 }
 
+/**
+ * Implements hook_library_info_alter().
+ */
+function openy_library_info_alter(&$libraries, $extension) {
+  // Add jQuery Migrate 4.x to core/jquery library. For more info see https://github.com/jquery/jquery-migrate
+  // This fix is needed for scripts that are not compatible with jQuery 4.x yet.
+  if ($extension == 'core' && isset($libraries['jquery'])) {
+    $libraries['jquery']['js']['//code.jquery.com/jquery-migrate-4.0.0-beta.1.js'] = [
+      'type' => 'external',
+      'minified' => TRUE,
+    ];
+  }
+}
