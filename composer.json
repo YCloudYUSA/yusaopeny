@@ -376,6 +376,9 @@
       },
       "drupal/migrate_tools": {
         "hook_config_schema_info_alter injected optional migrate_plus config schema https://www.drupal.org/project/migrate_tools/issues/3534606":"https://git.drupalcode.org/project/migrate_tools/-/merge_requests/89.diff"
+      },
+      "drupal/ws_event": {
+        "Move field_location_reference above address in lb_event edit form (issue #3542918)": "https://git.drupalcode.org/project/ws_event/-/merge_requests/85.diff"
       }
     }
   },
