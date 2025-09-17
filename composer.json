@@ -74,7 +74,7 @@
     "drupal/pathauto": "^1.6",
     "drupal/personify": "^1.0",
     "drupal/plugin": "2.5 || ^2.8",
-    "drupal/program_search": "^1.0",
+    "drupal/program_search": "^2.0.0",
     "drupal/protected_pages": "^1.4",
     "drupal/rabbit_hole": "^1.0 || ^1.0@beta",
     "drupal/recaptcha": "^3",
@@ -131,7 +131,7 @@
     "open-y-subprojects/openy_map": "^6@beta || ^6.0.0",
     "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.0.1",
     "ycloudyusa/y_pef_schedule": "^1.0",
-    "ycloudyusa/useless_machines": "^2.0.1",
+    "ycloudyusa/useless_machines": "^2.0.3",
     "ycloudyusa/y_lb_demo_content": "^3.3 || ~4.0.0",
     "drupal/lb_testimonial_blocks": "^1.0",
     "ycloudyusa/y_lb": "^4.0.0",
@@ -350,6 +350,7 @@
         "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch"
       },
       "drupal/inline_entity_form": {
+        "Issue #2581223: Support for configuration entities": "https://www.drupal.org/files/issues/2025-08-04/rebasepatch_0.patch",
         "Issue #3403113: fixed save sub-block": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/94.diff",
         "Issue #3398615: Save is broken in modal": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/95.diff"
       },

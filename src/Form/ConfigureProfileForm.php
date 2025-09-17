@@ -411,7 +411,7 @@ class ConfigureProfileForm extends FormBase {
       foreach (array_keys($module_data[$module]->requires) as $dependency) {
         if (!isset($module_data[$dependency])) {
           // The dependency does not exist.
-          // throw new MissingDependencyException("Unable to install modules: module '$module' is missing its dependency module $dependency.");
+          throw new MissingDependencyException("Unable to install modules: module '$module' is missing its dependency module $dependency.");
         }
 
         // Skip already installed modules.

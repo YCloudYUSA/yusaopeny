@@ -91,6 +91,12 @@ function openy_update_dependencies() {
       'openy_txnm_color' => 8005,
     ],
   ];
+  
+  $dependencies['system'] = [
+    11102 => [
+      'openy' => 11001,
+    ],
+  ];
 
   return $dependencies;
 }
@@ -1163,4 +1169,48 @@ function openy_update_8098() {
   $config_importer->importConfigs([
     'responsive_favicons.settings',
   ]);
+}
+
+/**
+ * Uninstall themes if they does not exist in the codebase anymore.
+ */
+function openy_update_11001() {
+  // Get list of themes to check.
+  $themes = \Drupal::configFactory()->getEditable('core.extension')->get('theme');
+  if (empty($themes) || !is_array($themes)) {
+    return;
+  }
+  foreach ($themes as $theme => $weight) {
+    try {
+      $path = \Drupal::service('extension.list.theme')->getPath($theme);
+    }
+    catch (\Exception $e) {
+      // Theme does not exist.
+      $path = NULL;
+    }
+    
+    if (!$path) {
+      try {
+        \Drupal::service('theme_installer')->uninstall([$theme]);
+      }
+      catch (\Exception $e) {
+        // Just remove theme from config if uninstall fails.
+        $config = \Drupal::configFactory()->getEditable('core.extension');
+        $config->clear('theme.' . $theme);
+        $config->save();
+      }
+      finally {
+        \Drupal::logger('yusaopeny')->notice('Theme %theme was uninstalled because it does not exist in the codebase anymore.', ['%theme' => $theme]);
+      }
+    }
+  }
+
+  // Ensure that claro admin theme is installed and used as admin theme.
+  \Drupal::service('theme_installer')->install(['claro']);
+  $config = \Drupal::configFactory()->getEditable('system.theme');
+  $config->set('admin', 'claro');
+  $config->save();
+
+  // Uninstall openy_admin theme.
+  \Drupal::service('module_installer')->uninstall(['openy_admin']);
 }
