@@ -14,7 +14,7 @@ class RoboFile extends \Robo\Tasks {
    */
   function OpenyCreateProject($path) {
     $this->taskComposerCreateProject()
-      ->source('ycloudyusa/yusaopeny-project:dev-drupal11-alpha')
+      ->source('ycloudyusa/yusaopeny-project:dev-main')
       ->target($path . '/yusaopeny-project')
       ->ansi(TRUE)
       ->dev()
