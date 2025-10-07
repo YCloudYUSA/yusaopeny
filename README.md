@@ -146,8 +146,6 @@ openy_configure_profile.preset=complete    # Developers only
 ### Available Themes
 
 - **openy_carnation** - The default theme for Y USA
-- **openy_lily** - Alternative theme option
-- **openy_rose** - Alternative theme option
 
 Specify with: `openy_theme_select.theme=openy_carnation`
 
