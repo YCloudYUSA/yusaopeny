@@ -22,6 +22,7 @@ install:
   - drupal:datetime
   - drupal:datetime_range
   - drupal:editor
+  - drupal:exif_orientation
   - drupal:file
   - drupal:help
   - drupal:history
