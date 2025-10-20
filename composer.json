@@ -377,6 +377,9 @@
       },
       "drupal/migrate_tools": {
         "hook_config_schema_info_alter injected optional migrate_plus config schema https://www.drupal.org/project/migrate_tools/issues/3534606":"https://git.drupalcode.org/project/migrate_tools/-/merge_requests/89.diff"
+      },
+      "drupal/video_embed_field": {
+        "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
       }
     }
   },
