@@ -1,21 +1,212 @@
-Original Issue, this PR is going to fix: REPLACE WITH A LINK TO ISSUE ( publicly available )
+# [type(TICKET-ID)]: [Brief Description]
 
-Make sure these boxes are checked before asking for review of your pull request - thank you!
+<!--
+PR Title Format: type(TICKET-ID): Brief description
+Types: feat, fix, docs, refactor, test, build, chore
+Example: feat(ITCR-123): Add dynamic menu support
+-->
 
-If there is a new feature or this is a bug fix - use `main` branch. We'll tag for release if the bug is critical ASAP or tag for release next bug fix release until the critical issue arrives.
+## Summary
 
-## Steps for review
+[1-2 sentences describing what this PR accomplishes]
 
-- [ ] Please provide steps for review here.
+---
 
+## Changes Made
 
-## General checks
-- [ ] All coding styles are fulfilled and there are no any issues reported by CodeSniffer. See [Code of Conduct](https://github.com/ymcatwincities/openy/wiki/Open-Y-Code-of-Conduct-and-Best-Practices).
-- [ ] Try to use Conventional commit messages accordingly to the standard https://www.conventionalcommits.org/en/v1.0.0/#specification
-- [ ] [Documentation](https://github.com/ycloudyusa/yusaopeny/tree/main/docs) has been updated according to PR changes.
-- [ ] [Steps for review](https://github.com/ymcatwincities/openy/pull/94#issue-204580200) have been provided according to PR changes. <br/><img src="https://raw.githubusercontent.com/ycloudyusa/yusaopeny/main/.github/assets/steps-for-review.png" width="200" alt="Steps for review"/>
-- [ ] Make sure you've provided all necessary hook\_update\_N to [support upgrade path](https://github.com/ycloudyusa/yusaopeny/blob/main/docs/Development/Upgrade%20path.md).
-- [ ] Make sure your git email is associated with an account on drupal.org, otherwise, you won't get commits there. <br/><img src="https://raw.githubusercontent.com/ycloudyusa/yusaopeny/main/.github/assets/drupalorg-email.png" width="200" alt="drupal.org email"/>
-- [ ] If you would like to get credits on drupal.org, [check documentation](https://github.com/ycloudyusa/yusaopeny/blob/main/docs/Development/Contributing.md#drupalorg-credits).
+- [Main change 1]
+- [Main change 2]
+- [Main change 3]
 
-Thank you for your contribution!
+<details>
+<summary><strong>Technical Details</strong></summary>
+
+### Backend Changes
+
+- [Backend change details if applicable]
+
+### Frontend Changes
+
+- [Frontend change details if applicable]
+
+### Configuration Changes
+
+- [Configuration changes if applicable]
+
+### Database Changes
+
+- [Schema changes, update hooks, etc. if applicable]
+
+</details>
+
+---
+
+## Testing
+
+- [ ] Unit tests added/updated
+- [ ] Kernel tests added/updated
+- [ ] Functional tests added/updated
+- [ ] Manual testing completed
+- [ ] Edge cases tested
+- [ ] Drupal coding standards followed ([phpcs](https://www.drupal.org/docs/develop/standards/phpcs))
+- [ ] Tested on supported PHP versions
+- [ ] Tested on supported Drupal core versions
+
+<details>
+<summary><strong>Testing Instructions</strong></summary>
+
+### Manual Testing Steps
+
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+
+### Expected Results
+
+- [Expected result 1]
+- [Expected result 2]
+
+</details>
+
+---
+
+## Related
+
+### Issue/Ticket
+
+- **[TICKET-ID]**: [Ticket Title](ticket-url)
+
+### Closes
+
+<!-- Use GitHub keywords: Closes, Fixes, Resolves -->
+- Closes #[issue-number]
+
+### Related To
+
+- Related to #[issue-number]
+
+### Related PRs
+
+<!-- Specify relationship: Depends on, Follows, Blocks, Part of series -->
+- **Depends on**: #[PR-number] - [Description]
+
+---
+
+## Drupal-Specific Checklist
+
+### Code Quality
+
+- [ ] Follows [Drupal Coding Standards](https://www.drupal.org/docs/develop/standards)
+- [ ] Follows [Drupal Best Practices](https://www.drupal.org/docs/develop/standards/coding-standards)
+- [ ] Uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [ ] No debug code (dpm, kint, console.log, etc.)
+- [ ] Proper error handling and logging
+- [ ] Security best practices followed
+
+### Upgrade Path
+
+- [ ] Update hooks provided (`hook_update_N`) for data/config changes
+- [ ] Supports [upgrade path](https://github.com/YCloudYUSA/yusaopeny/blob/main/docs/Development/Upgrade%20path.md)
+- [ ] Backwards compatible (or breaking change documented)
+- [ ] Config export included (if applicable)
+
+### Documentation
+
+- [ ] [Documentation](https://github.com/YCloudYUSA/yusaopeny/tree/main/docs) updated
+- [ ] Code comments added where needed
+- [ ] README updated (if applicable)
+- [ ] Change record created (if API/plugin change)
+- [ ] Docblocks added/updated
+
+### Drupal.org Contribution
+
+- [ ] Git email associated with [Drupal.org account](https://www.drupal.org/)
+- [ ] Ready for [Drupal.org credit](https://github.com/YCloudYUSA/yusaopeny/blob/main/docs/Development/Contributing.md#drupalorg-credits) (if desired)
+
+---
+
+## Breaking Changes
+
+- [ ] No breaking changes
+- [ ] Breaking changes documented below
+
+<details>
+<summary><strong>Breaking Changes Details</strong></summary>
+
+### What's Breaking
+
+[Describe what breaks and why]
+
+### Migration Path
+
+**Before**:
+```php
+// Old usage
+```
+
+**After**:
+```php
+// New usage
+```
+
+### Semantic Versioning
+
+[e.g., Minor version bump: 11.0.x → 11.1.x]
+
+</details>
+
+---
+
+## Success Criteria
+
+- [ ] All acceptance criteria met (from ticket)
+- [ ] Code reviewed and approved
+- [ ] All tests passing
+- [ ] Documentation complete
+- [ ] Upgrade path verified
+- [ ] Ready to merge
+
+---
+
+## Screenshots
+
+<details>
+<summary><strong>Visual Changes</strong></summary>
+
+### Before
+
+[Screenshot or description]
+
+### After
+
+[Screenshot or description]
+
+</details>
+
+---
+
+## Areas Needing Feedback
+
+<!-- Optional: List any specific areas where you need reviewer input -->
+
+- [Area 1 needing feedback]
+- [Area 2 needing feedback]
+
+---
+
+## Additional Notes
+
+[Any additional context, concerns, or information for reviewers]
+
+---
+
+<!--
+Reference Documentation:
+- PR Guidelines: https://github.com/ITCare-Company/pulsepoint-ai.itcaresolutions.org/issues/83
+- Drupal Coding Standards: https://www.drupal.org/docs/develop/standards
+- Conventional Commits: https://www.conventionalcommits.org/
+-->
+
+**Template Version**: 1.0
+**Source**: ITCare GitHub Templates
+**Last Updated**: 2025-10-21
