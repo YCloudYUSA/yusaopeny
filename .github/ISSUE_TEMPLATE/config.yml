@@ -4,8 +4,5 @@ contact_links:
     url: https://github.com/YCloudYUSA/yusaopeny/discussions
     about: Ask questions and discuss with the community
   - name: 📖 Documentation
-    url: https://github.com/YCloudYUSA/yusaopeny/tree/main/docs
-    about: Browse the official documentation
-  - name: 🌐 Drupal.org Issue Queue
-    url: https://www.drupal.org/project/issues/openy
-    about: Report issues on Drupal.org (for contrib credit)
+    url: https://ds-docs.y.org/
+    about: Browse the official distribution documentation
