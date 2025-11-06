@@ -64,7 +64,7 @@
     "drupal/openy_carnation": "^4.0.0-beta3 || ^4.0@rc || ^4.0.0",
     "drupal/openy_daxko2": "^1.0",
     "drupal/openy_er": "^1.0",
-    "drupal/openy_gtranslate": "^1.0",
+    "drupal/openy_gtranslate": "^1 || ^2.0.0",
     "drupal/openy_mappings": "^1.0",
     "drupal/openy_node_session": "^2.1.2",
     "drupal/openy_pef_gxp_sync": "^2.0.0",
