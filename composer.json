@@ -323,10 +323,6 @@
         "Issue #3368736: no config schema' Error after update to Drupal 10.1.0": "https://www.drupal.org/files/issues/2024-06-25/ckeditor5_font-schema-fix-10.3.x-3368736-48_0.patch",
         "Issue #3350333: TypeError: array_filter(): Argument #1 ($array) must be of type array.": "https://www.drupal.org/files/issues/2023-04-21/3350333-5.patch"
       },
-      "drupal/colorapi": {
-        "3171235 - Add Value property": "https://www.drupal.org/files/issues/2020-09-16/3171235-2.patch",
-        "Update colorapi configs": "https://gist.githubusercontent.com/manachynskyi/a24c7898a0ed051bc077fc94cc2dc2e8/raw/9524fa2d630d2ee0e0e39316156612b33c854182/colorapi_config_patch.patch"
-      },
       "drupal/commerce_cart_api": {
         "Allow Drupal 10": "https://git.drupalcode.org/project/commerce_cart_api/-/merge_requests/3.patch"
       },
@@ -344,39 +340,15 @@
       "drupal/media_entity_video": {
         "3149789 - Add a 3.x branch with an update path to the video source in core.": "https://www.drupal.org/files/issues/2020-06-11/3149789-4.patch"
       },
-      "drupal/media_library_form_element": {
-        "Issue #3341978: TypeError: explode(): Argument #2 ($string) must be of type string, array given in explode().": "https://www.drupal.org/files/issues/2023-05-10/check-default-value-not-array-15044301-16.patch"
-      },
       "drupal/plugin": {
         "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch"
       },
       "drupal/inline_entity_form": {
-        "Issue #2581223: Support for configuration entities": "https://www.drupal.org/files/issues/2025-08-04/rebasepatch_0.patch",
-        "Issue #3403113: fixed save sub-block": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/94.diff",
-        "Issue #3398615: Save is broken in modal": "https://git.drupalcode.org/project/inline_entity_form/-/merge_requests/95.diff"
-      },
-      "drupal/responsive_favicons": {
-        "Issue #3376766: Incorrect path if Drupal is installed in subfolder": "https://git.drupalcode.org/project/responsive_favicons/-/merge_requests/6.diff"
-      },
-      "drupal/editor_advanced_link": {
-        "Issue #3423208: Integrate a functionality of the CKEditor Bootstrap Buttons module": "https://git.drupalcode.org/project/editor_advanced_link/-/merge_requests/19.diff"
-      },
-      "drupal/scheduler": {
-        "Issue #3446881: Unhandled Warning: Undefined array key 'translatable'": "https://git.drupalcode.org/project/scheduler/-/merge_requests/140.diff"
-      },
-      "drupal/redirect": {
-        "Issue #3373123: Setting 'Enforce clean and canonical URLs.' breaks CSS aggregation on multilingual Drupal 10.1.x with browser caching enabled": "https://git.drupalcode.org/project/redirect/-/merge_requests/93.patch"
-      },
-      "drupal/search_api_solr": {
-        "https://www.drupal.org/project/search_api_solr/issues/3449292#comment-15644442": "https://www.drupal.org/files/issues/2024-06-17/search-api-solr-fatal-error-declaration-of-sleep-3449292-12.patch"
+        "Issue #2581223: Support for configuration entities": "https://www.drupal.org/files/issues/2025-08-04/rebasepatch_0.patch"
       },
       "drupal/core": {
-        "Fix contextual links disappear intermittently leading to console errors https://www.drupal.org/project/drupal/issues/3458067": "https://git.drupalcode.org/project/drupal/-/merge_requests/8585.diff",
         "Url only outputs the last value of a query parameter": "https://www.drupal.org/files/issues/2024-02-28/3038774-51-10.2.3-reroll.patch",
         "Class is not added to MediaLibrary dialog https://www.drupal.org/project/drupal/issues/3474018": "https://git.drupalcode.org/project/drupal/-/merge_requests/12597.diff"
-      },
-      "drupal/migrate_tools": {
-        "hook_config_schema_info_alter injected optional migrate_plus config schema https://www.drupal.org/project/migrate_tools/issues/3534606":"https://git.drupalcode.org/project/migrate_tools/-/merge_requests/89.diff"
       },
       "drupal/video_embed_field": {
         "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
