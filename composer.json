@@ -154,10 +154,6 @@
   },
   "repositories": [
     {
-      "type": "vcs",
-      "url": "https://github.com/YCloudYUSA/fontyourface.git"
-    },
-    {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
     },
