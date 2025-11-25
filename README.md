@@ -1,147 +1,343 @@
 <p align="center">
   <a href="https://ycloud.y.org/open-y-association-websites">
-    <img alt="react-router" src="https://www.ymcanorth.org/themes/custom/ymca/img/ymca-logo.svg" width="144">
+    <img alt="YMCA Website Services" src="https://www.ymcanorth.org/themes/custom/ymca/img/ymca-logo.svg" width="144">
   </a>
 </p>
 
 <h3 align="center">
-  YMCA’s Website Service
+  YMCA Website Services
 </h3>
 <p align="center">
-  https://ycloud.y.org/open-y-association-websites
+  <a href="https://ycloud.y.org/open-y-association-websites">ycloud.y.org/open-y-association-websites</a>
 </p>
 <p align="center">
   An open-source platform for YMCAs, by YMCAs, built on <a href="https://drupal.org">Drupal</a>.
 </p>
 
 <p align="center">
-  <a href="https://packagist.org/packages/ycloudyusa/yusaopeny-project"><img src="https://img.shields.io/packagist/v/ycloudyusa/yusaopeny-project.svg?style=flat-square"></a>
-  <a href="https://packagist.org/packages/ycloudyusa/yusaopeny-project"><img src="https://img.shields.io/packagist/dm/ycloudyusa/yusaopeny-project.svg?style=flat-square"></a>
+  <a href="https://packagist.org/packages/ycloudyusa/yusaopeny"><img src="https://img.shields.io/packagist/v/ycloudyusa/yusaopeny.svg?style=flat-square"></a>
+  <a href="https://packagist.org/packages/ycloudyusa/yusaopeny"><img src="https://img.shields.io/packagist/dm/ycloudyusa/yusaopeny.svg?style=flat-square"></a>
 </p>
 
 ***
 
-The [Y USA Website Services Project](https://ycloud.y.org/open-y-association-websites) is a composer-based installer for the [Y USA Website Services distribution](https://github.com/YCloudYUSA/yusaopeny).
+# YMCA Website Services Distribution
+
+**YMCA Website Services** (formerly OpenY) is a Drupal distribution built specifically for YMCAs. This repository contains the installation profile that provides content types, modules, configuration, and features for building YMCA websites.
+
+- **Distribution Repository**: https://github.com/YCloudYUSA/yusaopeny
+- **Project Template**: https://github.com/YCloudYUSA/yusaopeny-project
+- **Documentation**: https://ds-docs.y.org
+- **Community**: https://ycloud.y.org/open-y-association-websites
 
 
-## Requirements
+## System Requirements
 
-#### Composer    
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the [official instructions](https://getcomposer.org/download/). For usage, see [the documentation](https://getcomposer.org/doc/).
+- **Drupal**: 11.1.x
+- **PHP**: 8.3 or higher
+- **Composer**: 2.0 or higher
+- **Database**: MySQL 8.0+ or MariaDB 10.6+
+- **Web Server**: Apache 2.4+ or Nginx 1.18+
 
-## Installation
+For detailed server requirements, see the [YMCA Website Services server requirements](https://ds-docs.y.org/docs/development/server-requirements/).
 
-### Clean install
+## Quick Start
 
-If you are using internal tooling or only want the required code with no development environment, follow these steps.
+### Create a New Project
 
-#### Latest STABLE version
-
-```
+**Latest stable release:**
+```bash
 composer create-project ycloudyusa/yusaopeny-project MY_PROJECT --no-interaction
 cd MY_PROJECT
 ```
 
-#### Latest DEVELOPMENT version (Drupal 11+ 2.x)
-
-```
-composer create-project ycloudyusa/yusaopeny-project:dev-main-development MY_PROJECT --no-interaction --no-dev
-cd MY_PROJECT
-```
-
-This command will build a project based on the [**Drupal 10/11 development branch**](https://github.com/ycloudyusa/yusaopeny/commits/main) release.
-
-See [a how-to video](https://youtu.be/jRlinjpTl0c) for the whole process of this command usage.
-
-### Development environment
-
-To get an environment that was configured especially for development with the distribution, remove `--no-dev` from the composer command.
-
-So it should look like this:
-
-```
+**Latest development version (Drupal 11):**
+```bash
 composer create-project ycloudyusa/yusaopeny-project:dev-main-development MY_PROJECT --no-interaction
 cd MY_PROJECT
 ```
 
-See [a how-to video](https://youtu.be/jRlinjpTl0c) for the whole process of this command usage.
+### Development Environments
 
-#### Docksal
-[Docksal](http://docksal.io) is a tool for defining and managing development environments.
+#### Docksal (Recommended)
 
-- [How to develop](https://github.com/ymcatwincities/openy-docksal#how-to-develop)
-  
-Read more details on [Docksal](https://github.com/ymcatwincities/openy-docksal) repo.
+[Docksal](https://docksal.io) provides a complete Docker-based development environment:
 
-### Drupal install
+```bash
+# Install Docksal (if not already installed)
+# See https://docksal.io/installation
 
-The distribution has a full user interface for step-by-step installation. Simply visit your site after building your dev environment to be taken through the installation process.
+# Initialize the project
+fin init
 
-For developers who want a kick-start, you can pass many configuration options in the install process through to [drush site:install](https://www.drush.org/12.x/commands/site_install/).
-
-For example, a "complete" install with the "Carnation" theme might look like:
-
-```shell
-drush -vy si openy openy_configure_profile.preset=complete openy_theme_select.theme=openy_carnation openy_terms_of_use.agree_openy_terms=1 install_configure_form.enable_update_status_emails=NULL --account-name=admin --site-name='YMCA Website Services sandbox'
+# Access the site
+# Default URL: http://yusaopeny.docksal.site
 ```
 
-## Use Fork for the development
+For more details, see the [installation documentation](https://ds-docs.y.org/docs/development/installationwithdrush/).
 
-All development happens in the [Website Services Drupal 9/10 installation profile](https://github.com/ycloudyusa/yusaopeny). To start development:
+#### DDEV
 
-1. Create a fork of [Website Services installation profile](https://github.com/YCloudYUSA/yusaopeny)
-2. Add your repository to `composer.json`
+DDEV support is available with basic configuration in the `.ddev/` directory.
+
+#### Manual Installation
+
+If using your own environment, after creating the project:
+
+```bash
+# Configure your database settings
+# Edit docroot/sites/default/settings.php
+
+# Install Drupal with the Web UI
+# Visit your site in a browser and follow the installation wizard
+
+# OR install via Drush (recommended for developers)
+cd docroot
+drush site:install openy \
+  openy_configure_profile.preset=complete \
+  openy_theme_select.theme=openy_carnation \
+  openy_terms_of_use.agree_openy_terms=1 \
+  install_configure_form.enable_update_status_emails=NULL \
+  --account-name=admin \
+  --site-name='YMCA Website Services' \
+  --yes
 ```
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "https://github.com/GITHUB_USERNAME/yusaopeny"
-    }
-]
+
+### Installation Presets
+
+The profile offers installation presets that determine which feature packages are enabled:
+
+**Small Y** (Recommended - Default)
+- **Status**: Standard and Small Y profiles are being merged into this unified installation
+- Streamlined installation suitable for most YMCA organizations
+- Includes: Alerts, Analytics, Editorial, Locations, Scheduler, Search, SEO, Translation, Webforms, Layout Builder
+- Best for: Most YMCA websites, especially smaller to mid-size organizations
+- This will become the primary installation option
+
+**Standard**
+- **Status**: Being phased out - merging with Small Y
+- Legacy installation type maintained for backward compatibility
+- Includes: Alerts, Editorial tools, News, SEO, Webforms, Layout Builder
+- **Recommendation**: New installations should use Small Y instead
+
+**Extended**
+- For organizations requiring advanced features and complex integrations
+- Adds: Analytics, Events, Locations, Membership, Translation, Search, Activity Finder, Home Branch
+- Includes CRM integrations (GroupEx Pro, ActiveNet, Daxko)
+- Best for: Large organizations with complex program management needs
+
+**Complete** (Developers Only)
+- **For development and testing purposes only**
+- Full feature set with all packages and demo content
+- Includes: ActiveNet, Daxko, GroupEx Pro, Programs, Camps, Blog, and every available package
+- Only available via Drush installation (hidden from web UI)
+- Best for: Development, testing, evaluation, and demonstrations
+- **Not recommended for production sites**
+
+Specify preset via Drush:
+```bash
+openy_configure_profile.preset=small_y     # Recommended for most sites
+openy_configure_profile.preset=extended    # For complex usage
+openy_configure_profile.preset=complete    # Developers only
 ```
 
-3. Change a version for `ycloudyusa/yusaopeny` to `dev-main` or any other branch. E.g.:
-- branch name "bugfix" - version name `dev-bugfix`
-- branch name "feature/workflow" - version name `dev-feature/workflow`
+> **Migration Note**: Sites currently using the Standard preset will continue to work. The Standard preset remains available for backward compatibility but is not recommended for new installations.
 
+### Available Themes
+
+- **openy_carnation** - The default theme for Y USA
+
+Specify with: `openy_theme_select.theme=openy_carnation`
+
+## Contributing & Development
+
+### Working with a Fork
+
+To contribute to YMCA Website Services, you'll work with a fork of this repository:
+
+1. **Fork the repository** on GitHub: https://github.com/YCloudYUSA/yusaopeny
+
+2. **Add your fork as a composer repository** in your project's `composer.json`:
+   ```json
+   "repositories": [
+       {
+           "type": "vcs",
+           "url": "https://github.com/YOUR_USERNAME/yusaopeny"
+       }
+   ]
+   ```
+
+3. **Point to your development branch**. Branch names map to composer versions:
+   - `bugfix` → `dev-bugfix`
+   - `feature/my-feature` → `dev-feature/my-feature`
+   - `main` → `dev-main`
+
+   ```json
+   "require": {
+       "ycloudyusa/yusaopeny": "dev-YOUR-BRANCH-NAME"
+   }
+   ```
+
+4. **Update dependencies**:
+   ```bash
+   composer update ycloudyusa/yusaopeny --with-dependencies
+   ```
+
+5. **Make your changes** in `docroot/profiles/contrib/yusaopeny/` (or `docroot/profiles/contrib/openy/`)
+
+6. **Test your changes** thoroughly (see Testing section below)
+
+7. **Submit a pull request** to the main repository
+
+For detailed contribution guidelines, review:
+- [Pull Request Standards](https://ds-docs.y.org/docs/development/open-y-pull-requests-review-standard/)
+- [Code Review Best Practices](https://ds-docs.y.org/docs/development/code-review-quality-best-practices/)
+- [Developer Documentation](https://ds-docs.y.org/docs/development/)
+
+### Code Standards
+
+This project follows Drupal coding standards. Before submitting code:
+
+```bash
+# Run code sniffers (from project root)
+cd docroot
+./runsniffers.sh
+
+# Auto-fix code style issues
+./runcodestyleautofix.sh
 ```
-"require": {
-    "ycloudyusa/yusaopeny": "dev-main",
-}
-```
-```
-"require": {
-    "ycloudyusa/yusaopeny": "dev-feature/workflow",
-}
-```
 
-4. Run `composer update` to update packages
-5. Add and commit changes in `docroot/profiles/contrib/openy`. Now it should be pointed to your fork.
+### Testing
 
-## Directory structure
+For testing procedures, see [SMOKE_TESTS.md](SMOKE_TESTS.md) for manual testing or the [Smoke Tests Index](https://ds-docs.y.org/docs/development/open-y-smoke-tests-index/) for comprehensive testing guidelines.
 
-| Directory | Purpose |
-|-----------|---------|
-| [**Y USA Website Services**](https://github.com/ycloudyusa/yusaopeny) ||
-| `docroot/` | Contains Drupal core |
-| `docroot/profiles/contrib/openy/` | Contains Website Services distribution |
-| `vendor/` | Contains Y USA Website Services distribution |
-| `composer.json` | Contains Y USA Website Services distribution |
-| [**CIBox VM**](https://github.com/ymcatwincities/openy-cibox-vm) + [**CIBox Build**](https://github.com/ymcatwincities/openy-cibox-build)  ||
-| `cibox/` | Contains CIBox libraries |
-| `docroot/devops/` | DevOps scripts for the installation process |
-| `provisioning/` | Vagrant configuration |
-| `docroot/*.sh` | Bash scripts to trigger reinstall scripts
-| `docroot/*.yml` | YAML playbooks for the installation process |
-| `Vagrantfile` | Vagrant index file |
-| [**Docksal**](https://github.com/ymcatwincities/openy-docksal) ||
-| `.docksal/` | Docksal configuration |
-| `build.sh` | Build script for Docksal environment |
+## Key Features
 
-## Documentation
+The distribution is organized into **packages** - logical groupings of related functionality. Each installation preset enables different combinations of packages.
 
-Documentation about Website Services is available at [docs](https://github.com/YCloudYUSA/yusaopeny_docs). For details please visit [https://ycloud.y.org/open-y-association-websites](https://ycloud.y.org/open-y-association-websites).
+### Core Packages
+
+- **Editorial** - Content components for building flexible pages (galleries, banners, grids, breadcrumbs)
+- **[Layout Builder](https://ds-docs.y.org/docs/user-documentation/layout-builder/)** - Drupal's drag-and-drop page builder with 30+ custom components
+- **Alerts** - Create and manage website [alerts](https://ds-docs.y.org/docs/user-documentation/content-types/alert/)
+- **News** - [News posts](https://ds-docs.y.org/docs/user-documentation/content-types/news/) with listings, featured content, and taxonomy
+- **Webforms** - Advanced form building with submission handling
+- **SEO** - Metatags, sitemaps, and search engine optimization tools
+
+### Location & Membership Packages
+
+- **Locations** - [Branch](https://ds-docs.y.org/docs/user-documentation/content-types/branch/) and [facility](https://ds-docs.y.org/docs/user-documentation/content-types/facility/) management with hours, amenities, maps, and alerts
+- **Membership** - [Membership](https://ds-docs.y.org/docs/user-documentation/content-types/membership/) content types and calculators
+- **Camps** - [Camp](https://ds-docs.y.org/docs/user-documentation/content-types/camp/) management and location finder integration
+- **Home Branch** - Personalized branch selection for users
+
+### Program & Events Packages
+
+- **Programs** - [Program](https://ds-docs.y.org/docs/user-documentation/content-types/program/) content types with [subcategories](https://ds-docs.y.org/docs/user-documentation/content-types/program-subcategory/)
+- **Events** - [Event](https://ds-docs.y.org/docs/user-documentation/content-types/event/) management with listings and calendars
+- **Blog** - [Blog posts](https://ds-docs.y.org/docs/user-documentation/content-types/blog/) with multiple listing types
+- **Scheduler** - Schedule content publishing and unpublishing
+
+### Integration Packages
+
+- **ActiveNet** - ActiveNet CRM integration
+- **Daxko** - Daxko program and membership integration
+- **GroupEx Pro** - Group exercise class scheduling
+- **Personify** - Personify CRM integration
+- **Activity Finder** - Program search with registration integration
+
+### Additional Packages
+
+- **Analytics** - Google Analytics and Google Tag Manager integration
+- **Search** - Solr or Google Custom Search integration
+- **Translation** - Multilingual support
+- **Social** - Social posts and feeds
+- **Social Sharing** - AddThis social sharing integration
+- **Theme Customization** - Color schemes and CSS editing
+
+See `openy.packages.yml` for the complete list of packages and their modules, or browse the [Content Structure documentation](https://ds-docs.y.org/docs/content-structure/) for detailed information about each feature.
+
+## Architecture
+
+### Package-Based System
+
+YMCA Website Services uses a **package-based architecture**:
+
+1. **Packages** (`openy.packages.yml`) - Logical groupings of modules by functionality
+   - Each package has: name, description, help text, and list of modules
+   - Examples: `editorial`, `locations`, `blog`, `activity_finder`
+
+2. **Installation Types** (`openy.installation_types.yml`) - Presets that combine packages
+   - Each preset specifies which packages to install
+   - `standard`, `extended`, `small_y`, `complete`
+
+3. **Module Installation** - During installation:
+   - User selects a preset (or specifies via Drush)
+   - System loads packages for that preset
+   - Installs all modules from those packages (with dependencies)
+   - Optionally imports demo content for selected preset
+
+### Directory Structure
+
+| Path | Purpose |
+|------|---------|
+| `config/install/` | Default configuration installed with profile |
+| `config/optional/` | Optional configuration for specific features |
+| `src/` | Profile PHP classes (forms, services, plugins) |
+| `src/Form/` | Installation wizard forms |
+| `patches/` | Contrib module patches |
+| `build/` | Testing and CI/CD configurations |
+| `themes/` | Base theme definitions |
+| `openy.packages.yml` | Package definitions |
+| `openy.installation_types.yml` | Installation preset definitions |
+| `openy.profile` | Installation tasks and hooks |
+| `openy.install` | Install and update hooks |
+
+### Custom Modules Location
+
+Custom modules are **not** stored in this repository. They are managed as separate composer packages:
+- `open-y-subprojects/*` - Core custom modules (openy_map, openy_focal_point, etc.)
+- `ycloudyusa/*` - Y USA maintained packages (y_lb, yusaopeny_activity_finder, etc.)
+- Installed to: `docroot/modules/contrib/`
+
+See [CLAUDE.md](CLAUDE.md) for detailed development documentation.
+
+## Resources
+
+### Documentation
+
+- **Main Documentation**: https://ds-docs.y.org
+- **User Guides**: https://ds-docs.y.org/docs/user-documentation/
+  - [Content Types](https://ds-docs.y.org/docs/user-documentation/content-types/)
+  - [Layout Builder](https://ds-docs.y.org/docs/user-documentation/layout-builder/)
+  - [Blocks](https://ds-docs.y.org/docs/user-documentation/blocks/)
+- **Developer Documentation**: https://ds-docs.y.org/docs/development/
+  - [Installation Guide](https://ds-docs.y.org/docs/development/installationwithdrush/)
+  - [Pull Request Standards](https://ds-docs.y.org/docs/development/open-y-pull-requests-review-standard/)
+  - [Code Review Best Practices](https://ds-docs.y.org/docs/development/code-review-quality-best-practices/)
+  - [Smoke Tests](https://ds-docs.y.org/docs/development/open-y-smoke-tests-index/)
+- **Content Structure**: https://ds-docs.y.org/docs/content-structure/
+
+### Community & Support
+
+- **Community**: https://ycloud.y.org/open-y-association-websites
+- **Issue Queue**: https://github.com/YCloudYUSA/yusaopeny/issues
+- **Changelog**: [GitHub Releases](https://github.com/YCloudYUSA/yusaopeny/releases)
+
+## Support
+
+YMCA Website Services is maintained by:
+- Y-USA Digital Services
+- ITCare
+- ImageX
+- Five Jars
+
+For implementation support, training, and customization services, contact the [Y-USA Digital Services team](https://ycloud.y.org/open-y-association-websites).
 
 ## License
 
-Y USA OpenY Project is licensed under the [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0-standalone.en.html). See the [License file](https://github.com/YCloudYUSA/yusaopeny-project/blob/9.2.x/LICENSE) for details.
+YMCA Website Services is licensed under the [GPL-2.0-or-later](LICENSE.txt). This is free and open-source software.
+
+---
+
+**Note**: This distribution was formerly known as "OpenY". References to "openy" in code and paths are maintained for backward compatibility.
