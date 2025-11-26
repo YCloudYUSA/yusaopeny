@@ -43,7 +43,6 @@ complete:
     - editorial_ext
     - embeddable_header_footer
     - events
-    - groupexpro
     - helpers
     - locations
     - locations_ext
