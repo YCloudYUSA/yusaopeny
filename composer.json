@@ -102,7 +102,7 @@
     "drupal/views_block_filter_block": "^1.2 || ^2.0",
     "drupal/views_data_export": "^1.0 || 1.0-rc1",
     "drupal/views_infinite_scroll": "^1.7 || ^2",
-    "drupal/webform": "^6.3@beta",
+    "drupal/webform": "6.3.x-dev",
     "drupal/y_donate": "^2.0",
     "grt107/grt-youtube-popup": "^1.0",
     "guzzlehttp/guzzle": "^6 || ^7",
