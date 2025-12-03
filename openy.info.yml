@@ -25,7 +25,7 @@ install:
   - drupal:exif_orientation
   - drupal:file
   - drupal:help
-  - drupal:history
+  # - drupal:history # Removed: triggers D11.3 bug with comment.manager when comment module disabled
   - drupal:image
   - drupal:link
   - drupal:menu_link_content
