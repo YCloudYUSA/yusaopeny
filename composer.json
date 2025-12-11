@@ -135,7 +135,8 @@
     "ycloudyusa/yusaopeny_activity_finder": "^6.0",
     "ymcatwincities/media_entity_document": "*",
     "drupal/ymca_sync": "^10 || ^11",
-    "ycloudyusa/ws_outsiders": "dev-main"
+    "ycloudyusa/ws_outsiders": "dev-main",
+    "drupal/media_directories": "dev-main"
   },
   "require-dev": {
     "consolidation/robo": "^3 || ^4 || ~5.0.0",
