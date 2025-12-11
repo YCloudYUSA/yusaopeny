@@ -136,7 +136,7 @@
     "ymcatwincities/media_entity_document": "*",
     "drupal/ymca_sync": "^10 || ^11",
     "ycloudyusa/ws_outsiders": "dev-main",
-    "drupal/media_directories": "dev-main"
+    "drupal/media_directories": "2.2.x-dev"
   },
   "require-dev": {
     "consolidation/robo": "^3 || ^4 || ~5.0.0",
