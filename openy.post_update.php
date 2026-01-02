@@ -51,3 +51,234 @@ function openy_post_update_cleanup_update_path_messages(&$sandbox) {
   $sandbox['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['progress'] / $sandbox['max']);
   return t('@count Entities were deleted.', ['@count' => $sandbox['max']]);
 }
+
+/**
+ * Deprecate entity_browser and media_directories in favor of media_library.
+ *
+ * Delete entity_browser and media_directories configs, then uninstall modules.
+ * All dependent modules have had their info.yml dependencies updated to remove
+ * entity_browser_entity_form dependency.
+ */
+function openy_post_update_deprecate_entity_browser_media_directories() {
+  $config_factory = \Drupal::configFactory();
+  $module_installer = \Drupal::service('module_installer');
+  $module_handler = \Drupal::service('module_handler');
+
+  // Delete entity_browser configs (browsers only, not the module config).
+  $entity_browser_configs = $config_factory->listAll('entity_browser.browser.');
+  foreach ($entity_browser_configs as $config_name) {
+    $config = $config_factory->getEditable($config_name);
+    if (!$config->isNew()) {
+      $config->delete();
+    }
+  }
+
+  // Delete media_directories configs.
+  $media_directories_configs = [
+    'media_directories.settings',
+  ];
+  foreach ($media_directories_configs as $config_name) {
+    $config = $config_factory->getEditable($config_name);
+    if (!$config->isNew()) {
+      $config->delete();
+    }
+  }
+
+  // Delete entity_browser views (they use display_plugin: entity_browser).
+  $entity_browser_views = [
+    'views.view.images_library',
+    'views.view.videos_library',
+    'views.view.documents_library',
+    'views.view.local_videos_library',
+    'views.view.media_directories_base',
+  ];
+  foreach ($entity_browser_views as $config_name) {
+    $config = $config_factory->getEditable($config_name);
+    if (!$config->isNew()) {
+      $config->delete();
+    }
+  }
+
+  // Uninstall media_directories and entity_browser modules.
+  // Order matters: uninstall dependent modules first.
+  $modules_to_uninstall = [
+    'media_directories_editor',
+    'media_directories_ui',
+    'media_directories',
+    'entity_browser_entity_form',
+    'dropzonejs_eb_widget',
+    'entity_browser',
+  ];
+
+  foreach ($modules_to_uninstall as $module) {
+    if ($module_handler->moduleExists($module)) {
+      try {
+        $module_installer->uninstall([$module]);
+        \Drupal::messenger()->addStatus("Uninstalled $module module.");
+      }
+      catch (\Exception $e) {
+        \Drupal::messenger()->addWarning("Could not uninstall $module: " . $e->getMessage());
+      }
+    }
+  }
+
+  return "Media Directories modules uninstalled. Entity Browser configs deleted. Remove drupal/entity_browser and drupal/media_directories from composer.json manually.";
+}
+
+/**
+ * Migrate Media Directories vocabulary to Media Tags.
+ *
+ * Copies directory terms to media_tags vocabulary with same hierarchy,
+ * then migrates media entity directory field values to field_media_tags.
+ *
+ * IMPORTANT: Run this BEFORE openy_post_update_deprecate_entity_browser_media_directories.
+ */
+function openy_post_update_migrate_media_directories_to_tags(&$sandbox) {
+  $config = \Drupal::config('media_directories.settings');
+  $source_vocabulary = $config->get('directory_taxonomy');
+
+  if (empty($source_vocabulary)) {
+    return t('No media directories vocabulary configured. Skipping migration.');
+  }
+
+  $term_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  $media_storage = \Drupal::entityTypeManager()->getStorage('media');
+  $vocabulary_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_vocabulary');
+
+  // Ensure media_tags vocabulary exists.
+  $media_tags_vocab = $vocabulary_storage->load('media_tags');
+  if (!$media_tags_vocab) {
+    $media_tags_vocab = $vocabulary_storage->create([
+      'vid' => 'media_tags',
+      'name' => 'Media Tags',
+      'description' => 'Tags for organizing media items (migrated from Media Directories).',
+    ]);
+    $media_tags_vocab->save();
+  }
+
+  if (!isset($sandbox['progress'])) {
+    // Phase 1: Migrate terms with hierarchy.
+    $sandbox['phase'] = 'terms';
+    $sandbox['progress'] = 0;
+    $sandbox['term_map'] = [];
+
+    // Load source vocabulary tree.
+    $tree = $term_storage->loadTree($source_vocabulary, 0, NULL, TRUE);
+
+    foreach ($tree as $source_term) {
+      // Check if term already exists in media_tags.
+      $existing = $term_storage->loadByProperties([
+        'vid' => 'media_tags',
+        'name' => $source_term->label(),
+      ]);
+
+      if (!empty($existing)) {
+        $target_term = reset($existing);
+      }
+      else {
+        // Create new term in media_tags.
+        $parent_tid = 0;
+        if (!empty($source_term->parents[0]) && $source_term->parents[0] != 0) {
+          // Map parent to new vocabulary.
+          $parent_tid = $sandbox['term_map'][$source_term->parents[0]] ?? 0;
+        }
+
+        $target_term = $term_storage->create([
+          'vid' => 'media_tags',
+          'name' => $source_term->label(),
+          'parent' => $parent_tid,
+          'weight' => $source_term->getWeight(),
+        ]);
+        $target_term->save();
+      }
+
+      // Store mapping: old tid -> new tid.
+      $sandbox['term_map'][$source_term->id()] = $target_term->id();
+      $sandbox['progress']++;
+    }
+
+    // Prepare for phase 2: migrate media entities.
+    $sandbox['phase'] = 'media';
+    $sandbox['media_progress'] = 0;
+    $sandbox['media_current'] = 0;
+
+    // Count media entities with directory field set.
+    $sandbox['media_max'] = $media_storage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('directory', NULL, 'IS NOT NULL')
+      ->count()
+      ->execute();
+
+    if ($sandbox['media_max'] == 0) {
+      $sandbox['#finished'] = 1;
+      return t('Migrated @count terms. No media entities to update.', [
+        '@count' => $sandbox['progress'],
+      ]);
+    }
+  }
+
+  // Phase 2: Migrate media entity field values.
+  if ($sandbox['phase'] === 'media') {
+    $batch_size = 50;
+
+    $media_ids = $media_storage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('directory', NULL, 'IS NOT NULL')
+      ->condition('mid', $sandbox['media_current'], '>')
+      ->sort('mid', 'ASC')
+      ->range(0, $batch_size)
+      ->execute();
+
+    foreach ($media_ids as $mid) {
+      $media = $media_storage->load($mid);
+      if (!$media) {
+        continue;
+      }
+
+      $sandbox['media_current'] = $mid;
+
+      // Get directory term ID.
+      $directory_tid = $media->get('directory')->target_id;
+      if (empty($directory_tid) || $directory_tid <= 0) {
+        $sandbox['media_progress']++;
+        continue;
+      }
+
+      // Map to new term ID.
+      $new_tid = $sandbox['term_map'][$directory_tid] ?? NULL;
+      if (!$new_tid) {
+        $sandbox['media_progress']++;
+        continue;
+      }
+
+      // Check if media has field_media_tags field.
+      if (!$media->hasField('field_media_tags')) {
+        $sandbox['media_progress']++;
+        continue;
+      }
+
+      // Get existing tags and add the new one.
+      $existing_tags = [];
+      foreach ($media->get('field_media_tags') as $item) {
+        $existing_tags[] = $item->target_id;
+      }
+
+      if (!in_array($new_tid, $existing_tags)) {
+        $existing_tags[] = $new_tid;
+        $media->set('field_media_tags', $existing_tags);
+        $media->save();
+      }
+
+      $sandbox['media_progress']++;
+    }
+  }
+
+  $sandbox['#finished'] = empty($sandbox['media_max']) ? 1 : ($sandbox['media_progress'] / $sandbox['media_max']);
+
+  if ($sandbox['#finished'] >= 1) {
+    return t('Migrated @terms terms and updated @media media entities from Media Directories to Media Tags.', [
+      '@terms' => $sandbox['progress'],
+      '@media' => $sandbox['media_progress'],
+    ]);
+  }
+}
