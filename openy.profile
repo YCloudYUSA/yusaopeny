@@ -15,6 +15,7 @@ use Drupal\openy\Form\ThirdPartyServicesForm;
 use Drupal\openy\Form\UploadFontMessageForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Site\Settings;
 
 /**
  * Implements hook_install_tasks().
@@ -239,8 +240,27 @@ function openy_install_features(array &$install_state) {
   \Drupal::state()->set('openy_preset', $preset);
   $modules = ConfigureProfileForm::getModulesToInstallWithDependencies($preset);
 
-  foreach ($modules as $module) {
-    $module_operations[] = ['openy_enable_module', (array) $module];
+  // Check if Drupal version supports batched module installation (11.2+).
+  // @see https://www.drupal.org/project/drupal/issues/3416522
+  $drupal_version = \Drupal::VERSION;
+  $supports_batching = version_compare($drupal_version, '11.2', '>=');
+
+  if ($supports_batching) {
+    // Use batched installation to reduce container rebuilds.
+    // Get batch size from settings, default to 20 (same as core default).
+    $batch_size = Settings::get('openy.module_install_batch_size',
+      Settings::get('core.multi_module_install_batch_size', 20));
+    $module_chunks = array_chunk($modules, $batch_size);
+
+    foreach ($module_chunks as $chunk) {
+      $module_operations[] = ['openy_enable_modules', [$chunk]];
+    }
+  }
+  else {
+    // Fallback for older Drupal versions: install one module at a time.
+    foreach ($modules as $module) {
+      $module_operations[] = ['openy_enable_module', (array) $module];
+    }
   }
 
   return ['operations' => $module_operations];
@@ -269,12 +289,27 @@ function openy_install_search(array &$install_state) {
   if (isset($install_state['openy']['search']['google_search_engine_id'])) {
     $state->set('google_search_engine_id', $install_state['openy']['search']['google_search_engine_id']);
   };
+  $modules = [];
   if ($files[$module]->requires) {
     $modules = array_merge(array_keys($files[$module]->requires), (array) $module);
   }
-  foreach ($modules as $module) {
-    $module_operations[] = ['openy_enable_module', (array) $module];
+
+  $module_operations = [];
+
+  // Check if Drupal version supports batched module installation (11.2+).
+  $drupal_version = \Drupal::VERSION;
+  $supports_batching = version_compare($drupal_version, '11.2', '>=');
+
+  if ($supports_batching && !empty($modules)) {
+    // Install all search modules in a single batch operation.
+    $module_operations[] = ['openy_enable_modules', [$modules]];
   }
+  else {
+    foreach ($modules as $module) {
+      $module_operations[] = ['openy_enable_module', (array) $module];
+    }
+  }
+
   // @todo install search_api_solr_legacy.
   $module_operations[] = ['openy_enable_search_api_solr_legacy', []];
 
@@ -336,9 +371,9 @@ function openy_install_theme(array &$install_state) {
  *   Batch.
  */
 function openy_import_content(array &$install_state) {
-  $module_operations = [];
+  $modules_to_enable = [];
+  $modules_to_uninstall = [];
   $migrate_operations = [];
-  $uninstall_operations = [];
   $preset = \Drupal::state()->get('openy_preset') ?: 'complete';
   if (function_exists('drush_print')) {
     drush_print(dt('Preset: %preset', ['%preset' => $preset]));
@@ -350,39 +385,73 @@ function openy_import_content(array &$install_state) {
     'small_y' => 'openy_small_y_installation',
   ];
   $migration_tag = $preset_tags[$preset];
-  // Add core demo content.
-  _openy_import_content_helper($module_operations, 'core', 'enable');
+
+  // Collect core demo content modules.
+  $modules_to_enable = array_merge($modules_to_enable, openy_demo_content_configs_map('core'));
   $migrate_operations[] = ['openy_import_migration', ['openy_core_installation']];
 
   if ($install_state['openy']['content']) {
-    // If option has been selected build demo modules installation operations array.
-    _openy_import_content_helper($module_operations, $preset, 'enable');
+    // If option has been selected, collect demo modules.
+    $modules_to_enable = array_merge($modules_to_enable, openy_demo_content_configs_map($preset));
     // Add migration import by tag to migration operations array.
     $migrate_operations[] = ['openy_import_migration', (array) $migration_tag];
     if ($preset == 'complete') {
       // Add demo content Program Event Framework landing pages manually.
-      // Do it as the last step so menu items are in place.
       $migrate_operations[] = ['openy_demo_nlanding_pef_pages', []];
       // Add demo content Activity Finder landing pages manually.
-      // Do it as the last step so menu items are in place.
       $migrate_operations[] = ['openy_demo_nlanding_af_pages', []];
     }
-    // Build demo modules uninstall array to disable migrations with demo content.
-    _openy_import_content_helper($uninstall_operations, $preset, 'uninstall');
+    // Collect demo modules for uninstall.
+    $modules_to_uninstall = array_merge($modules_to_uninstall, openy_demo_content_configs_map($preset));
     if (function_exists('drush_print')) {
       drush_print(dt('Demo content enabled'));
     }
   }
   else {
     // Add homepage alternative if demo content is not enabled.
-    $module_operations[] = ['openy_enable_module', (array) 'openy_demo_nhome_alt'];
+    $modules_to_enable[] = 'openy_demo_nhome_alt';
     $migrate_operations[] = ['openy_import_migration', (array) 'openy_demo_home_alt'];
-    $uninstall_operations[] = ['openy_uninstall_module', (array) 'openy_demo_home_alt'];
+    $modules_to_uninstall[] = 'openy_demo_home_alt';
   }
 
-  // Uninstall core demo content modules.
-  _openy_import_content_helper($uninstall_operations, 'core', 'uninstall');
-  // Combine operations module enable before of migrations.
+  // Add core demo content modules for uninstall.
+  $modules_to_uninstall = array_merge($modules_to_uninstall, openy_demo_content_configs_map('core'));
+
+  // Build module operations with batching support for Drupal 11.2+.
+  $module_operations = [];
+  $uninstall_operations = [];
+  $drupal_version = \Drupal::VERSION;
+  $supports_batching = version_compare($drupal_version, '11.2', '>=');
+
+  if ($supports_batching) {
+    $batch_size = Settings::get('openy.module_install_batch_size',
+      Settings::get('core.multi_module_install_batch_size', 20));
+
+    // Batch enable operations.
+    if (!empty($modules_to_enable)) {
+      foreach (array_chunk($modules_to_enable, $batch_size) as $chunk) {
+        $module_operations[] = ['openy_enable_modules', [$chunk]];
+      }
+    }
+
+    // Batch uninstall operations.
+    if (!empty($modules_to_uninstall)) {
+      foreach (array_chunk($modules_to_uninstall, $batch_size) as $chunk) {
+        $uninstall_operations[] = ['openy_uninstall_modules', [$chunk]];
+      }
+    }
+  }
+  else {
+    // Fallback for older Drupal versions.
+    foreach ($modules_to_enable as $module) {
+      $module_operations[] = ['openy_enable_module', (array) $module];
+    }
+    foreach ($modules_to_uninstall as $module) {
+      $uninstall_operations[] = ['openy_uninstall_module', (array) $module];
+    }
+  }
+
+  // Combine operations: enable modules -> run migrations -> uninstall modules.
   return ['operations' => array_merge($module_operations, $migrate_operations, $uninstall_operations)];
 }
 
@@ -576,6 +645,25 @@ function openy_enable_module($module_name) {
 }
 
 /**
+ * Enable multiple modules in a single batch operation.
+ *
+ * This function leverages Drupal 11.2+'s batched module installation
+ * to reduce container rebuilds and improve installation performance.
+ *
+ * @param array $module_names
+ *   Array of module names to install.
+ *
+ * @throws \Drupal\Core\Extension\MissingDependencyException
+ *
+ * @see https://www.drupal.org/project/drupal/issues/3416522
+ */
+function openy_enable_modules(array $module_names) {
+  /** @var \Drupal\Core\Extension\ModuleInstaller $service */
+  $service = \Drupal::service('module_installer');
+  $service->install($module_names);
+}
+
+/**
  * Enable theme.
  *
  * @param string $theme_name
@@ -599,6 +687,18 @@ function openy_uninstall_module($module_name) {
   /** @var \Drupal\Core\Extension\ModuleInstaller $service */
   $service = \Drupal::service('module_installer');
   $service->uninstall([$module_name]);
+}
+
+/**
+ * Uninstall multiple modules in a single batch operation.
+ *
+ * @param array $module_names
+ *   Array of module names to uninstall.
+ */
+function openy_uninstall_modules(array $module_names) {
+  /** @var \Drupal\Core\Extension\ModuleInstaller $service */
+  $service = \Drupal::service('module_installer');
+  $service->uninstall($module_names);
 }
 
 /**
