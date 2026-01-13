@@ -61,6 +61,7 @@ install:
   - plugin:plugin
   - recaptcha:recaptcha
   - simple_menu_icons:simple_menu_icons
+  - trash:trash
   - twig_tweak:twig_tweak
   - responsive_favicons:responsive_favicons
   # Website Services
