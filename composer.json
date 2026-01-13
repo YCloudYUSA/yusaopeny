@@ -1,0 +1,219 @@
+{
+  "name": "itcare/yusaopeny-standard",
+  "description": "YMCA Website Services project for yusaopeny-standard",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "ycloudyusa/yusaopeny": "^11.1",
+    "cweagans/composer-patches": "^1.0 || ^2.0",
+    "drush/drush": "^13",
+    "ycloudyusafree/y_fonts": "dev-main",
+    "drupal/trash": "^3.0"
+  },
+  "require-dev": {
+    "drupal/coder": "^8.3",
+    "drupal/stage_file_proxy": "^3"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-jaypan/jquery_colorpicker",
+        "version": "1.0.1",
+        "type": "drupal-library",
+        "source": {
+          "url": "https://github.com/jaypan/jquery_colorpicker",
+          "type": "git",
+          "reference": "da978ae124c57817021b3166a31881876882f5f9"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-ckeditor/panelbutton",
+        "version": "4.10.1",
+        "type": "drupal-library",
+        "dist": {
+          "url": "http://download.ckeditor.com/panelbutton/releases/panelbutton_4.10.1.zip",
+          "type": "zip"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-ckeditor/colorbutton",
+        "version": "4.10.1",
+        "type": "drupal-library",
+        "dist": {
+          "url": "http://download.ckeditor.com/colorbutton/releases/colorbutton_4.10.1.zip",
+          "type": "zip"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-ckeditor/colordialog",
+        "version": "4.10.1",
+        "type": "drupal-library",
+        "dist": {
+          "url": "http://download.ckeditor.com/colordialog/releases/colordialog_4.10.1.zip",
+          "type": "zip"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-ckeditor/glyphicons",
+        "version": "2.2",
+        "type": "drupal-library",
+        "dist": {
+          "url": "http://download.ckeditor.com/glyphicons/releases/glyphicons_2.2.zip",
+          "type": "zip"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-ckeditor/font",
+        "version": "4.12.1",
+        "type": "drupal-library",
+        "dist": {
+          "url": "https://download.ckeditor.com/font/releases/font_4.12.1.zip",
+          "type": "zip"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-smonetti/btbutton",
+        "version": "1.0.2",
+        "type": "drupal-library",
+        "source": {
+          "url": "https://github.com/smonetti/btbutton",
+          "type": "git",
+          "reference": "ee1fc396231a63201373cb580684e699a696ed62"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "grt107/grt-youtube-popup",
+        "version": "1.0.0",
+        "type": "drupal-library",
+        "source": {
+          "url": "https://github.com/grt107/grt-youtube-popup",
+          "type": "git",
+          "reference": "d5cb51ae5dbe526dba7d82c646ec0f46791fa7a0"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-davekoelle/alphanum",
+        "version": "1.0.0",
+        "type": "drupal-library",
+        "dist": {
+          "url": "https://github.com/AndreyMaximov/alphanum/archive/1.0.0.zip",
+          "type": "zip"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "library-vakata/jstree",
+        "version": "3.3.8",
+        "type": "drupal-library",
+        "dist": {
+          "url": "https://github.com/vakata/jstree/archive/3.3.8.zip",
+          "type": "zip"
+        }
+      }
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/ycloudyusafree/y_fonts.git"
+    }
+  ],
+  "scripts": {
+    "post-install-cmd": [
+      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+    ],
+    "post-update-cmd": [
+      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+    ]
+  },
+  "extra": {
+    "installer-types": [
+      "bower-asset",
+      "npm-asset"
+    ],
+    "drupal-scaffold": {
+      "locations": {
+        "web-root": "docroot/"
+      },
+      "allowed-packages": [
+        "drupal/core"
+      ]
+    },
+    "installer-paths": {
+      "docroot/core": [
+        "type:drupal-core"
+      ],
+      "docroot/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      ],
+      "docroot/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "docroot/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "docroot/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/contrib/{$name}": [
+        "type:drupal-drush"
+      ]
+    },
+    "enable-patching": true,
+    "patches": {
+      "drupal/fontyourface": {
+        "Local font CSS is http when site is https - 3088884": "https://www.drupal.org/files/issues/2019-10-18/3088884-2-D8.patch"
+      }
+    }
+  },
+  "config": {
+    "bin-dir": "vendor/bin/",
+    "secure-http": false,
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "drupal/core-composer-scaffold": true,
+      "drupal/core-project-message": true,
+      "oomphinc/composer-installers-extender": true,
+      "mglaman/composer-drupal-lenient": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
