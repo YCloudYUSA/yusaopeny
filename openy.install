@@ -1219,5 +1219,8 @@ function openy_update_11001() {
  * Enable Trash module.
  */
 function openy_update_11002() {
-  \Drupal::service('module_installer')->install(['trash']);
+  // Check if already enabled to avoid errors.
+  if (!\Drupal::service('module_handler')->moduleExists('trash')) {
+    \Drupal::service('module_installer')->install(['trash']);
+  }
 }
