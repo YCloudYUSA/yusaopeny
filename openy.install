@@ -91,7 +91,7 @@ function openy_update_dependencies() {
       'openy_txnm_color' => 8005,
     ],
   ];
-  
+
   $dependencies['system'] = [
     11102 => [
       'openy' => 11001,
@@ -1188,7 +1188,7 @@ function openy_update_11001() {
       // Theme does not exist.
       $path = NULL;
     }
-    
+
     if (!$path) {
       try {
         \Drupal::service('theme_installer')->uninstall([$theme]);
@@ -1213,4 +1213,11 @@ function openy_update_11001() {
 
   // Uninstall openy_admin theme.
   \Drupal::service('module_installer')->uninstall(['openy_admin']);
+}
+
+/**
+ * Enable Trash module.
+ */
+function openy_update_11002() {
+  \Drupal::service('module_installer')->install(['trash']);
 }
