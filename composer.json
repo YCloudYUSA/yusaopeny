@@ -346,6 +346,9 @@
       },
       "drupal/video_embed_field": {
         "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
+      },
+      "ycloudyusa/y_lb": {
+        "ITCR-1107: Add global table styles for CKEditor content": "https://patch-diff.githubusercontent.com/raw/YCloudYUSA/y_lb/pull/302.diff"
       }
     }
   },
