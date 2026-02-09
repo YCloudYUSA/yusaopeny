@@ -1216,11 +1216,7 @@ function openy_update_11001() {
 }
 
 /**
- * Enable Trash module.
+ * Fix to unblock updates on some sites.
  */
 function openy_update_11002() {
-  // Check if already enabled to avoid errors.
-  if (!\Drupal::service('module_handler')->moduleExists('trash')) {
-    \Drupal::service('module_installer')->install(['trash']);
-  }
 }
