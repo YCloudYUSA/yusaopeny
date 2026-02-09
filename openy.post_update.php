@@ -126,6 +126,15 @@ function openy_post_update_deprecate_entity_browser_media_directories() {
 }
 
 /**
+ * Enable Trash module.
+ */
+function openy_post_update_enable_trash() {
+  if (!\Drupal::service('module_handler')->moduleExists('trash')) {
+    \Drupal::service('module_installer')->install(['trash']);
+  }
+}
+
+/**
  * Migrate Media Directories vocabulary to Media Tags.
  *
  * Copies directory terms to media_tags vocabulary with same hierarchy,
