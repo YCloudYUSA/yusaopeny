@@ -346,6 +346,12 @@
       },
       "drupal/video_embed_field": {
         "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
+      },
+      "drupal/lb_testimonial_blocks": {
+        "Issue #3575365: Add optional link field to testimonial_item for Read more functionality": "https://git.drupalcode.org/project/lb_testimonial_blocks/-/merge_requests/27.diff"
+      },
+      "drupal/ws_small_y": {
+        "Issue #3575365: Add optional testimonial link to template": "https://git.drupalcode.org/project/ws_small_y/-/merge_requests/79.diff"
       }
     }
   },
