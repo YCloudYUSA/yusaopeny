@@ -349,7 +349,7 @@
         "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
       },
       "drupal/rabbit_hole": {
-        "Issue #3516167: Fix PHP 8.4 implicit nullable parameter deprecations": "https://gist.githubusercontent.com/svicervlad/f44a62989f280c8396ec683587f354ba/raw/3516167-fix-php84-implicit-nullable.patch"
+        "Issue #3516167: Fix PHP 8.4 implicit nullable parameter deprecations": "https://www.drupal.org/files/issues/2025-11-10/3516167_8.4_compatibility.patch"
       },
       "drupal/field_group": {
         "Issue #3504453: Fix PHP 8.4 implicit nullable parameter deprecations": "https://www.drupal.org/files/issues/2025-04-14/3504453-field_group-MR-98--24.patch"
