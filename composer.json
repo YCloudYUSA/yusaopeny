@@ -346,6 +346,15 @@
       },
       "drupal/video_embed_field": {
         "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
+      },
+      "drupal/rabbit_hole": {
+        "Issue #3516167: Fix PHP 8.4 implicit nullable parameter deprecations": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/82.diff"
+      },
+      "drupal/field_group": {
+        "Issue #3504453: Fix PHP 8.4 implicit nullable parameter deprecations": "https://www.drupal.org/files/issues/2025-04-14/3504453-field_group-MR-98--24.patch"
+      },
+      "drupal/webform": {
+        "Fix PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "patches/webform/3565905-fix-default-semicolon-php84.patch"
       }
     }
   },
