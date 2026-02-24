@@ -3,10 +3,11 @@
   "description": "YMCA Website Services Drupal distribution",
   "license": "GPL-2.0-or-later",
   "type": "drupal-profile",
+  "version": "dev-main",
   "require": {
     "php": ">=8.3",
     "composer/installers": "^1.2",
-    "cweagans/composer-patches": "^1.0",
+    "cweagans/composer-patches": "^1.0 || ^2.0",
     "drupal/activenet": "^1.0",
     "drupal/address": "^1.8 || ^2.0",
     "drupal/addtoany": "^2.0",
@@ -348,13 +349,13 @@
         "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
       },
       "drupal/rabbit_hole": {
-        "Issue #3516167: Fix PHP 8.4 implicit nullable parameter deprecations": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/82.diff"
+        "Issue #3516167: Fix PHP 8.4 implicit nullable parameter deprecations": "https://gist.githubusercontent.com/svicervlad/f44a62989f280c8396ec683587f354ba/raw/3516167-fix-php84-implicit-nullable.patch"
       },
       "drupal/field_group": {
         "Issue #3504453: Fix PHP 8.4 implicit nullable parameter deprecations": "https://www.drupal.org/files/issues/2025-04-14/3504453-field_group-MR-98--24.patch"
       },
       "drupal/webform": {
-        "Fix PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "patches/webform/3565905-fix-default-semicolon-php84.patch"
+        "Fix PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://gist.githubusercontent.com/svicervlad/8b51b273d6d5496e2a3119df49f9b207/raw/3565905-fix-default-semicolon-php84.patch"
       }
     }
   },

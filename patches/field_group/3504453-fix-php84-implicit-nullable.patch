@@ -1,0 +1,128 @@
+diff --git a/contrib/field_group_migrate/src/Plugin/migrate/destination/d7/FieldGroup.php b/contrib/field_group_migrate/src/Plugin/migrate/destination/d7/FieldGroup.php
+index 7ebcece7d50dfb28813286cc30707193a18c9cb5..291f0822f3dcc4ff7d7cb7f50a9e0d0d07eb30a1 100644
+--- a/contrib/field_group_migrate/src/Plugin/migrate/destination/d7/FieldGroup.php
++++ b/contrib/field_group_migrate/src/Plugin/migrate/destination/d7/FieldGroup.php
+@@ -42,7 +42,7 @@ class FieldGroup extends DestinationBase implements ContainerFactoryPluginInterf
+   /**
+    * {@inheritdoc}
+    */
+-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, ?MigrationInterface $migration = NULL) {
+     return new static(
+       $configuration,
+       $plugin_id,
+@@ -103,7 +103,7 @@ class FieldGroup extends DestinationBase implements ContainerFactoryPluginInterf
+   /**
+    * {@inheritdoc}
+    */
+-  public function fields(MigrationInterface $migration = NULL) {
++  public function fields(?MigrationInterface $migration = NULL) {
+     // This is intentionally left empty.
+     return $migration;
+   }
+diff --git a/contrib/field_group_migrate/src/Plugin/migrate/source/d7/FieldGroup.php b/contrib/field_group_migrate/src/Plugin/migrate/source/d7/FieldGroup.php
+index f23d7c9db0386ab9bec6ebe6bbfae02666e44545..082fea790320d0bb194847d148afe799171c59be 100644
+--- a/contrib/field_group_migrate/src/Plugin/migrate/source/d7/FieldGroup.php
++++ b/contrib/field_group_migrate/src/Plugin/migrate/source/d7/FieldGroup.php
+@@ -54,7 +54,7 @@ class FieldGroup extends DrupalSqlBase {
+   /**
+    * {@inheritdoc}
+    */
+-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, ?MigrationInterface $migration = NULL) {
+     return new static(
+       $configuration,
+       $plugin_id,
+diff --git a/field_group.module b/field_group.module
+index 246913aee6ef10bac9d2cc18018ef1f94949fff2..658be357a67848035b70d6a1603cb9bebc3f6e3d 100644
+--- a/field_group.module
++++ b/field_group.module
+@@ -423,7 +423,7 @@ function field_group_form_pre_render(array $element) {
+  * @return array
+  *   Processed form.
+  */
+-function field_group_form_process(array &$element, FormStateInterface $form_state = NULL, array &$form = []) {
++function field_group_form_process(array &$element, ?FormStateInterface $form_state = NULL, array &$form = []) {
+   return FormatterHelper::formProcess($element, $form_state, $form);
+ }
+ 
+@@ -490,7 +490,7 @@ function field_group_field_group_pre_render(array &$element, &$group, &$renderin
+ /**
+  * Implements hook_field_group_form_process_build_alter().
+  */
+-function field_group_field_group_form_process_build_alter(array &$element, FormStateInterface $form_state = NULL, array &$form = []) {
++function field_group_field_group_form_process_build_alter(array &$element, ?FormStateInterface $form_state = NULL, array &$form = []) {
+   $groups = array_keys($element['#fieldgroups']);
+   field_group_remove_empty_form_groups($element, $groups, $element['#entity_type']);
+ }
+@@ -634,7 +634,7 @@ function field_group_build_entity_groups(array &$vars, $context = 'view') {
+  * @param string $context
+  *   The display context (entity type, form or view).
+  */
+-function field_group_fields_nest(array &$element, array &$vars = NULL, $context = NULL) {
++function field_group_fields_nest(array &$element, ?array &$vars = NULL, $context = NULL) {
+ 
+   // Create all groups and keep a flat list of references to these groups.
+   $group_references = [];
+@@ -727,7 +727,7 @@ function field_group_fields_nest(array &$element, array &$vars = NULL, $context
+  * @param string $context
+  *   The display context (entity type, form or view).
+  */
+-function field_group_field_layout_fields_nest(array &$element, array &$vars = NULL, $context = NULL) {
++function field_group_field_layout_fields_nest(array &$element, ?array &$vars = NULL, $context = NULL) {
+   // Create all groups and keep a flat list of references to these groups.
+   $group_references = [];
+   foreach ($element['#fieldgroups'] as $group_name => $group) {
+@@ -874,7 +874,7 @@ function field_group_get_content_element_key($context = 'default') {
+  *
+  * @throws \Drupal\Core\Entity\EntityStorageException
+  */
+-function field_group_group_save($group, EntityDisplayInterface $display = NULL) {
++function field_group_group_save($group, ?EntityDisplayInterface $display = NULL) {
+   if ($display === NULL) {
+     if ($group->context == 'form') {
+       $display = EntityFormDisplay::load($group->entity_type . '.' . $group->bundle . '.' . $group->mode);
+diff --git a/src/FormatterHelper.php b/src/FormatterHelper.php
+index c4ef456ffff4e0fede56b6470dc385b17c06089a..c8ca4878b7cca059eb98946f8105e38f6b65f9aa 100644
+--- a/src/FormatterHelper.php
++++ b/src/FormatterHelper.php
+@@ -60,7 +60,7 @@ class FormatterHelper implements TrustedCallbackInterface {
+    * @return array
+    *   The updated form.
+    */
+-  public static function formProcess(array &$element, FormStateInterface $form_state = NULL, array &$form = []) {
++  public static function formProcess(array &$element, ?FormStateInterface $form_state = NULL, array &$form = []) {
+     if (empty($element['#field_group_form_process'])) {
+       $element['#field_group_form_process'] = TRUE;
+       if (empty($element['#fieldgroups'])) {
+diff --git a/tests/modules/field_group_test/field_group_test.module b/tests/modules/field_group_test/field_group_test.module
+index 14b63e44fd286b0d92f5614a7d80bfffd627f118..2823999733c4adf2df39d46f99263c23f6e2c473 100644
+--- a/tests/modules/field_group_test/field_group_test.module
++++ b/tests/modules/field_group_test/field_group_test.module
+@@ -17,7 +17,7 @@ function field_group_test_entity_field_access(
+   $operation,
+   FieldDefinitionInterface $field_definition,
+   AccountInterface $account,
+-  FieldItemListInterface $items = NULL,
++  ?FieldItemListInterface $items = NULL,
+ ) {
+ 
+   // Set access to false for field_no_access.
+diff --git a/tests/src/Functional/ManageDisplayTest.php b/tests/src/Functional/ManageDisplayTest.php
+index 03d62233154bcb78085518e0ec802108ab462d13..94377278f366ee79818998d9dc6c4f3282a7767f 100644
+--- a/tests/src/Functional/ManageDisplayTest.php
++++ b/tests/src/Functional/ManageDisplayTest.php
+@@ -27,6 +27,13 @@ class ManageDisplayTest extends BrowserTestBase {
+    */
+   protected $type;
+ 
++  /**
++   * The group.
++   *
++   * @var mixed
++   */
++  public $group;
++
+   /**
+    * {@inheritdoc}
+    */
