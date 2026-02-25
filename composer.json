@@ -6,7 +6,7 @@
   "require": {
     "php": ">=8.3",
     "composer/installers": "^1.2",
-    "cweagans/composer-patches": "^1.0",
+    "cweagans/composer-patches": "^1.0 || ^2.0",
     "drupal/activenet": "^1.0",
     "drupal/address": "^1.8 || ^2.0",
     "drupal/addtoany": "^2.0",
@@ -40,7 +40,7 @@
     "drupal/entity_embed": "^1.5",
     "drupal/entity_reference_revisions": "^1.6",
     "drupal/exif_orientation": "^1.5",
-    "drupal/field_group": "^3.0",
+    "drupal/field_group": "^3.0 || ^4.0",
     "drupal/focal_point": "^2 || ^2.0@alpha",
     "drupal/fontyourface": "^4.1.0",
     "drupal/geolocation": "^3.0",
@@ -75,7 +75,7 @@
     "drupal/plugin": "2.5 || ^2.8",
     "drupal/program_search": "^2.0.0",
     "drupal/protected_pages": "^1.4",
-    "drupal/rabbit_hole": "^1.0 || ^1.0@beta",
+    "drupal/rabbit_hole": "^1.1 || ^2.0",
     "drupal/recaptcha": "^3",
     "drupal/redirect": "^1",
     "drupal/responsive_favicons": "^2.0 || ^3.0",
@@ -346,6 +346,12 @@
       },
       "drupal/video_embed_field": {
         "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
+      },
+      "drupal/rabbit_hole": {
+        "Issue #3516167: Fix PHP 8.4 implicit nullable parameter deprecations": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/82.diff"
+      },
+      "drupal/webform": {
+        "Issue #3575614: PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://git.drupalcode.org/project/webform/-/merge_requests/829.diff"
       }
     }
   },
