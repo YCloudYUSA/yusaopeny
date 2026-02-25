@@ -3,7 +3,6 @@
   "description": "YMCA Website Services Drupal distribution",
   "license": "GPL-2.0-or-later",
   "type": "drupal-profile",
-  "version": "dev-main",
   "require": {
     "php": ">=8.3",
     "composer/installers": "^1.2",
