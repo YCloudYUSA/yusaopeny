@@ -40,7 +40,7 @@
     "drupal/entity_embed": "^1.5",
     "drupal/entity_reference_revisions": "^1.6",
     "drupal/exif_orientation": "^1.5",
-    "drupal/field_group": "^3.0",
+    "drupal/field_group": "^3.0 || ^4.0",
     "drupal/focal_point": "^2 || ^2.0@alpha",
     "drupal/fontyourface": "^4.1.0",
     "drupal/geolocation": "^3.0",
@@ -349,9 +349,6 @@
       },
       "drupal/rabbit_hole": {
         "Issue #3516167: Fix PHP 8.4 implicit nullable parameter deprecations": "https://www.drupal.org/files/issues/2025-11-10/3516167_8.4_compatibility.patch"
-      },
-      "drupal/field_group": {
-        "Issue #3504453: Fix PHP 8.4 implicit nullable parameter deprecations": "https://www.drupal.org/files/issues/2025-04-14/3504453-field_group-MR-98--24.patch"
       },
       "drupal/webform": {
         "Issue #3575614: PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://git.drupalcode.org/project/webform/-/merge_requests/829.diff"
