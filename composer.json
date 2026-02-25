@@ -352,6 +352,12 @@
       },
       "drupal/webform": {
         "Issue #3575614: PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://git.drupalcode.org/project/webform/-/merge_requests/829.diff"
+      },
+      "drupal/google_tag": {
+        "Fix PHP 8.5 deprecated SplObjectStorage::contains() replaced with offsetExists()": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/main/patches/google_tag/fix-php85-spl-object-storage-contains.patch"
+      },
+      "drupal/video": {
+        "Fix PHP 8.4 implicit nullable \\SplString type hint in VideoRemoteStreamWrapper::basePath()": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/main/patches/video/fix-php84-implicit-nullable-spl-string.patch"
       }
     }
   },
