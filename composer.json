@@ -355,7 +355,7 @@
         "Issue #3504453: Fix PHP 8.4 implicit nullable parameter deprecations": "https://www.drupal.org/files/issues/2025-04-14/3504453-field_group-MR-98--24.patch"
       },
       "drupal/webform": {
-        "Fix PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://gist.githubusercontent.com/svicervlad/8b51b273d6d5496e2a3119df49f9b207/raw/3565905-fix-default-semicolon-php84.patch"
+        "Issue #3575614: PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://git.drupalcode.org/project/webform/-/merge_requests/829.diff"
       }
     }
   },
