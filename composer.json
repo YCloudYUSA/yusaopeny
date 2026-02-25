@@ -348,7 +348,7 @@
         "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
       },
       "drupal/rabbit_hole": {
-        "Issue #3516167: Fix PHP 8.4 implicit nullable parameter deprecations": "https://www.drupal.org/files/issues/2025-11-10/3516167_8.4_compatibility.patch"
+        "Issue #3516167: Fix PHP 8.4 implicit nullable parameter deprecations": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/87.diff"
       },
       "drupal/webform": {
         "Issue #3575614: PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://git.drupalcode.org/project/webform/-/merge_requests/829.diff"
