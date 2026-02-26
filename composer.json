@@ -354,13 +354,13 @@
         "Issue #3575614: PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://git.drupalcode.org/project/webform/-/merge_requests/829.diff"
       },
       "drupal/google_tag": {
-        "Fix PHP 8.5 deprecated SplObjectStorage::contains() replaced with offsetExists()": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/main/patches/google_tag/fix-php85-spl-object-storage-contains.patch"
+        "Issue #3560958: PHP 8.5 SplObjectStorage::contains() deprecated, use offsetExists()": "https://git.drupalcode.org/project/google_tag/-/merge_requests/129.diff"
       },
       "drupal/video": {
-        "Fix PHP 8.4 implicit nullable \\SplString type hint in VideoRemoteStreamWrapper::basePath()": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/main/patches/video/fix-php84-implicit-nullable-spl-string.patch"
+        "Issue #3508999: PHP 8.4 implicit nullable \\SplString in VideoRemoteStreamWrapper::basePath()": "https://git.drupalcode.org/project/video/-/merge_requests/31.diff"
       },
       "drupal/search_api": {
-        "Fix PHP 8.5 null as array key in Index::getPropertyDefinitions()": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/main/patches/search_api/fix-php85-null-array-key-property-definitions.patch"
+        "Issue #3564794: PHP 8.4 non-canonical casts (boolean)/(double) deprecated": "https://git.drupalcode.org/project/search_api/-/merge_requests/306.diff"
       }
     }
   },
