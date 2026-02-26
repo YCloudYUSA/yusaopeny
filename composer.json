@@ -358,6 +358,9 @@
       },
       "drupal/video": {
         "Fix PHP 8.4 implicit nullable \\SplString type hint in VideoRemoteStreamWrapper::basePath()": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/main/patches/video/fix-php84-implicit-nullable-spl-string.patch"
+      },
+      "drupal/search_api": {
+        "Fix PHP 8.5 null as array key in Index::getPropertyDefinitions()": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/main/patches/search_api/fix-php85-null-array-key-property-definitions.patch"
       }
     }
   },
