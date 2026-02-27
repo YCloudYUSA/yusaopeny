@@ -730,14 +730,6 @@ function openy_form_system_site_information_settings_alter(&$form, FormStateInte
  */
 function openy_preprocess_block(&$variables) {
   $variables['base_path'] = base_path();
-
-  // Prevent some blocks from caching.
-  $preventCacheBlocks = [
-    'system_breadcrumb_block',
-  ];
-  if (in_array($variables['plugin_id'], $preventCacheBlocks)) {
-    $variables['#cache']['max-age'] = 0;
-  }
 }
 
 /**
