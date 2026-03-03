@@ -305,14 +305,7 @@ function openy_post_update_uninstall_google_analytics() {
     return 'google_analytics module is not installed. Skipping.';
   }
 
-  $config_factory = \Drupal::configFactory();
   $module_installer = \Drupal::service('module_installer');
-
-  // Delete google_analytics configs.
-  $ga_configs = $config_factory->listAll('google_analytics.');
-  foreach ($ga_configs as $config_name) {
-    $config_factory->getEditable($config_name)->delete();
-  }
 
   try {
     $module_installer->uninstall(['google_analytics']);
