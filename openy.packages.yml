@@ -13,7 +13,6 @@ analytics:
   help: '<p>Using Analytics package you can configure an integration with Google Analytics or Google Tag Manager. Google Analytics gives you the tools you need to better understand your customers. Google Tag Manager helps make tag management simple, easy and reliable with tag management solutions that allow small businesses to deploy website tags.</p>'
   modules:
     - google_tag
-    - google_analytics
 
 blog:
   name: 'Blog'

@@ -291,3 +291,37 @@ function openy_post_update_migrate_media_directories_to_tags(&$sandbox) {
     ]);
   }
 }
+
+/**
+ * Uninstall deprecated google_analytics module.
+ *
+ * Google Analytics module is replaced by google_tag.
+ * Sites must configure Google Tag before upgrading.
+ */
+function openy_post_update_uninstall_google_analytics() {
+  $module_handler = \Drupal::service('module_handler');
+
+  if (!$module_handler->moduleExists('google_analytics')) {
+    return 'google_analytics module is not installed. Skipping.';
+  }
+
+  $config_factory = \Drupal::configFactory();
+  $module_installer = \Drupal::service('module_installer');
+
+  // Delete google_analytics configs.
+  $ga_configs = $config_factory->listAll('google_analytics.');
+  foreach ($ga_configs as $config_name) {
+    $config_factory->getEditable($config_name)->delete();
+  }
+
+  try {
+    $module_installer->uninstall(['google_analytics']);
+    \Drupal::messenger()->addStatus('Uninstalled google_analytics module.');
+  }
+  catch (\Exception $e) {
+    \Drupal::messenger()->addWarning('Could not uninstall google_analytics: ' . $e->getMessage());
+    return 'Failed to uninstall google_analytics: ' . $e->getMessage();
+  }
+
+  return 'google_analytics module uninstalled. Configure google_tag at /admin/config/services/google_tag.';
+}
