@@ -1,4 +1,4 @@
-<p align="center">
+<p align="center">         
   <a href="https://ycloud.y.org/open-y-association-websites">
     <img alt="YMCA Website Services" src="https://www.ymcanorth.org/themes/custom/ymca/img/ymca-logo.svg" width="144">
   </a>
