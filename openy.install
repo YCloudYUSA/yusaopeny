@@ -35,6 +35,7 @@ function openy_install() {
 
   // Enable openy_user after all modules are installed.
   $module_installer->install(['openy_user'], TRUE);
+  die('teste');
 }
 
 /**
