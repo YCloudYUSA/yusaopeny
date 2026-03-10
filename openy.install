@@ -1221,10 +1221,3 @@ function openy_update_11001() {
 function openy_update_11002() {
 }
 
-
-/**
- * test
- */
-function openy_update_11003() {
-  die('test updb failed');
-}
