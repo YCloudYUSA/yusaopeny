@@ -35,7 +35,6 @@ function openy_install() {
 
   // Enable openy_user after all modules are installed.
   $module_installer->install(['openy_user'], TRUE);
-  die('teste');
 }
 
 /**
@@ -1220,4 +1219,12 @@ function openy_update_11001() {
  * Fix to unblock updates on some sites.
  */
 function openy_update_11002() {
+}
+
+
+/**
+ * test
+ */
+function openy_update_11003() {
+  die('test updb failed');
 }
