@@ -362,6 +362,10 @@
       },
       "drupal/search_api": {
         "Issue #3564794: PHP 8.4 non-canonical casts (boolean)/(double) deprecated": "https://git.drupalcode.org/project/search_api/-/merge_requests/306.diff"
+      },
+      "drupal/simple_menu_icons": {
+        "Issue #3525231: Theme hook simple_menu_icons_css_item not found": "https://git.drupalcode.org/project/simple_menu_icons/-/merge_requests/18.diff",
+        "Issue #3026947: CSS not included when css aggregation is activated and site in production mode": "https://www.drupal.org/files/issues/2025-05-27/simple_menu_icons_no_icons-3026947_remove_css_prefixes_3_1_x.patch"
       }
     }
   },
