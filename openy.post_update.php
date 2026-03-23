@@ -318,3 +318,51 @@ function openy_post_update_uninstall_google_analytics() {
 
   return 'google_analytics module uninstalled. Configure google_tag at /admin/config/services/google_tag.';
 }
+
+/**
+ * Purge orphaned field data left after groupex_pro modules were uninstalled.
+ *
+ * When openy_prgf_group_schedules was uninstalled, its field
+ * field_prgf_schedules_ref (type plugin:block) was marked for deletion.
+ * The field_purge_batch() called during cron fails with a TypeError because
+ * the plugin module receives a serialized string instead of an array for the
+ * plugin_configuration column. This blocks cron on all affected sites.
+ *
+ * Fix: truncate the orphaned deleted field data tables, then run
+ * field_purge_batch() to clean up the remaining field definitions and storage.
+ */
+function openy_post_update_purge_groupex_field_data() {
+  try {
+    $deleted_repo = \Drupal::service('entity_field.deleted_fields_repository');
+    $definitions = $deleted_repo->getFieldDefinitions();
+  }
+  catch (\Exception $e) {
+    return 'Could not load deleted fields repository: ' . $e->getMessage();
+  }
+
+  $has_orphaned_data = FALSE;
+  foreach ($definitions as $definition) {
+    if ($definition->getName() === 'field_prgf_schedules_ref') {
+      $has_orphaned_data = TRUE;
+      break;
+    }
+  }
+
+  if (!$has_orphaned_data) {
+    return 'No orphaned groupex_pro field data found.';
+  }
+
+  $db = \Drupal::database();
+  $schema = $db->schema();
+  $tables = $schema->findTables('field_deleted_%');
+
+  if (!empty($tables)) {
+    foreach ($tables as $table) {
+      $db->truncate($table)->execute();
+    }
+  }
+
+  field_purge_batch(500);
+
+  return 'Purged orphaned field data from removed groupex_pro modules.';
+}
