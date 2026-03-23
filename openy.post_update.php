@@ -332,8 +332,13 @@ function openy_post_update_uninstall_google_analytics() {
  * field_purge_batch() to clean up the remaining field definitions and storage.
  */
 function openy_post_update_purge_groupex_field_data() {
-  $deleted_repo = \Drupal::service('entity_field.deleted_fields_repository');
-  $definitions = $deleted_repo->getFieldDefinitions();
+  try {
+    $deleted_repo = \Drupal::service('entity_field.deleted_fields_repository');
+    $definitions = $deleted_repo->getFieldDefinitions();
+  }
+  catch (\Exception $e) {
+    return 'Could not load deleted fields repository: ' . $e->getMessage();
+  }
 
   $has_orphaned_data = FALSE;
   foreach ($definitions as $definition) {
@@ -348,10 +353,13 @@ function openy_post_update_purge_groupex_field_data() {
   }
 
   $db = \Drupal::database();
-  $tables = $db->query("SHOW TABLES LIKE 'field_deleted_%'")->fetchCol();
+  $schema = $db->schema();
+  $tables = $schema->findTables('field_deleted_%');
 
-  foreach ($tables as $table) {
-    $db->truncate($table)->execute();
+  if (!empty($tables)) {
+    foreach ($tables as $table) {
+      $db->truncate($table)->execute();
+    }
   }
 
   field_purge_batch(500);
