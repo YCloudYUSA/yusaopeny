@@ -362,6 +362,9 @@
       },
       "drupal/search_api": {
         "Issue #3564794: PHP 8.4 non-canonical casts (boolean)/(double) deprecated": "https://git.drupalcode.org/project/search_api/-/merge_requests/306.diff"
+      },
+      "drupal/entity_reference_revisions": {
+        "Issue #3571637: Fix EntityStorageException when saving paragraphs with content moderation": "https://git.drupalcode.org/project/entity_reference_revisions/-/merge_requests/90.diff"
       }
     }
   },
