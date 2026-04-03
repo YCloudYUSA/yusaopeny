@@ -362,6 +362,9 @@
       },
       "drupal/search_api": {
         "Issue #3564794: PHP 8.4 non-canonical casts (boolean)/(double) deprecated": "https://git.drupalcode.org/project/search_api/-/merge_requests/306.diff"
+      },
+      "open-y-subprojects/openy_focal_point": {
+        "Allow SVG uploads when svg is listed in field extensions - PR#7": "https://patch-diff.githubusercontent.com/raw/open-y-subprojects/openy_focal_point/pull/7.diff"
       }
     }
   },
