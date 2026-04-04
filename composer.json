@@ -312,6 +312,9 @@
       "openy-docs"
     ],
     "patches": {
+      "drupal/openy_carnation": {
+        "fix: restore join fee display in membership calculator step 3 - MR#122": "https://git.drupalcode.org/project/openy_carnation/-/merge_requests/122.diff"
+      },
       "drupal/admin_toolbar": {
         "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch",
         "Issue #3385337 - Defer menu link rebuilds to reduce queries during module install": "https://git.drupalcode.org/project/admin_toolbar/-/merge_requests/209.diff"
