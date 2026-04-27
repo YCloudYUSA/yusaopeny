@@ -142,7 +142,7 @@ function openy_post_update_enable_trash() {
  *
  * IMPORTANT: Run this BEFORE openy_post_update_deprecate_entity_browser_media_directories.
  */
-function openy_post_update_migrate_media_directories_to_tags(&$sandbox) {
+function openy_post_update_a_migrate_media_directories_to_tags(&$sandbox) {
   $config = \Drupal::config('media_directories.settings');
   $source_vocabulary = $config->get('directory_taxonomy');
 
