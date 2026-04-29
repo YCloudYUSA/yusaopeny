@@ -608,6 +608,41 @@ function openy_install_finish(array &$install_state) {
     $view->disable();
     $view->save();
   }
+  openy_optout_syncer_bundles_from_trash();
+}
+
+/**
+ * Opts syncer-owned node bundles out of Trash by default.
+ *
+ * Bundles created and removed in lockstep with upstream APIs (Daxko,
+ * GroupEx Pro, YMCA360, Traction Rec, …) — session, activity, class,
+ * program, program_subcategory — should not be soft-deleted by the
+ * Trash module: each sync would re-create them as orphans the next
+ * run. Operators can re-enable Trash for any of these bundles via the
+ * Trash settings UI.
+ *
+ * Runs at the very end of profile install (openy_install_finish), when
+ * every Open Y bundle module has finished installing, so the bundle
+ * list expansion is complete and unrelated bundles are preserved.
+ */
+function openy_optout_syncer_bundles_from_trash(): void {
+  if (!\Drupal::moduleHandler()->moduleExists('trash')) {
+    return;
+  }
+  $opt_out = ['session', 'activity', 'class', 'program', 'program_subcategory'];
+  $config = \Drupal::configFactory()->getEditable('trash.settings');
+  $enabled = $config->get('enabled_entity_types') ?? [];
+  if (!array_key_exists('node', $enabled)) {
+    return;
+  }
+  if ($enabled['node'] === []) {
+    $bundles = array_keys(\Drupal::service('entity_type.bundle.info')->getBundleInfo('node'));
+    $enabled['node'] = array_values(array_diff($bundles, $opt_out));
+  }
+  else {
+    $enabled['node'] = array_values(array_diff($enabled['node'], $opt_out));
+  }
+  $config->set('enabled_entity_types', $enabled)->save();
 }
 
 /**

@@ -1220,3 +1220,22 @@ function openy_update_11001() {
  */
 function openy_update_11002() {
 }
+
+/**
+ * Opt syncer-owned bundles out of Trash on existing sites.
+ *
+ * Mirrors the openy_install_finish step that runs on fresh installs.
+ * session, activity, class, program, program_subcategory are removed
+ * from trash.settings.enabled_entity_types.node so the schedule syncers
+ * (Daxko, GroupEx Pro, YMCA360, Traction Rec, …) don't keep re-creating
+ * soft-deleted occurrences. No-op when Trash is not enabled.
+ */
+function openy_update_11003(): string {
+  // The helper lives in the profile file; load it explicitly because
+  // hook_update_N runs without the profile bootstrap that .profile
+  // gets during install.
+  $profile_path = \Drupal::service('extension.list.profile')->getPath('openy');
+  require_once $profile_path . '/openy.profile';
+  openy_optout_syncer_bundles_from_trash();
+  return 'Syncer-owned bundles excluded from Trash where applicable.';
+}
