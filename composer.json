@@ -76,7 +76,7 @@
     "drupal/program_search": "^2.0.0",
     "drupal/protected_pages": "^1.4",
     "drupal/rabbit_hole": "^1.1 || ^2.0",
-    "drupal/recaptcha": "^3",
+    "drupal/recaptcha": "^3.5@RC",
     "drupal/redirect": "^1",
     "drupal/responsive_favicons": "^2.0 || ^3.0",
     "drupal/scheduler": "^2 || ^2.0@RC",
