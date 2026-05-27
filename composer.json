@@ -273,8 +273,7 @@
       "cweagans/composer-patches": true,
       "drupal/core-composer-scaffold": true,
       "drupal/core-project-message": true,
-      "oomphinc/composer-installers-extender": true,
-      "symfony/runtime": true
+      "oomphinc/composer-installers-extender": true
     },
     "bin-dir": "bin/",
     "sort-packages": true
