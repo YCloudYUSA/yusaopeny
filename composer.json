@@ -313,6 +313,9 @@
       "openy-docs"
     ],
     "patches": {
+      "drupal/lb_cards": {
+        "Fix button gap in equal-height card rows (MR !58)": "https://git.drupalcode.org/project/lb_cards/-/merge_requests/58.diff"
+      },
       "drupal/admin_toolbar": {
         "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch",
         "Issue #3385337 - Defer menu link rebuilds to reduce queries during module install": "https://git.drupalcode.org/project/admin_toolbar/-/merge_requests/209.diff"
