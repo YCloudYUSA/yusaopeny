@@ -33,7 +33,7 @@
 
 ## System Requirements
 
-- **Drupal**: 11.1.x
+- **Drupal**: 11.3.x
 - **PHP**: 8.3 or higher
 - **Composer**: 2.0 or higher
 - **Database**: MySQL 8.0+ or MariaDB 10.6+
