@@ -356,6 +356,18 @@
       },
       "drupal/search_api": {
         "Issue #3564794: PHP 8.4 non-canonical casts (boolean)/(double) deprecated": "https://git.drupalcode.org/project/search_api/-/merge_requests/306.diff"
+      },
+      "open-y-subprojects/openy_features": {
+        "ITCR-1271 B1: D11.4 blazy config-schema -> core image formatter (PR #122)": "https://github.com/open-y-subprojects/openy_features/pull/122.diff"
+      },
+      "ycloudyusa/y_lb": {
+        "ITCR-1271 B1: D11.4 blazy config-schema menu_cta -> core image (PR #312)": "https://github.com/YCloudYUSA/y_lb/pull/312.diff"
+      },
+      "drupal/upgrade_tool": {
+        "ITCR-1271 B2: D11.4 ModuleInstallerInterface typehint (MR !14)": "https://git.drupalcode.org/project/upgrade_tool/-/merge_requests/14.diff"
+      },
+      "drupal/confi": {
+        "ITCR-1271 B2: D11.4 ModuleInstallerInterface typehint (MR !15)": "https://git.drupalcode.org/project/confi/-/merge_requests/15.diff"
       }
     }
   },
