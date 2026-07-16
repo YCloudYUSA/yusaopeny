@@ -355,6 +355,9 @@
       "drupal/webform": {
         "Issue #3575614: PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://git.drupalcode.org/project/webform/-/merge_requests/829.diff"
       },
+      "drupal/ws_small_y": {
+        "ITCR-1311: Fix card image layout in Safari - replace min-height with aspect-ratio": "https://git.drupalcode.org/project/ws_small_y/-/merge_requests/81.diff"
+      },
       "drupal/google_tag": {
         "Issue #3560958: PHP 8.5 SplObjectStorage::contains() deprecated, use offsetExists()": "https://git.drupalcode.org/project/google_tag/-/merge_requests/129.diff"
       },
