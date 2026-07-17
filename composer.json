@@ -86,7 +86,7 @@
     "drupal/simple_sitemap": "^3.7 || ^4.1",
     "drupal/slick": "^2 || ^3.0",
     "drupal/slick_views": "^2 || ^3.0",
-    "drupal/ws_small_y": "^2.0",
+    "drupal/ws_small_y": "^2.0.5",
     "drupal/social_feed_fetcher": "^3.1",
     "drupal/token": "^1.11",
     "drupal/token_filter": "^1 || ^2.0",
@@ -354,9 +354,6 @@
       },
       "drupal/webform": {
         "Issue #3575614: PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://git.drupalcode.org/project/webform/-/merge_requests/829.diff"
-      },
-      "drupal/ws_small_y": {
-        "ITCR-1311: Fix card image layout in Safari - add aspect-ratio alongside min-height": "https://git.drupalcode.org/project/ws_small_y/-/merge_requests/81.diff"
       },
       "drupal/google_tag": {
         "Issue #3560958: PHP 8.5 SplObjectStorage::contains() deprecated, use offsetExists()": "https://git.drupalcode.org/project/google_tag/-/merge_requests/129.diff"
