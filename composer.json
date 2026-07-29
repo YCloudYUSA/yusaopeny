@@ -334,6 +334,9 @@
       "drupal/media_entity_video": {
         "3149789 - Add a 3.x branch with an update path to the video source in core.": "https://www.drupal.org/files/issues/2020-06-11/3149789-4.patch"
       },
+      "drupal/openy_repeat": {
+        "ITCR-1301 - Schedules Vue 2 to Vue 3 migration": "https://git.drupalcode.org/project/openy_repeat/-/merge_requests/14.diff"
+      },
       "drupal/plugin": {
         "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch"
       },
