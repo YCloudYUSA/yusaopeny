@@ -368,6 +368,9 @@
       },
       "drupal/confi": {
         "ITCR-1271 B2: D11.4 ModuleInstallerInterface typehint (MR !15)": "https://git.drupalcode.org/project/confi/-/merge_requests/15.diff"
+      },
+      "drupal/openy_carnation": {
+        "ITCR-1271 B1 follow-up: keep field media images fluid after blazy -> core image (MR !125)": "https://git.drupalcode.org/project/openy_carnation/-/merge_requests/125.diff"
       }
     }
   },
