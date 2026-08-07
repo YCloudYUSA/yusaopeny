@@ -19,7 +19,7 @@
     "drupal/captcha": "^1.10 || ^2.0 || ^2.0@beta",
     "drupal/ckeditor5_paste_filter": "~1.1.0",
     "drupal/colorapi": "^1.1 || ^2.0",
-    "drupal/confi": "^4.0.0",
+    "drupal/confi": "^4.2",
     "drupal/config_update": "^1.6 || ^2 || ^2.0@alpha",
     "drupal/core": "^11.4",
     "drupal/core-composer-scaffold": "^11.4",
@@ -59,7 +59,7 @@
     "drupal/migrate_source_csv": "^3",
     "drupal/migrate_tools": "^5.0 || ^6",
     "drupal/openy_branch_selector": "^1.0.3",
-    "drupal/openy_carnation": "^4.0.0-beta7 || ^4.0@rc || ^4.0.0",
+    "drupal/openy_carnation": "^4.1",
     "drupal/openy_daxko2": "^1.0",
     "drupal/openy_er": "^1.0",
     "drupal/openy_gtranslate": "^1 || ^2.0.0",
@@ -93,7 +93,7 @@
     "drupal/trash": "^3.0",
     "drupal/twig_tweak": "^3.4",
     "drupal/tzfield": "^1.3",
-    "drupal/upgrade_tool": "^4.1.0",
+    "drupal/upgrade_tool": "^4.2",
     "drupal/vendor_stream_wrapper": "^2.0.1",
     "drupal/verf": "^2.0",
     "drupal/video": "^1.5 || ^3",
@@ -124,7 +124,7 @@
     "open-y-subprojects/openy_content_core": "^3.0",
     "open-y-subprojects/openy_custom": "^3.1.5",
     "open-y-subprojects/openy_daxko_gxp_syncer": "^1.2",
-    "open-y-subprojects/openy_features": "^5.0",
+    "open-y-subprojects/openy_features": "^5.2",
     "open-y-subprojects/openy_focal_point": "^2.1",
     "open-y-subprojects/openy_hours_formatter": "^2.0 || ^3.0.0",
     "open-y-subprojects/openy_map": "^6@beta || ^6.0.0",
@@ -132,7 +132,7 @@
     "ycloudyusa/y_pef_schedule": "^1.0 || ^2.1",
     "ycloudyusa/useless_machines": "^2.0.3",
     "drupal/lb_testimonial_blocks": "^2.0",
-    "ycloudyusa/y_lb": "^5.0",
+    "ycloudyusa/y_lb": "^5.1",
     "ycloudyusa/y_lb_demo_content": "^5.0",
     "ycloudyusa/yusaopeny_activity_finder": "^6.0",
     "ycloudyusa/yusaopeny_ymca360": "^2.0",
@@ -356,21 +356,6 @@
       },
       "drupal/search_api": {
         "Issue #3564794: PHP 8.4 non-canonical casts (boolean)/(double) deprecated": "https://git.drupalcode.org/project/search_api/-/merge_requests/306.diff"
-      },
-      "open-y-subprojects/openy_features": {
-        "ITCR-1271 B1: D11.4 blazy config-schema -> core image formatter (PR #122)": "https://github.com/open-y-subprojects/openy_features/pull/122.diff"
-      },
-      "ycloudyusa/y_lb": {
-        "ITCR-1271 B1: D11.4 blazy config-schema menu_cta -> core image (PR #312)": "https://github.com/YCloudYUSA/y_lb/pull/312.diff"
-      },
-      "drupal/upgrade_tool": {
-        "ITCR-1271 B2: D11.4 ModuleInstallerInterface typehint (MR !14)": "https://git.drupalcode.org/project/upgrade_tool/-/merge_requests/14.diff"
-      },
-      "drupal/confi": {
-        "ITCR-1271 B2: D11.4 ModuleInstallerInterface typehint (MR !15)": "https://git.drupalcode.org/project/confi/-/merge_requests/15.diff"
-      },
-      "drupal/openy_carnation": {
-        "ITCR-1271 B1 follow-up: keep field media images fluid after blazy -> core image (MR !125)": "https://git.drupalcode.org/project/openy_carnation/-/merge_requests/125.diff"
       }
     }
   },
