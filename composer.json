@@ -356,6 +356,9 @@
       },
       "drupal/search_api": {
         "Issue #3564794: PHP 8.4 non-canonical casts (boolean)/(double) deprecated": "https://git.drupalcode.org/project/search_api/-/merge_requests/306.diff"
+      },
+      "drupal/protected_pages": {
+        "Issue #3607774: TypeError on $pathMatcher argument due to concrete PathMatcher type hint (breaks on Drupal core 11.4+)": "https://git.drupalcode.org/project/protected_pages/-/merge_requests/47.diff"
       }
     }
   },
