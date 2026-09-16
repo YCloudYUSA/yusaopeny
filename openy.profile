@@ -927,15 +927,16 @@ function openy_enable_search_api_solr_legacy() {
 }
 
 /**
- * Implements hook_library_info_alter().
+ * Implements hook_page_attachments().
  */
-function openy_library_info_alter(&$libraries, $extension) {
-  // Add jQuery Migrate 4.x to core/jquery library. For more info see https://github.com/jquery/jquery-migrate
-  // This fix is needed for scripts that are not compatible with jQuery 4.x yet.
-  if ($extension == 'core' && isset($libraries['jquery'])) {
-    $libraries['jquery']['js']['//code.jquery.com/jquery-migrate-4.0.0-beta.1.js'] = [
-      'type' => 'external',
-      'minified' => TRUE,
-    ];
-  }
+function openy_page_attachments(array &$attachments) {
+  // Attach jQuery Migrate 4.x for scripts not yet compatible with
+  // jQuery 4.x. Self-hosted (openy/jquery_migrate) instead of loaded from
+  // code.jquery.com: the library's own "dependencies: [core/jquery]"
+  // declaration makes Drupal's asset system guarantee load order, so this
+  // replaces the previous hook_library_info_alter() approach of injecting
+  // an external script directly into core's jquery library js array, which
+  // had no such ordering guarantee and raced with core/jquery under load.
+  // See https://github.com/jquery/jquery-migrate
+  $attachments['#attached']['library'][] = 'openy/jquery_migrate';
 }

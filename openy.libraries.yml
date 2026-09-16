@@ -9,3 +9,10 @@ installation_ui:
     - jquery_ui_tooltip/tooltip
     - core/drupal.dialog
     - core/once
+
+jquery_migrate:
+  version: 4.0.2
+  js:
+    assets/jquery-migrate/jquery-migrate.min.js: { minified: true }
+  dependencies:
+    - core/jquery
