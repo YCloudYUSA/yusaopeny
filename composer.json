@@ -104,7 +104,7 @@
     "drupal/webform": "^6.3@beta",
     "drupal/y_donate": "^3.0",
     "grt107/grt-youtube-popup": "^1.0",
-    "guzzlehttp/guzzle": "^6 || ^7",
+    "guzzlehttp/guzzle": "^6 || ^7 || ^8",
     "league/csv": "^9.11.0 !=9.12.0",
     "library-ckeditor/colorbutton": "4.10.1",
     "library-ckeditor/font": "4.12.1",
