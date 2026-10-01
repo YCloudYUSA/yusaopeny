@@ -104,7 +104,6 @@
     "drupal/webform": "^6.3@beta",
     "drupal/y_donate": "^3.0",
     "grt107/grt-youtube-popup": "^1.0",
-    "guzzlehttp/guzzle": "^6 || ^7",
     "league/csv": "^9.11.0 !=9.12.0",
     "library-ckeditor/colorbutton": "4.10.1",
     "library-ckeditor/font": "4.12.1",
@@ -334,28 +333,19 @@
         "Issue #2581223: Support for configuration entities": "https://www.drupal.org/files/issues/2025-08-04/rebasepatch_0.patch"
       },
       "drupal/core": {
-        "Url only outputs the last value of a query parameter": "https://www.drupal.org/files/issues/2024-02-28/3038774-51-10.2.3-reroll.patch",
-        "InlineBlock LoggerInterface missing import https://www.drupal.org/node/3462504": "https://git.drupalcode.org/project/drupal/-/merge_requests/12460.diff",
-        "Issue #3493290: Batch-load existing links in MenuTreeStorage::rebuild()": "https://git.drupalcode.org/project/drupal/-/merge_requests/14230.diff",
         "Issue #3492438: Reduce route rebuilds during module installation": "https://git.drupalcode.org/project/drupal/-/merge_requests/14231.diff"
       },
       "drupal/video_embed_field": {
         "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
       },
       "drupal/rabbit_hole": {
-        "Issue #3516167: Fix PHP 8.4 implicit nullable parameter deprecations": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/82.diff"
-      },
-      "drupal/webform": {
-        "Issue #3575614: PHP 8.5 deprecated case statement semicolon in WebformSubmissionForm": "https://git.drupalcode.org/project/webform/-/merge_requests/829.diff"
+        "PHP 8.4 implicit nullable fixes from 8.x-1.x commit a9e6f36 (unreleased after 8.x-1.2)": "https://git.drupalcode.org/project/rabbit_hole/-/commit/a9e6f3621d692836b4be48dc62eaa0bfe63a0b06.diff"
       },
       "drupal/google_tag": {
         "Issue #3560958: PHP 8.5 SplObjectStorage::contains() deprecated, use offsetExists()": "https://git.drupalcode.org/project/google_tag/-/merge_requests/129.diff"
       },
       "drupal/video": {
         "Issue #3508999: PHP 8.4 implicit nullable \\SplString in VideoRemoteStreamWrapper::basePath()": "https://git.drupalcode.org/project/video/-/merge_requests/31.diff"
-      },
-      "drupal/search_api": {
-        "Issue #3564794: PHP 8.4 non-canonical casts (boolean)/(double) deprecated": "https://git.drupalcode.org/project/search_api/-/merge_requests/306.diff"
       }
     }
   },
