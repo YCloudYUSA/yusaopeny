@@ -1239,3 +1239,23 @@ function openy_update_11003(): string {
   openy_optout_syncer_bundles_from_trash();
   return 'Syncer-owned bundles excluded from Trash where applicable.';
 }
+
+/**
+ * Install text_with_summary on sites that predate the D12 core split.
+ *
+ * Drupal 12 moved the text_with_summary field type/formatter/widget out of
+ * core's text module into the now-required contrib module
+ * drupal/text_with_summary. Composer always pulls the package in once a
+ * site's composer.json requires ^12, but that doesn't enable the module on
+ * a database that predates the split -- any body field using this field
+ * type (lb_accordion's accordion_item, article_lb, and others across the
+ * distro) keeps fataling with "text_with_summary plugin does not exist"
+ * until the module is explicitly installed.
+ */
+function openy_update_11004(): string {
+  if (\Drupal::moduleHandler()->moduleExists('text_with_summary')) {
+    return 'text_with_summary is already installed.';
+  }
+  \Drupal::service('module_installer')->install(['text_with_summary']);
+  return 'Installed text_with_summary (D12 core split from text).';
+}
