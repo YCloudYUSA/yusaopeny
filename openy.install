@@ -1259,3 +1259,46 @@ function openy_update_11004(): string {
   \Drupal::service('module_installer')->install(['text_with_summary']);
   return 'Installed text_with_summary (D12 core split from text).';
 }
+
+/**
+ * Uninstall toolbar-dependent modules and remove removed core modules
+ * (toolbar, history) from the enabled module list ahead of D12.
+ *
+ * Per W4-D3: the admin UI moves to core Navigation; toolbar has no D12
+ * release and no replacement is planned. admin_toolbar(+_tools) depend
+ * on core's removed toolbar module and must be uninstalled first (their
+ * code still exists, so the normal uninstall path works). toolbar and
+ * history no longer have providing code at all in D12, so they can't go
+ * through the normal uninstall path; removing them from core.extension
+ * directly is Drupal's own documented recommendation for core-removed
+ * modules still listed as enabled after a major upgrade.
+ */
+function openy_update_11005(): string {
+  $uninstalled = [];
+  $installer = \Drupal::service('module_installer');
+  foreach (['admin_toolbar_tools', 'admin_toolbar'] as $module) {
+    if (\Drupal::moduleHandler()->moduleExists($module)) {
+      $installer->uninstall([$module]);
+      $uninstalled[] = $module;
+    }
+  }
+
+  $config = \Drupal::configFactory()->getEditable('core.extension');
+  $modules = $config->get('module');
+  $removed = [];
+  foreach (['toolbar', 'history'] as $module) {
+    if (isset($modules[$module])) {
+      unset($modules[$module]);
+      $removed[] = $module;
+    }
+  }
+  if ($removed) {
+    $config->set('module', $modules)->save(TRUE);
+  }
+
+  return sprintf(
+    'Uninstalled: %s. Removed from core.extension (no D12 code, no replacement): %s.',
+    $uninstalled ? implode(', ', $uninstalled) : 'none',
+    $removed ? implode(', ', $removed) : 'none'
+  );
+}
