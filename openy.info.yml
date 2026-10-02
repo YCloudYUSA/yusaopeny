@@ -40,15 +40,13 @@ install:
   - drupal:taxonomy
   - drupal:telephone
   - drupal:text
-  - drupal:toolbar
+  - drupal:navigation
   - drupal:views
   # - drupal:tour
   # Compatibility
   - jquery_ui_tooltip:jquery_ui_tooltip
   - jquery_ui_tabs:jquery_ui_tabs
   # Contrib modules.
-  - admin_toolbar:admin_toolbar
-  - admin_toolbar:admin_toolbar_tools
   - captcha:captcha
   # - ckeditor_bootstrap_buttons:ckeditor_bootstrap_buttons
   - ckeditor5_paste_filter:ckeditor5_paste_filter
