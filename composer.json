@@ -338,7 +338,8 @@
         "InlineBlock LoggerInterface missing import https://www.drupal.org/node/3462504": "https://git.drupalcode.org/project/drupal/-/merge_requests/12460.diff",
         "Issue #3493290: Batch-load existing links in MenuTreeStorage::rebuild()": "https://git.drupalcode.org/project/drupal/-/merge_requests/14230.diff",
         "Issue #3492438: Reduce route rebuilds during module installation": "https://git.drupalcode.org/project/drupal/-/merge_requests/14231.diff",
-        "D12 beta1: ConstraintManager::create() scalar-option regression (ValidKeys '<infer>')": "https://gist.githubusercontent.com/podarok/21921364e297e865084d4249938d547b/raw/constraint-manager-validkeys-scalar-fix.patch"
+        "D12 beta1: ConstraintManager::create() scalar-option regression (ValidKeys '<infer>')": "https://gist.githubusercontent.com/podarok/21921364e297e865084d4249938d547b/raw/constraint-manager-validkeys-scalar-fix.patch",
+        "Issue #3574003: Properly include install files for install hook_requirements": "https://git.drupalcode.org/project/drupal/-/merge_requests/14802.diff"
       },
       "drupal/video_embed_field": {
         "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
