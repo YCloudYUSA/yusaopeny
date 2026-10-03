@@ -1256,6 +1256,12 @@ function openy_update_11004(): string {
   if (\Drupal::moduleHandler()->moduleExists('text_with_summary')) {
     return 'text_with_summary is already installed.';
   }
+  // Core 11 still ships the field type inside text, and the package is not
+  // required by this profile's composer.json (it needs core ^11.5 || ^12,
+  // the profile still supports ^11.4): nothing to install without its code.
+  if (!\Drupal::service('extension.list.module')->exists('text_with_summary')) {
+    return 'text_with_summary code not present (core 11 or package not required), skipped.';
+  }
   \Drupal::service('module_installer')->install(['text_with_summary']);
   return 'Installed text_with_summary (D12 core split from text).';
 }
