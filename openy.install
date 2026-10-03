@@ -1335,14 +1335,25 @@ function openy_update_11006(): string {
   if (!\Drupal::moduleHandler()->moduleExists('navigation')) {
     \Drupal::service('module_installer')->install(['navigation']);
   }
+  // Roles recorded by 11005 (its toolbar uninstall already stripped the
+  // permission) plus any role still holding 'access toolbar'.
+  $holders = \Drupal::state()->get('openy_update_11005.toolbar_roles', []);
   $moved = [];
   foreach (\Drupal\user\Entity\Role::loadMultiple() as $role) {
     // isAdmin() first: hasPermission() is TRUE for admin roles.
-    if ($role->isAdmin() || !in_array('access toolbar', $role->getPermissions(), TRUE)) {
+    if ($role->isAdmin()) {
       continue;
     }
-    $role->revokePermission('access toolbar')->grantPermission('access navigation')->save();
+    $had = in_array('access toolbar', $role->getPermissions(), TRUE);
+    if (!$had && !in_array($role->id(), $holders, TRUE)) {
+      continue;
+    }
+    if ($had) {
+      $role->revokePermission('access toolbar');
+    }
+    $role->grantPermission('access navigation')->save();
     $moved[] = $role->id();
   }
+  \Drupal::state()->delete('openy_update_11005.toolbar_roles');
   return 'Navigation enabled. Roles moved to "access navigation": ' . ($moved ? implode(', ', $moved) : 'none') . '.';
 }
