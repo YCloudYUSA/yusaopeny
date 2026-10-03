@@ -1312,3 +1312,25 @@ function openy_update_11005(): string {
     $removed ? implode(', ', $removed) : 'none'
   );
 }
+
+/**
+ * Install core Navigation and move 'access toolbar' roles to 'access navigation'.
+ *
+ * Navigation first: Role::calculateDependencies() strips permissions no
+ * installed module provides, so the grant must follow the install.
+ */
+function openy_update_11006(): string {
+  if (!\Drupal::moduleHandler()->moduleExists('navigation')) {
+    \Drupal::service('module_installer')->install(['navigation']);
+  }
+  $moved = [];
+  foreach (\Drupal\user\Entity\Role::loadMultiple() as $role) {
+    // isAdmin() first: hasPermission() is TRUE for admin roles.
+    if ($role->isAdmin() || !in_array('access toolbar', $role->getPermissions(), TRUE)) {
+      continue;
+    }
+    $role->revokePermission('access toolbar')->grantPermission('access navigation')->save();
+    $moved[] = $role->id();
+  }
+  return 'Navigation enabled. Roles moved to "access navigation": ' . ($moved ? implode(', ', $moved) : 'none') . '.';
+}
