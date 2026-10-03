@@ -1289,21 +1289,25 @@ function openy_update_11005(): string {
     }
   }
 
-  $config = \Drupal::configFactory()->getEditable('core.extension');
-  $modules = $config->get('module');
   $removed = [];
   foreach (['toolbar', 'history'] as $module) {
-    if (isset($modules[$module])) {
-      unset($modules[$module]);
-      $removed[] = $module;
+    if (\Drupal::config('core.extension')->get("module.$module") === NULL) {
+      continue;
     }
-  }
-  if ($removed) {
-    $config->set('module', $modules)->save(TRUE);
+    if (\Drupal::service('extension.list.module')->exists($module)) {
+      // 11.x: code present, a real uninstall removes config, permissions and schema.
+      $installer->uninstall([$module]);
+    }
+    else {
+      // 12: code gone, only the extension entry and schema version can be dropped.
+      \Drupal::configFactory()->getEditable('core.extension')->clear("module.$module")->save(TRUE);
+      \Drupal::keyValue('system.schema')->delete($module);
+    }
+    $removed[] = $module;
   }
 
   return sprintf(
-    'Uninstalled: %s. Removed from core.extension (no D12 code, no replacement): %s.',
+    'Uninstalled: %s. Toolbar/history removed (uninstalled when code present, else dropped from core.extension): %s.',
     $uninstalled ? implode(', ', $uninstalled) : 'none',
     $removed ? implode(', ', $removed) : 'none'
   );
