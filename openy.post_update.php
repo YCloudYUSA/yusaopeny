@@ -362,7 +362,7 @@ function openy_post_update_purge_groupex_field_data() {
     }
   }
 
-  field_purge_batch(500);
+  \Drupal::service(\Drupal\Core\Field\FieldPurger::class)->purgeBatch(500);
 
   return 'Purged orphaned field data from removed groupex_pro modules.';
 }
