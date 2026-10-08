@@ -11,7 +11,7 @@
     "drupal/address": "^1.8 || ^2.0",
     "drupal/addtoany": "^2.0",
     "drupal/admin_toolbar": "^3.2",
-    "drupal/advanced_help_block": "^1.0",
+    "drupal/advanced_help_block": "^1.1",
     "drupal/better_exposed_filters": "^7.0.5",
     "drupal/blazy": "^2.4 || ~3.0.0 || ~3.1.0",
     "drupal/bootstrap_layout_builder": ">=2.1.4",
