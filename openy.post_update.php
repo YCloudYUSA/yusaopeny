@@ -362,7 +362,13 @@ function openy_post_update_purge_groupex_field_data() {
     }
   }
 
-  \Drupal::service(\Drupal\Core\Field\FieldPurger::class)->purgeBatch(500);
+  // The FieldPurger service exists in Drupal 11.4+ only.
+  if (\Drupal::getContainer()->has(\Drupal\Core\Field\FieldPurger::class)) {
+    \Drupal::service(\Drupal\Core\Field\FieldPurger::class)->purgeBatch(500);
+  }
+  else {
+    field_purge_batch(500);
+  }
 
   return 'Purged orphaned field data from removed groupex_pro modules.';
 }
