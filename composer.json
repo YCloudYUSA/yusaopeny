@@ -278,7 +278,18 @@
     "drupal-lenient": {
       "allowed-list": [
         "drupal/address",
-        "drupal/addtoany"
+        "drupal/addtoany",
+        "drupal/ai",
+        "drupal/datalayer",
+        "drupal/date_augmenter",
+        "drupal/editor_advanced_link",
+        "drupal/embed",
+        "drupal/exif_orientation",
+        "drupal/gemini_provider",
+        "drupal/jquery_ui",
+        "drupal/layout_builder_operation_link",
+        "drupal/plugin",
+        "drupal/responsive_favicons"
       ]
     },
     "drupal-scaffold": {
@@ -321,6 +332,36 @@
       "drupal/addtoany": {
         "Issue #3629641: Add ^12 to core_version_requirement (MR !35)": "https://git.drupalcode.org/project/addtoany/-/merge_requests/35.diff"
       },
+      "drupal/ai": {
+        "Issue #3586796: Drupal 12 compatibility (MR !2097)": "https://git.drupalcode.org/project/ai/-/merge_requests/2097.diff"
+      },
+      "drupal/datalayer": {
+        "Issue #3597036: Drupal 12 compatibility (MR !18)": "https://git.drupalcode.org/project/datalayer/-/merge_requests/18.diff"
+      },
+      "drupal/date_augmenter": {
+        "Issue #3597042: Drupal 12 compatibility (MR !15)": "https://git.drupalcode.org/project/date_augmenter/-/merge_requests/15.diff"
+      },
+      "drupal/editor_advanced_link": {
+        "Issue #3622548: Drupal 12 compatibility (MR !60)": "https://git.drupalcode.org/project/editor_advanced_link/-/merge_requests/60.diff"
+      },
+      "drupal/embed": {
+        "Issue #3612593: Drupal 12 compatibility (MR !31)": "https://git.drupalcode.org/project/embed/-/merge_requests/31.diff"
+      },
+      "drupal/exif_orientation": {
+        "Issue #3597993: Drupal 12 compatibility (MR !20)": "https://git.drupalcode.org/project/exif_orientation/-/merge_requests/20.diff"
+      },
+      "drupal/gemini_provider": {
+        "Issue #3589198: Drupal 12 compatibility (MR !44)": "https://git.drupalcode.org/project/gemini_provider/-/merge_requests/44.diff"
+      },
+      "drupal/jquery_ui": {
+        "Issue #3599351: Drupal 12 compatibility (MR !25)": "https://git.drupalcode.org/project/jquery_ui/-/merge_requests/25.diff"
+      },
+      "drupal/layout_builder_operation_link": {
+        "Issue #3599563: Drupal 12 compatibility (MR !12)": "https://git.drupalcode.org/project/layout_builder_operation_link/-/merge_requests/12.diff"
+      },
+      "drupal/responsive_favicons": {
+        "Issue #3602500: Drupal 12 compatibility (MR !36)": "https://git.drupalcode.org/project/responsive_favicons/-/merge_requests/36.diff"
+      },
       "drupal/admin_toolbar": {
         "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch",
         "Issue #3385337 - Defer menu link rebuilds to reduce queries during module install": "https://git.drupalcode.org/project/admin_toolbar/-/merge_requests/209.diff"
@@ -343,7 +384,8 @@
         "3149789 - Add a 3.x branch with an update path to the video source in core.": "https://www.drupal.org/files/issues/2020-06-11/3149789-4.patch"
       },
       "drupal/plugin": {
-        "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch"
+        "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch",
+        "Issue #3624808: Drupal 12 compatibility (MR !17)": "https://git.drupalcode.org/project/plugin/-/merge_requests/17.diff"
       },
       "drupal/inline_entity_form": {
         "Issue #2581223: Support for configuration entities": "https://www.drupal.org/files/issues/2025-08-04/rebasepatch_0.patch"
