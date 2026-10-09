@@ -290,6 +290,7 @@
         "drupal/ctools",
         "drupal/datalayer",
         "drupal/date_augmenter",
+        "drupal/daterange_compact",
         "drupal/editor_advanced_link",
         "drupal/embed",
         "drupal/exif_orientation",
@@ -396,6 +397,9 @@
       },
       "drupal/ctools": {
         "Issue #3629656: Drupal 12 compatibility (MR !106)": "https://git.drupalcode.org/project/ctools/-/merge_requests/106.diff"
+      },
+      "drupal/daterange_compact": {
+        "Issue #3629657: Drupal 12 compatibility (MR !13)": "https://git.drupalcode.org/project/daterange_compact/-/merge_requests/13.diff"
       },
       "drupal/admin_toolbar": {
         "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch",
