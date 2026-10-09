@@ -122,7 +122,7 @@
     "open-y-subprojects/common_scss": "dev-main",
     "open-y-subprojects/openy_content_core": "^3.4",
     "open-y-subprojects/openy_custom": "^3.3.0",
-    "open-y-subprojects/openy_daxko_gxp_syncer": "^1.2",
+    "open-y-subprojects/openy_daxko_gxp_syncer": "^1.5",
     "open-y-subprojects/openy_features": "^5.3",
     "open-y-subprojects/openy_focal_point": "^2.2",
     "open-y-subprojects/openy_hours_formatter": "^2.0 || ^3.0.0",
