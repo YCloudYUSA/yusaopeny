@@ -280,6 +280,14 @@
         "drupal/address",
         "drupal/addtoany",
         "drupal/ai",
+        "drupal/bootstrap_layout_builder",
+        "drupal/bootstrap_styles",
+        "drupal/ckeditor5_plugin_pack",
+        "drupal/ckeditor5_premium_features",
+        "drupal/config_update",
+        "drupal/crop",
+        "drupal/csv_serialization",
+        "drupal/ctools",
         "drupal/datalayer",
         "drupal/date_augmenter",
         "drupal/editor_advanced_link",
@@ -361,6 +369,33 @@
       },
       "drupal/responsive_favicons": {
         "Issue #3602500: Drupal 12 compatibility (MR !36)": "https://git.drupalcode.org/project/responsive_favicons/-/merge_requests/36.diff"
+      },
+      "drupal/blazy": {
+        "Issue #3629646: Drupal 12 compatibility (MR !35)": "https://git.drupalcode.org/project/blazy/-/merge_requests/35.diff"
+      },
+      "drupal/bootstrap_layout_builder": {
+        "Issue #3629648: Drupal 12 compatibility (MR !40)": "https://git.drupalcode.org/project/bootstrap_layout_builder/-/merge_requests/40.diff"
+      },
+      "drupal/bootstrap_styles": {
+        "Issue #3629649: Drupal 12 compatibility (MR !88)": "https://git.drupalcode.org/project/bootstrap_styles/-/merge_requests/88.diff"
+      },
+      "drupal/ckeditor5_plugin_pack": {
+        "Issue #3629651: Drupal 12 compatibility (MR !50)": "https://git.drupalcode.org/project/ckeditor5_plugin_pack/-/merge_requests/50.diff"
+      },
+      "drupal/ckeditor5_premium_features": {
+        "Issue #3629652: Drupal 12 compatibility (MR !51)": "https://git.drupalcode.org/project/ckeditor5_premium_features/-/merge_requests/51.diff"
+      },
+      "drupal/config_update": {
+        "Issue #3629653: Drupal 12 compatibility (MR !22)": "https://git.drupalcode.org/project/config_update/-/merge_requests/22.diff"
+      },
+      "drupal/crop": {
+        "Issue #3629654: Drupal 12 compatibility (MR !37)": "https://git.drupalcode.org/project/crop/-/merge_requests/37.diff"
+      },
+      "drupal/csv_serialization": {
+        "Issue #3629655: Drupal 12 compatibility (MR !49)": "https://git.drupalcode.org/project/csv_serialization/-/merge_requests/49.diff"
+      },
+      "drupal/ctools": {
+        "Issue #3629656: Drupal 12 compatibility (MR !106)": "https://git.drupalcode.org/project/ctools/-/merge_requests/106.diff"
       },
       "drupal/admin_toolbar": {
         "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch",
