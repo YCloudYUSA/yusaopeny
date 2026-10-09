@@ -112,6 +112,7 @@
     "library-jaypan/jquery_colorpicker": "1.0.1",
     "library-smonetti/btbutton": "1.0.2",
     "library-vakata/jstree": "^3.3",
+    "mglaman/composer-drupal-lenient": "^1.0",
     "mpdf/mpdf": "^7 || ^8.1 || v8.0.4 || ~v8.0.4",
     "npm-asset/blazy": "^1.8",
     "npm-asset/dropzone": "^5.5",
@@ -267,10 +268,19 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
+    "allow-plugins": {
+      "mglaman/composer-drupal-lenient": true
+    },
     "bin-dir": "bin/",
     "sort-packages": true
   },
   "extra": {
+    "drupal-lenient": {
+      "allowed-list": [
+        "drupal/address",
+        "drupal/addtoany"
+      ]
+    },
     "drupal-scaffold": {
       "allowed-packages": [
         "drupal/core"
@@ -305,6 +315,12 @@
       "openy-docs"
     ],
     "patches": {
+      "drupal/address": {
+        "Issue #3629639: Drupal 12 compatibility (MR !107)": "https://git.drupalcode.org/project/address/-/merge_requests/107.diff"
+      },
+      "drupal/addtoany": {
+        "Issue #3629641: Add ^12 to core_version_requirement (MR !35)": "https://git.drupalcode.org/project/addtoany/-/merge_requests/35.diff"
+      },
       "drupal/admin_toolbar": {
         "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch",
         "Issue #3385337 - Defer menu link rebuilds to reduce queries during module install": "https://git.drupalcode.org/project/admin_toolbar/-/merge_requests/209.diff"
