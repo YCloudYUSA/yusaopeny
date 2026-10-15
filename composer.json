@@ -78,7 +78,7 @@
     "drupal/rabbit_hole": "^1.1 || ^2.0",
     "drupal/recaptcha": "^3.5@RC",
     "drupal/redirect": "^1",
-    "drupal/responsive_favicons": "^2.0 || ^3.0",
+    "drupal/responsive_favicons": "^4.1",
     "drupal/scheduler": "^2 || ^2.0@RC",
     "drupal/search_api": "^1.31",
     "drupal/search_api_solr": "^4.3.1",
@@ -297,8 +297,7 @@
         "drupal/gemini_provider",
         "drupal/jquery_ui",
         "drupal/layout_builder_operation_link",
-        "drupal/plugin",
-        "drupal/responsive_favicons"
+        "drupal/plugin"
       ]
     },
     "drupal-scaffold": {
@@ -367,9 +366,6 @@
       },
       "drupal/layout_builder_operation_link": {
         "Issue #3599563: Drupal 12 compatibility (MR !12)": "https://git.drupalcode.org/project/layout_builder_operation_link/-/merge_requests/12.diff"
-      },
-      "drupal/responsive_favicons": {
-        "Issue #3602500: Drupal 12 compatibility (MR !36)": "https://git.drupalcode.org/project/responsive_favicons/-/merge_requests/36.diff"
       },
       "drupal/blazy": {
         "Issue #3629646: Drupal 12 compatibility (MR !35)": "https://git.drupalcode.org/project/blazy/-/merge_requests/35.diff"
