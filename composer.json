@@ -279,6 +279,7 @@
       "allowed-list": [
         "drupal/address",
         "drupal/addtoany",
+        "drupal/admin_toolbar",
         "drupal/ai",
         "drupal/bootstrap_layout_builder",
         "drupal/bootstrap_styles",
@@ -295,9 +296,13 @@
         "drupal/embed",
         "drupal/exif_orientation",
         "drupal/gemini_provider",
+        "drupal/google_tag",
+        "drupal/inline_entity_form",
         "drupal/jquery_ui",
         "drupal/layout_builder_operation_link",
-        "drupal/plugin"
+        "drupal/plugin",
+        "drupal/rabbit_hole",
+        "drupal/video_embed_field"
       ]
     },
     "drupal-scaffold": {
@@ -399,14 +404,16 @@
       },
       "drupal/admin_toolbar": {
         "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch",
-        "Issue #3385337 - Defer menu link rebuilds to reduce queries during module install": "https://git.drupalcode.org/project/admin_toolbar/-/merge_requests/209.diff"
+        "Issue #3385337 - Defer menu link rebuilds to reduce queries during module install (MR !209 as of 3.6.3, without the CI hunk)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/admin_toolbar/3385337-reduce-queries-3.6.3.patch",
+        "Drupal 12: Views::invalidateCache(), core ^12": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/admin_toolbar/d12-views-core12.patch"
       },
       "drupal/plugin": {
         "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch",
         "Issue #3624808: Drupal 12 compatibility (MR !17)": "https://git.drupalcode.org/project/plugin/-/merge_requests/17.diff"
       },
       "drupal/inline_entity_form": {
-        "Issue #2581223: Support for configuration entities": "https://www.drupal.org/files/issues/2025-08-04/rebasepatch_0.patch"
+        "Issue #2581223: Support for configuration entities": "https://www.drupal.org/files/issues/2025-08-04/rebasepatch_0.patch",
+        "Drupal 12: RenderElementBase, explicit initial preprocess, core ^12 (#3585018)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/inline_entity_form/d12-renderelementbase-core12.patch"
       },
       "drupal/core": {
         "Issue #3492438: Reduce route rebuilds during module installation": "https://git.drupalcode.org/project/drupal/-/merge_requests/14231.diff",
@@ -414,13 +421,18 @@
         "Issue #3574003: Properly include install files for install hook_requirements": "https://git.drupalcode.org/project/drupal/-/merge_requests/14802.diff"
       },
       "drupal/video_embed_field": {
-        "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch"
+        "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch",
+        "Issue #3594291: Support php attributes (MR !119 as of 3.1.1)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/video_embed_field/3594291-support-php-attributes.patch",
+        "Drupal 12: ConstraintValidator::validate() signature, core ^12": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/video_embed_field/d12-validator-core12.patch"
       },
       "drupal/rabbit_hole": {
-        "PHP 8.4 implicit nullable fixes from 8.x-1.x commit a9e6f36 (unreleased after 8.x-1.2)": "https://git.drupalcode.org/project/rabbit_hole/-/commit/a9e6f3621d692836b4be48dc62eaa0bfe63a0b06.diff"
+        "PHP 8.4 implicit nullable fixes from 8.x-1.x commit a9e6f36 (unreleased after 8.x-1.2)": "https://git.drupalcode.org/project/rabbit_hole/-/commit/a9e6f3621d692836b4be48dc62eaa0bfe63a0b06.diff",
+        "Drupal 12: attribute plugin discovery, core ^12 (#3591353)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/rabbit_hole/d12-attribute-discovery.patch"
       },
       "drupal/google_tag": {
-        "Issue #3560958: PHP 8.5 SplObjectStorage::contains() deprecated, use offsetExists()": "https://git.drupalcode.org/project/google_tag/-/merge_requests/129.diff"
+        "Issue #3560958: PHP 8.5 SplObjectStorage::contains() deprecated, use offsetExists()": "https://git.drupalcode.org/project/google_tag/-/merge_requests/129.diff",
+        "Issue #3560958 follow-up: getSubscribedEvents() return type (MR !144 as of 2.0.9)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/google_tag/getsubscribedevents-return-type.patch",
+        "Drupal 12: plugin attribute class, keyed schema constraint, page_attachments order, core ^12 (#3598653)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/google_tag/d12-attribute-schema-order.patch"
       },
       "drupal/video": {
         "Issue #3508999: PHP 8.4 implicit nullable \\SplString in VideoRemoteStreamWrapper::basePath()": "https://git.drupalcode.org/project/video/-/merge_requests/31.diff"
