@@ -1,0 +1,68 @@
+diff --git a/modules/video_embed_media/modules/vem_migrate_oembed/vem_migrate_oembed.info.yml b/modules/video_embed_media/modules/vem_migrate_oembed/vem_migrate_oembed.info.yml
+index 1a57503..1ed0e04 100644
+--- a/modules/video_embed_media/modules/vem_migrate_oembed/vem_migrate_oembed.info.yml
++++ b/modules/video_embed_media/modules/vem_migrate_oembed/vem_migrate_oembed.info.yml
+@@ -2,7 +2,7 @@ name: Video Embed Media - Migrate to core oEmbed
+ type: module
+ description: 'Provides a drush command to migrate to cores oEmbed'
+ package: Video Embed Field
+-core_version_requirement: ^10.3 || ^11
++core_version_requirement: ^10.3 || ^11 || ^12
+ dependencies:
+   - drupal:media
+   - video_embed_field:video_embed_media
+diff --git a/modules/video_embed_media/video_embed_media.info.yml b/modules/video_embed_media/video_embed_media.info.yml
+index 5c454af..3f9c750 100644
+--- a/modules/video_embed_media/video_embed_media.info.yml
++++ b/modules/video_embed_media/video_embed_media.info.yml
+@@ -2,7 +2,7 @@ name: Video Embed Media
+ type: module
+ description: 'Integrates video_embed_field with the Media module, creating a new media type tailored to display embedded videos. Useful for websites which are using the media suite of modules.'
+ package: Video Embed Field
+-core_version_requirement: ^10.3 || ^11
++core_version_requirement: ^10.3 || ^11 || ^12
+ dependencies:
+   - drupal:media
+   - video_embed_field:video_embed_field
+diff --git a/modules/video_embed_wysiwyg/video_embed_wysiwyg.info.yml b/modules/video_embed_wysiwyg/video_embed_wysiwyg.info.yml
+index 654472d..366e893 100644
+--- a/modules/video_embed_wysiwyg/video_embed_wysiwyg.info.yml
++++ b/modules/video_embed_wysiwyg/video_embed_wysiwyg.info.yml
+@@ -2,7 +2,7 @@ name: Video Embed WYSIWYG
+ type: module
+ description: 'Integrates video_embed_field directly into ckeditor. Useful for websites not using the media suite of modules that need WYSIWYG support.'
+ package: Video Embed Field
+-core_version_requirement: ^10.3 || ^11
++core_version_requirement: ^10.3 || ^11 || ^12
+ dependencies:
+   - drupal:ckeditor5
+   - drupal:field
+diff --git a/src/Plugin/Validation/Constraint/VideoEmbedConstraintValidator.php b/src/Plugin/Validation/Constraint/VideoEmbedConstraintValidator.php
+index f4ebd0f..984cd43 100644
+--- a/src/Plugin/Validation/Constraint/VideoEmbedConstraintValidator.php
++++ b/src/Plugin/Validation/Constraint/VideoEmbedConstraintValidator.php
+@@ -42,9 +42,9 @@ class VideoEmbedConstraintValidator extends ConstraintValidator implements Conta
+   /**
+    * {@inheritdoc}
+    */
+-  public function validate($field, Constraint $constraint) {
++  public function validate(mixed $field, Constraint $constraint): void {
+     if (!isset($field->value)) {
+-      return NULL;
++      return;
+     }
+ 
+     $allowed_providers = $field->getFieldDefinition()->getSetting('allowed_providers');
+diff --git a/video_embed_field.info.yml b/video_embed_field.info.yml
+index 3cf2994..058a89b 100644
+--- a/video_embed_field.info.yml
++++ b/video_embed_field.info.yml
+@@ -2,7 +2,7 @@ name: Video Embed Field
+ type: module
+ description: 'Provides a field type for displaying videos from 3rd party providers such as YouTube and Vimeo.'
+ package: Video Embed Field
+-core_version_requirement: ^10.3 || ^11
++core_version_requirement: ^10.3 || ^11 || ^12
+ dependencies:
+   - drupal:field
+   - drupal:image

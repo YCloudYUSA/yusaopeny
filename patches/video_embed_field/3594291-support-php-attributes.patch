@@ -1,0 +1,179 @@
+diff --git a/modules/video_embed_media/tests/src/Kernel/ProvidedFieldsTest.php b/modules/video_embed_media/tests/src/Kernel/ProvidedFieldsTest.php
+index 7d643c11ab95e768f96b477dc42e6abdcb8a41fc..2237e51a88d90517b381912f47d99b0c628d3ac9 100644
+--- a/modules/video_embed_media/tests/src/Kernel/ProvidedFieldsTest.php
++++ b/modules/video_embed_media/tests/src/Kernel/ProvidedFieldsTest.php
+@@ -3,8 +3,8 @@
+ namespace Drupal\Tests\video_embed_media\Kernel;
+ 
+ use Drupal\Core\File\FileSystemInterface;
+-use Drupal\Tests\media\Kernel\MediaKernelTestBase;
+ use Drupal\media\Entity\Media;
++use Drupal\Tests\media\Kernel\MediaKernelTestBase;
+ 
+ /**
+  * Test the provided fields.
+diff --git a/src/Attribute/VideoEmbedProvider.php b/src/Attribute/VideoEmbedProvider.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..a4732ca56398ad17c800a843c68de35f4b2b4a7e
+--- /dev/null
++++ b/src/Attribute/VideoEmbedProvider.php
+@@ -0,0 +1,30 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\video_embed_field\Attribute;
++
++use Drupal\Component\Plugin\Attribute\Plugin;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
++
++/**
++ * Defines a Video Embed Field attribute object.
++ */
++#[\Attribute(\Attribute::TARGET_CLASS)]
++class VideoEmbedProvider extends Plugin {
++
++  /**
++   * Constructs a VideoEmbedProvider attribute.
++   *
++   * @param string $id
++   *   The plugin ID.
++   * @param \Drupal\Core\StringTranslation\TranslatableMarkup $title
++   *   The plugin title.
++   */
++  public function __construct(
++    public readonly string $id,
++    public readonly TranslatableMarkup $title,
++  ) {
++  }
++
++}
+diff --git a/src/Plugin/video_embed_field/Provider/Vimeo.php b/src/Plugin/video_embed_field/Provider/Vimeo.php
+index b8c694035a5fae70ebeccddfe0b8ef271da77ea5..5b033eadf3e57812320b6fcdcb749a34835be6db 100644
+--- a/src/Plugin/video_embed_field/Provider/Vimeo.php
++++ b/src/Plugin/video_embed_field/Provider/Vimeo.php
+@@ -2,7 +2,9 @@
+ 
+ namespace Drupal\video_embed_field\Plugin\video_embed_field\Provider;
+ 
++use Drupal\Core\StringTranslation\TranslatableMarkup;
+ use Drupal\Core\Url;
++use Drupal\video_embed_field\Attribute\VideoEmbedProvider;
+ use Drupal\video_embed_field\Plugin\Field\FieldFormatter\Video;
+ use Drupal\video_embed_field\ProviderPluginBase;
+ 
+@@ -14,6 +16,11 @@ use Drupal\video_embed_field\ProviderPluginBase;
+  *   title = @Translation("Vimeo")
+  * )
+  */
++#[
++  VideoEmbedProvider(
++  id: "vimeo",
++  title: new TranslatableMarkup("Vimeo"),
++  )]
+ class Vimeo extends ProviderPluginBase {
+ 
+   /**
+diff --git a/src/Plugin/video_embed_field/Provider/YouTube.php b/src/Plugin/video_embed_field/Provider/YouTube.php
+index 1602723b74ad9823cde6c23ade74c813307a0a05..9cfbf24f95b566a1be0380db28baf6d9c1a1920e 100644
+--- a/src/Plugin/video_embed_field/Provider/YouTube.php
++++ b/src/Plugin/video_embed_field/Provider/YouTube.php
+@@ -2,7 +2,9 @@
+ 
+ namespace Drupal\video_embed_field\Plugin\video_embed_field\Provider;
+ 
++use Drupal\Core\StringTranslation\TranslatableMarkup;
+ use Drupal\Core\Url;
++use Drupal\video_embed_field\Attribute\VideoEmbedProvider;
+ use Drupal\video_embed_field\Plugin\Field\FieldFormatter\Video;
+ use Drupal\video_embed_field\ProviderPluginBase;
+ 
+@@ -14,6 +16,12 @@ use Drupal\video_embed_field\ProviderPluginBase;
+  *   title = @Translation("YouTube")
+  * )
+  */
++#[
++  VideoEmbedProvider(
++    id: "youtube",
++    title: new TranslatableMarkup("YouTube"),
++  )
++]
+ class YouTube extends ProviderPluginBase {
+ 
+   /**
+diff --git a/src/Plugin/video_embed_field/Provider/YouTubePlaylist.php b/src/Plugin/video_embed_field/Provider/YouTubePlaylist.php
+index 4451f1375d2f8592721c7fbfaf264a77c20659b7..7c0fb0322c3d30dbc437d295c79ec8d943ee7ec3 100644
+--- a/src/Plugin/video_embed_field/Provider/YouTubePlaylist.php
++++ b/src/Plugin/video_embed_field/Provider/YouTubePlaylist.php
+@@ -6,19 +6,27 @@ use Drupal\Core\Cache\CacheBackendInterface;
+ use Drupal\Core\Config\ConfigFactoryInterface;
+ use Drupal\Core\File\FileSystemInterface;
+ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
+ use Drupal\Core\Url;
++use Drupal\video_embed_field\Attribute\VideoEmbedProvider;
+ use Drupal\video_embed_field\Plugin\Field\FieldFormatter\Video;
+ use Drupal\video_embed_field\ProviderPluginBase;
+ use GuzzleHttp\ClientInterface;
+ 
+ /**
+- * A YouTube playlist video provider.
++ * A YouTube playlist provider plugin.
+  *
+  * @VideoEmbedProvider(
+  *   id = "youtube_playlist",
+  *   title = @Translation("YouTube Playlist")
+  * )
+  */
++#[
++  VideoEmbedProvider(
++    id: "youtube_playlist",
++    title: new TranslatableMarkup("YouTube Playlist"),
++  )
++]
+ class YouTubePlaylist extends ProviderPluginBase {
+ 
+   /**
+diff --git a/src/ProviderManager.php b/src/ProviderManager.php
+index 5cae8da031dd50e92487759df7e5e3032b0e3d0c..8baabdf1d4bf06e1580953769cb71d134c0ca828 100644
+--- a/src/ProviderManager.php
++++ b/src/ProviderManager.php
+@@ -6,6 +6,8 @@ use Drupal\Component\Plugin\Mapper\MapperInterface;
+ use Drupal\Core\Cache\CacheBackendInterface;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
+ use Drupal\Core\Plugin\DefaultPluginManager;
++use Drupal\video_embed_field\Annotation\VideoEmbedProvider as AnnotationVideoEmbedProvider;
++use Drupal\video_embed_field\Attribute\VideoEmbedProvider as AttributeVideoEmbedProvider;
+ 
+ /**
+  * Gathers the provider plugins.
+@@ -16,7 +18,14 @@ class ProviderManager extends DefaultPluginManager implements ProviderManagerInt
+    * {@inheritdoc}
+    */
+   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
+-    parent::__construct('Plugin/video_embed_field/Provider', $namespaces, $module_handler, 'Drupal\video_embed_field\ProviderPluginInterface', 'Drupal\video_embed_field\Annotation\VideoEmbedProvider');
++    parent::__construct(
++      'Plugin/video_embed_field/Provider',
++      $namespaces,
++      $module_handler,
++      ProviderPluginInterface::class,
++      AttributeVideoEmbedProvider::class,
++      AnnotationVideoEmbedProvider::class
++    );
+     $this->setCacheBackend($cache_backend, 'video_embed_field_provider_plugins');
+     $this->alterInfo('video_embed_field_provider_info');
+   }
+diff --git a/tests/src/Unit/ProviderUrlParseTest.php b/tests/src/Unit/ProviderUrlParseTest.php
+index 53a1146a0e418f2ff3c4526d48728e7ba52abad7..4c4cdd0daabf0d36d1f8ae0ad421beb243453a8a 100644
+--- a/tests/src/Unit/ProviderUrlParseTest.php
++++ b/tests/src/Unit/ProviderUrlParseTest.php
+@@ -4,8 +4,8 @@ namespace Drupal\Tests\video_embed_field\Unit;
+ 
+ use Drupal\Core\Cache\DatabaseBackend;
+ use Drupal\Core\Config\ConfigFactoryInterface;
+-use Drupal\Core\DependencyInjection\ContainerBuilder;
+ use Drupal\Core\Config\ImmutableConfig;
++use Drupal\Core\DependencyInjection\ContainerBuilder;
+ use Drupal\Core\File\FileSystemInterface;
+ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+ use Drupal\Core\Logger\LoggerChannelInterface;
