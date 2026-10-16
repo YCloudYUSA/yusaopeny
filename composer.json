@@ -356,7 +356,7 @@
         "Issue #3612593: Drupal 12 compatibility (MR !31)": "https://git.drupalcode.org/project/embed/-/merge_requests/31.diff"
       },
       "drupal/exif_orientation": {
-        "Issue #3597993: Drupal 12 compatibility (MR !20)": "https://git.drupalcode.org/project/exif_orientation/-/merge_requests/20.diff"
+        "Issue #3597991: Drupal 12 compatibility (project update bot MR !18)": "https://git.drupalcode.org/project/exif_orientation/-/merge_requests/18.diff"
       },
       "drupal/gemini_provider": {
         "Issue #3589198: Drupal 12 compatibility (MR !44)": "https://git.drupalcode.org/project/gemini_provider/-/merge_requests/44.diff"
