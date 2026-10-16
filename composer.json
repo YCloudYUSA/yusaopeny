@@ -404,8 +404,7 @@
       },
       "drupal/admin_toolbar": {
         "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch",
-        "Issue #3385337 - Defer menu link rebuilds to reduce queries during module install (MR !209 as of 3.6.3, without the CI hunk)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/admin_toolbar/3385337-reduce-queries-3.6.3.patch",
-        "Drupal 12: Views::invalidateCache(), core ^12": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/admin_toolbar/d12-views-core12.patch"
+        "Issue #3385337 - Defer menu link rebuilds to reduce queries during module install (MR !209 as of 3.6.3, without the CI hunk)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/admin_toolbar/3385337-reduce-queries-3.6.3.patch"
       },
       "drupal/plugin": {
         "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch",
