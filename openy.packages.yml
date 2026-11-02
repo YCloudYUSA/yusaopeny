@@ -178,11 +178,7 @@ groupexpro:
   description: 'Integration with GroupEx Pro package provides an integration with CRM.'
   help: "<p>Using Integration with GroupEx Pro you can plug in your Website Services website to the CRM.</p>"
   modules:
-    - groupex_form_cache
-    - openy_group_schedules
-    - openy_gxp
     - openy_prgf_embedded_groupexpro_schedule
-    - openy_prgf_group_schedules
 
 locations:
   name: 'Locations'
