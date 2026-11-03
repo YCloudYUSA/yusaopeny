@@ -1239,3 +1239,10 @@ function openy_update_11003(): string {
   openy_optout_syncer_bundles_from_trash();
   return 'Syncer-owned bundles excluded from Trash where applicable.';
 }
+
+/**
+ * Enable Webform UI so editors can build and edit webforms.
+ */
+function openy_update_11004(): void {
+  \Drupal::service('module_installer')->install(['webform_ui']);
+}

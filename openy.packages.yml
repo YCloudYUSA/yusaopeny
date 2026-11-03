@@ -425,3 +425,4 @@ small_y:
     - ws_small_y_staff
     - ws_small_y_statistics
     - ws_small_y_testimonials
+    - webform_ui
