@@ -277,6 +277,9 @@
       "drupal/commerce_cart_api": {
         "Allow Drupal 10": "https://git.drupalcode.org/project/commerce_cart_api/-/merge_requests/3.patch"
       },
+      "drupal/fontyourface": {
+        "Issue #3630630: Font display hook runs after the provider submodules, so no font stylesheet is attached": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/main/patches/fontyourface/3630630-page-attachments-order.patch"
+      },
       "drupal/jquery_colorpicker": {
         "Use library directory instead vendor": "https://gist.githubusercontent.com/manachynskyi/3b059456ce97dd4380ff0c0e85f41696/raw/4cf7103c75849b2b474424fe9d8ad969192dd779/library_path_update.patch"
       },
