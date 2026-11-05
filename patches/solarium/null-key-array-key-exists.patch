@@ -1,0 +1,11 @@
+--- a/src/Core/Query/AbstractResponseParser.php
++++ b/src/Core/Query/AbstractResponseParser.php
+@@ -33,7 +33,7 @@
+         $dataCount = \count($data);
+         $result = [];
+         for ($i = 0; $i < $dataCount; $i += 2) {
+-            $key = $data[$i];
++            $key = $data[$i] ?? '';
+             $value = $data[$i + 1];
+             if (\array_key_exists($key, $keys)) {
+                 if (1 === $keys[$key]) {
