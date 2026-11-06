@@ -5,7 +5,7 @@ namespace Drupal\openy\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Serialization\Yaml;
-use Drupal\Core\Extension\ThemeHandlerInterface;
+use Drupal\Core\Extension\ThemeExtensionList;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -16,11 +16,11 @@ class ThemeSelectForm extends FormBase {
   const DEFAULT_THEME = 'openy_carnation';
 
   /**
-   * The theme handler.
+   * The theme extension list.
    *
-   * @var \Drupal\Core\Extension\ThemeHandlerInterface
+   * @var \Drupal\Core\Extension\ThemeExtensionList
    */
-  protected $themeHandler;
+  protected $themeExtensionList;
 
   /**
    * {@inheritdoc}
@@ -32,11 +32,11 @@ class ThemeSelectForm extends FormBase {
   /**
    * Constructs a ThemeSettingsForm object.
    *
-   * @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
-   *   The theme handler.
+   * @param \Drupal\Core\Extension\ThemeExtensionList $theme_extension_list
+   *   The theme extension list.
    */
-  public function __construct(ThemeHandlerInterface $theme_handler) {
-    $this->themeHandler = $theme_handler;
+  public function __construct(ThemeExtensionList $theme_extension_list) {
+    $this->themeExtensionList = $theme_extension_list;
   }
 
   /**
@@ -44,7 +44,7 @@ class ThemeSelectForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('theme_handler')
+      $container->get('extension.list.theme')
     );
   }
 
@@ -62,9 +62,9 @@ class ThemeSelectForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, array &$install_state = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?array &$install_state = NULL) {
     // Get all available themes.
-    $themes = $this->themeHandler->rebuildThemeData();
+    $themes = $this->themeExtensionList->reset()->getList();
     // Get Website Services themes for selection.
     $openy_themes = self::getOpenyThemes();
     $form['#title'] = $this->t('Select theme');
