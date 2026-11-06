@@ -61,7 +61,7 @@ class ConfigureProfileForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, array &$install_state = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?array &$install_state = NULL) {
     $form['#title'] = $this->t('Select installation type');
 
     $installation_types = self::getInstallationTypes(function_exists('drush_main'));

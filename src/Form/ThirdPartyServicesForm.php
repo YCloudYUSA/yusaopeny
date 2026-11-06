@@ -2,13 +2,11 @@
 
 namespace Drupal\openy\Form;
 
-use Drupal\Core\Asset\JsCollectionOptimizerLazy;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Defines a form for setting Third party services parameters during install.
@@ -23,23 +21,13 @@ class ThirdPartyServicesForm extends FormBase {
   protected $configFactory;
 
   /**
-   * The Collection Optimizer.
-   *
-   * @var \Drupal\Core\Asset\JsCollectionOptimizer
-   */
-  protected $collectionOptimizer;
-
-  /**
    * Constructs a new ThirdPartyServicesForm object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration factory.
-   * @param \Drupal\Core\Asset\JsCollectionOptimizerLazy $collection_optimizer
-   *   The JS Collection Optimizer.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, JsCollectionOptimizerLazy $collection_optimizer) {
+  public function __construct(ConfigFactoryInterface $config_factory) {
     $this->configFactory = $config_factory;
-    $this->collectionOptimizer = $collection_optimizer;
   }
 
   /**
@@ -47,8 +35,7 @@ class ThirdPartyServicesForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('config.factory'),
-      $container->get('asset.js.collection_optimizer')
+      $container->get('config.factory')
     );
   }
 
@@ -62,7 +49,7 @@ class ThirdPartyServicesForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, array &$install_state = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?array &$install_state = NULL) {
 
     $form['#title'] = $this->t('3rd Party Services');
 
@@ -100,12 +87,10 @@ class ThirdPartyServicesForm extends FormBase {
 
     // Google Tag Manager Account ID.
     if (\Drupal::moduleHandler()->moduleExists('google_tag')) {
-      // Get Google Tag Manager Account settings container.
-      $gtm_config = $this->configFactory->get('google_tag.settings');
       $form['google_tag_manager_id'] = [
         '#title' => $this->t('Google Tag Manager Container ID'),
         '#description' => $this->t('The ID assigned by Google Tag Manager (GTM) for this website container. To get a container ID, <a href="https://tagmanager.google.com/">sign up for GTM</a> and create a container for your website.'),
-        '#default_value' => $gtm_config->get('container_id'),
+        '#default_value' => $this->loadDefaultTagContainer()?->getGtmId(),
         '#attributes' => ['placeholder' => ['GTM-xxxxxx']],
         '#maxlength' => 20,
         '#type' => 'textfield',
@@ -234,12 +219,9 @@ class ThirdPartyServicesForm extends FormBase {
       $geo_loc_config->save();
     }
 
-    // Set Google Tag Manager Container ID & create snippets.
+    // Set Google Tag Manager Container ID.
     if (!empty($form_state->getValue('google_tag_manager_id'))) {
-      $gtm_config = $this->configFactory->getEditable('google_tag.settings');
-      $gtm_config->set('container_id', $form_state->getValue('google_tag_manager_id'));
-      $gtm_config->save();
-      $this->saveSnippets();
+      $this->saveTagContainer($form_state->getValue('google_tag_manager_id'));
     }
 
     // Set Google Analytics Account TODO: Add other values?
@@ -279,30 +261,31 @@ class ThirdPartyServicesForm extends FormBase {
   }
 
   /**
-   * Saves JS snippet files based on current settings.
+   * Loads the default Google Tag container.
    *
-   * @return bool
-   *   Whether the files were saved.
+   * @return \Drupal\google_tag\Entity\TagContainer|null
+   *   The container, or NULL if there is none yet.
    */
-  public function saveSnippets() {
-    $messenger = \Drupal::messenger();
-    // Save the altered snippets after hook_google_tag_snippets_alter().
-    module_load_include('inc', 'google_tag', 'includes/snippet');
-    $result = TRUE;
-    $snippets = google_tag_snippets();
-    foreach ($snippets as $type => $snippet) {
-      $path = \Drupal::service('file_system')->saveData($snippet, "public://js/google_tag.$type.js", FileSystemInterface::EXISTS_REPLACE);
-      $result = !$path ? FALSE : $result;
-    }
-    if (!$result) {
-      $messenger->addMessage(t('An error occurred saving one or more snippet files. Please try again or contact the site administrator if it persists.'));
-    }
-    else {
-      $messenger->addMessage(t('Created three snippet files based on configuration.'));
-      $this->collectionOptimizer->deleteAll();
-      _drupal_flush_css_js();
-    }
-    return TRUE;
+  protected function loadDefaultTagContainer() {
+    $id = $this->configFactory->get('google_tag.settings')->get('default_google_tag_entity');
+    return $id ? \Drupal::entityTypeManager()->getStorage('google_tag_container')->load($id) : NULL;
+  }
+
+  /**
+   * Saves the Google Tag Manager ID as the default Google Tag container.
+   *
+   * @param string $gtm_id
+   *   The Google Tag Manager container ID.
+   */
+  protected function saveTagContainer(string $gtm_id) {
+    // Same ID format as \Drupal\google_tag\Form\TagContainerForm::submitForm().
+    $container = $this->loadDefaultTagContainer() ?? \Drupal::entityTypeManager()
+      ->getStorage('google_tag_container')
+      ->create(['id' => uniqid($gtm_id . '.', TRUE), 'label' => $gtm_id]);
+    $container->set('tag_container_ids', [$gtm_id])->save();
+    $this->configFactory->getEditable('google_tag.settings')
+      ->set('default_google_tag_entity', $container->id())
+      ->save();
   }
 
 }

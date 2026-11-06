@@ -20,7 +20,7 @@ class UploadFontMessageForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, array &$install_state = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?array &$install_state = NULL) {
     $base_url = $GLOBALS['base_url'];
     $form['#title'] = $this->t('How to upload Cachet fonts');
 
