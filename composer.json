@@ -105,9 +105,6 @@
     "drupal/y_donate": "^3.1",
     "grt107/grt-youtube-popup": "^1.0",
     "league/csv": "^9.11.0 !=9.12.0",
-    "library-ckeditor/colorbutton": "4.10.1",
-    "library-ckeditor/font": "4.12.1",
-    "library-ckeditor/panelbutton": "4.10.1",
     "library-davekoelle/alphanum": "1.0.0",
     "library-jaypan/jquery_colorpicker": "1.0.1",
     "library-smonetti/btbutton": "1.0.2",
@@ -130,11 +127,12 @@
     "open-y-subprojects/openy_map": "^6.1",
     "open-y-subprojects/ynorth_gxp_spots_proxy": "^1.1",
     "ycloudyusa/y_pef_schedule": "^2.2",
-    "ycloudyusa/useless_machines": "^2.0.3",
+    "ycloudyusa/useless_machines": "^2.2.0",
+    "ycloudyusa/embedded_groupexpro_schedule": "^1.0",
     "drupal/lb_testimonial_blocks": "^2.2",
     "ycloudyusa/y_lb": "^5.2",
     "ycloudyusa/y_lb_demo_content": "^5.2",
-    "ycloudyusa/yusaopeny_activity_finder": "^7.1",
+    "ycloudyusa/yusaopeny_activity_finder": "^7.2",
     "ycloudyusa/yusaopeny_ymca360": "^2.0",
     "ymcatwincities/media_entity_document": "*",
     "drupal/ymca_sync": "^11.1.1",
@@ -175,44 +173,8 @@
       }
     },
     {
-      "type": "package",
-      "package": {
-        "name": "library-ckeditor/panelbutton",
-        "type": "drupal-library",
-        "version": "4.10.1",
-        "dist": {
-          "type": "zip",
-          "url": "https://download.ckeditor.com/panelbutton/releases/panelbutton_4.10.1.zip"
-        }
-      }
-    },
-    {
       "type": "git",
       "url": "https://github.com/open-y-subprojects/openy_docs"
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "library-ckeditor/colorbutton",
-        "type": "drupal-library",
-        "version": "4.10.1",
-        "dist": {
-          "type": "zip",
-          "url": "https://download.ckeditor.com/colorbutton/releases/colorbutton_4.10.1.zip"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "library-ckeditor/font",
-        "type": "drupal-library",
-        "version": "4.12.1",
-        "dist": {
-          "type": "zip",
-          "url": "https://download.ckeditor.com/font/releases/font_4.12.1.zip"
-        }
-      }
     },
     {
       "type": "package",
@@ -405,6 +367,9 @@
       "drupal/admin_toolbar": {
         "Issue #3335841 - Admin toolbar menu z-index increase": "https://www.drupal.org/files/issues/2023-02-06/3335841-2.patch",
         "Issue #3385337 - Defer menu link rebuilds to reduce queries during module install (MR !209 as of 3.6.3, without the CI hunk)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/admin_toolbar/3385337-reduce-queries-3.6.3.patch"
+      },
+      "drupal/fontyourface": {
+        "Issue #3630630: Font display hook runs after the provider submodules, so no font stylesheet is attached": "https://git.drupalcode.org/project/fontyourface/-/merge_requests/20.diff"
       },
       "drupal/plugin": {
         "2647312 - Use SubFormState in plugin selectors": "https://www.drupal.org/files/issues/2024-05-14/2647312-38-use-subformstate.patch",
