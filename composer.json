@@ -16,7 +16,7 @@
     "drupal/blazy": "^2.4 || ~3.0.0 || ~3.1.0",
     "drupal/bootstrap_layout_builder": ">=2.1.4",
     "drupal/bootstrap_styles": "<=1.1.6 || ~1.2.1",
-    "drupal/captcha": "^1.10 || ^2.0 || ^2.0@beta",
+    "drupal/captcha": "^1.10 || ^2.0.11",
     "drupal/ckeditor5_paste_filter": "~1.1.0",
     "drupal/colorapi": "^2.2",
     "drupal/confi": "^4.3",
@@ -385,9 +385,12 @@
         "Issue #3574003: Properly include install files for install hook_requirements": "https://git.drupalcode.org/project/drupal/-/merge_requests/14802.diff"
       },
       "drupal/video_embed_field": {
-        "Allow creation of new Video Embed Field media entities using the Media Browser": "https://www.drupal.org/files/issues/2024-09-25/video_embed_field-3039873-45.patch",
+        "Allow creation of new Video Embed Field media entities using the Media Browser (#3039873-45, re-rolled with explicit nullable)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/1b0cff304f5eea1664d9d47c379eaa87089842a3/patches/video_embed_field/3039873-45-explicit-nullable.patch",
         "Issue #3594291: Support php attributes (MR !119 as of 3.1.1)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/video_embed_field/3594291-support-php-attributes.patch",
         "Drupal 12: ConstraintValidator::validate() signature, core ^12": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/311c39d5ecaf5f10cd78d9d18a41fc1c0f729bba/patches/video_embed_field/d12-validator-core12.patch"
+      },
+      "solarium/solarium": {
+        "PHP 8.5 null array key in convertToKeyValueArray (no upstream fix)": "https://raw.githubusercontent.com/YCloudYUSA/yusaopeny/1b0cff304f5eea1664d9d47c379eaa87089842a3/patches/solarium/null-key-array-key-exists.patch"
       },
       "drupal/rabbit_hole": {
         "PHP 8.4 implicit nullable fixes from 8.x-1.x commit a9e6f36 (unreleased after 8.x-1.2)": "https://git.drupalcode.org/project/rabbit_hole/-/commit/a9e6f3621d692836b4be48dc62eaa0bfe63a0b06.diff",
