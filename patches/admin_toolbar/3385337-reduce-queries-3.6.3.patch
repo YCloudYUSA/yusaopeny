@@ -1,0 +1,996 @@
+diff --git a/admin_toolbar_tools/README.md b/admin_toolbar_tools/README.md
+index 616c946576281b33226996e31eacdb7e47c9e916..3fad7dfc1b8db37f0283985ce77286f776b134ef 100644
+--- a/admin_toolbar_tools/README.md
++++ b/admin_toolbar_tools/README.md
+@@ -29,6 +29,18 @@ For further information, see [Installing Drupal Modules][3].
+ 
+ No configuration is needed.
+ 
++## Menu links rebuild
++
++The menu links are rebuilt when entities like menus, roles, views or bundles
++(content types, etc.) are created, updated or deleted. To avoid hundreds of
++rebuilds, for example when installing modules, the rebuild is deferred: all the
++requests are collected and a single rebuild is done before the response is sent
++to the client (`kernel.response` event) or at the end of the request (Drush).
++
++Code saving these entities programmatically sees the previous menu links until
++then. Tests saving them in the test process have to flush the pending rebuild
++with `\Drupal::service('admin_toolbar_tools.menu_link_rebuild_manager')->destruct()`.
++
+ ## Maintainers
+ 
+ Current maintainers:
+diff --git a/admin_toolbar_tools/admin_toolbar_tools.module b/admin_toolbar_tools/admin_toolbar_tools.module
+index 414bb54c7b7f6100e5821f6dfd6cc5f78e67cf67..9ec6d98d694ec58acbec037cb3be29c807c757a6 100644
+--- a/admin_toolbar_tools/admin_toolbar_tools.module
++++ b/admin_toolbar_tools/admin_toolbar_tools.module
+@@ -50,45 +50,42 @@ function admin_toolbar_tools_help($route_name, RouteMatchInterface $route_match)
+ }
+ 
+ /**
+- * Implements hook_entity_insert().
++ * Requests a menu link rebuild when the entity is of a tracked type.
++ *
++ * @param \Drupal\Core\Entity\EntityInterface $entity
++ *   The entity that was inserted, updated or deleted.
+  */
+-function admin_toolbar_tools_entity_insert(EntityInterface $entity) {
++function _admin_toolbar_tools_request_rebuild(EntityInterface $entity): void {
+   // Skip rebuild during config sync because rebuild should
+   // always be a post-sync step.
+-  if (!\Drupal::isConfigSyncing()) {
+-    $entities = \Drupal::service('admin_toolbar_tools.helper')->getRebuildEntityTypes();
+-    if (in_array($entity->getEntityTypeId(), $entities)) {
+-      \Drupal::service('plugin.manager.menu.link')->rebuild();
+-    }
++  if (\Drupal::isConfigSyncing()) {
++    return;
++  }
++  $entities = \Drupal::service('admin_toolbar_tools.helper')->getRebuildEntityTypes();
++  if (in_array($entity->getEntityTypeId(), $entities)) {
++    \Drupal::service('admin_toolbar_tools.menu_link_rebuild_manager')->requestRebuild();
+   }
+ }
+ 
++/**
++ * Implements hook_entity_insert().
++ */
++function admin_toolbar_tools_entity_insert(EntityInterface $entity) {
++  _admin_toolbar_tools_request_rebuild($entity);
++}
++
+ /**
+  * Implements hook_entity_update().
+  */
+ function admin_toolbar_tools_entity_update(EntityInterface $entity) {
+-  // Skip rebuild during config sync because rebuild should
+-  // always be a post-sync step.
+-  if (!\Drupal::isConfigSyncing()) {
+-    $entities = \Drupal::service('admin_toolbar_tools.helper')->getRebuildEntityTypes();
+-    if (in_array($entity->getEntityTypeId(), $entities)) {
+-      \Drupal::service('plugin.manager.menu.link')->rebuild();
+-    }
+-  }
++  _admin_toolbar_tools_request_rebuild($entity);
+ }
+ 
+ /**
+  * Implements hook_entity_delete().
+  */
+ function admin_toolbar_tools_entity_delete(EntityInterface $entity) {
+-  // Skip rebuild during config sync because rebuild should
+-  // always be a post-sync step.
+-  if (!\Drupal::isConfigSyncing()) {
+-    $entities = \Drupal::service('admin_toolbar_tools.helper')->getRebuildEntityTypes();
+-    if (in_array($entity->getEntityTypeId(), $entities)) {
+-      \Drupal::service('plugin.manager.menu.link')->rebuild();
+-    }
+-  }
++  _admin_toolbar_tools_request_rebuild($entity);
+ }
+ 
+ /**
+@@ -103,5 +100,5 @@ function admin_toolbar_tools_form_project_browser_settings_alter(&$form) {
+  * Project browser integration: Helper function callback to rebuild menu items.
+  */
+ function admin_toolbar_tools_project_browser_settings_submit(&$form) {
+-  \Drupal::service('plugin.manager.menu.link')->rebuild();
++  \Drupal::service('admin_toolbar_tools.menu_link_rebuild_manager')->rebuildNow();
+ }
+diff --git a/admin_toolbar_tools/admin_toolbar_tools.services.yml b/admin_toolbar_tools/admin_toolbar_tools.services.yml
+index f9101836d92d776b163efff762c5f8e1dc0bc20c..3de7050474f42740e43121a91c38043a5a1cd46f 100644
+--- a/admin_toolbar_tools/admin_toolbar_tools.services.yml
++++ b/admin_toolbar_tools/admin_toolbar_tools.services.yml
+@@ -6,3 +6,8 @@ services:
+       - '@plugin.manager.menu.local_task'
+       - '@current_route_match'
+       - '@config.factory'
++  admin_toolbar_tools.menu_link_rebuild_manager:
++    class: Drupal\admin_toolbar_tools\MenuLinkRebuildManager
++    arguments: ['@plugin.manager.menu.link', '@event_dispatcher']
++    tags:
++      - { name: needs_destruction }
+diff --git a/admin_toolbar_tools/src/Controller/ToolbarController.php b/admin_toolbar_tools/src/Controller/ToolbarController.php
+index f16cb1bb5d7601de5db640dd557e6268a9d1e21c..cc8a4edeb33215e780651974f1aa6cca7a6b5d42 100644
+--- a/admin_toolbar_tools/src/Controller/ToolbarController.php
++++ b/admin_toolbar_tools/src/Controller/ToolbarController.php
+@@ -23,11 +23,11 @@ class ToolbarController extends ControllerBase {
+   protected $cron;
+ 
+   /**
+-   * A menu link manager instance.
++   * The menu link rebuild manager.
+    *
+-   * @var \Drupal\Core\Menu\MenuLinkManagerInterface
++   * @var \Drupal\admin_toolbar_tools\MenuLinkRebuildManager
+    */
+-  protected $menuLinkManager;
++  protected $menuLinkRebuildManager;
+ 
+   /**
+    * A context link manager instance.
+@@ -126,7 +126,7 @@ class ToolbarController extends ControllerBase {
+   public static function create(ContainerInterface $container) {
+     $instance = parent::create($container);
+     $instance->cron = $container->get('cron');
+-    $instance->menuLinkManager = $container->get('plugin.manager.menu.link');
++    $instance->menuLinkRebuildManager = $container->get('admin_toolbar_tools.menu_link_rebuild_manager');
+     $instance->contextualLinkManager = $container->get('plugin.manager.menu.contextual_link');
+     $instance->localTaskLinkManager = $container->get('plugin.manager.menu.local_task');
+     $instance->localActionLinkManager = $container->get('plugin.manager.menu.local_action');
+@@ -230,7 +230,7 @@ class ToolbarController extends ControllerBase {
+    */
+   public function flushMenu() {
+     $this->cacheMenu->deleteAll();
+-    $this->menuLinkManager->rebuild();
++    $this->menuLinkRebuildManager->rebuildNow();
+     $this->contextualLinkManager->clearCachedDefinitions();
+     $this->localTaskLinkManager->clearCachedDefinitions();
+     $this->localActionLinkManager->clearCachedDefinitions();
+diff --git a/admin_toolbar_tools/src/Form/AdminToolbarToolsSettingsForm.php b/admin_toolbar_tools/src/Form/AdminToolbarToolsSettingsForm.php
+index 9c2cf4588c539ca4f0cbd039539b574249cfcafd..211bacefcdc86135ab9cb35ddae2296966388717 100644
+--- a/admin_toolbar_tools/src/Form/AdminToolbarToolsSettingsForm.php
++++ b/admin_toolbar_tools/src/Form/AdminToolbarToolsSettingsForm.php
+@@ -23,11 +23,11 @@ class AdminToolbarToolsSettingsForm extends ConfigFormBase {
+   protected $cacheMenu;
+ 
+   /**
+-   * The menu link manager instance.
++   * The menu link rebuild manager.
+    *
+-   * @var \Drupal\Core\Menu\MenuLinkManagerInterface
++   * @var \Drupal\admin_toolbar_tools\MenuLinkRebuildManager
+    */
+-  protected $menuLinkManager;
++  protected $menuLinkRebuildManager;
+ 
+   /**
+    * The module handler.
+@@ -45,7 +45,7 @@ class AdminToolbarToolsSettingsForm extends ConfigFormBase {
+   public static function create(ContainerInterface $container) {
+     $instance = parent::create($container);
+     $instance->cacheMenu = $container->get('cache.menu');
+-    $instance->menuLinkManager = $container->get('plugin.manager.menu.link');
++    $instance->menuLinkRebuildManager = $container->get('admin_toolbar_tools.menu_link_rebuild_manager');
+     $instance->moduleHandler = $container->get('module_handler');
+     return $instance;
+   }
+@@ -122,7 +122,7 @@ class AdminToolbarToolsSettingsForm extends ConfigFormBase {
+       ->save();
+     parent::submitForm($form, $form_state);
+     $this->cacheMenu->deleteAll();
+-    $this->menuLinkManager->rebuild();
++    $this->menuLinkRebuildManager->rebuildNow();
+   }
+ 
+ }
+diff --git a/admin_toolbar_tools/src/MenuLinkRebuildManager.php b/admin_toolbar_tools/src/MenuLinkRebuildManager.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..115cfbfc03795a1f43656ea1a321d28e2f01f33e
+--- /dev/null
++++ b/admin_toolbar_tools/src/MenuLinkRebuildManager.php
+@@ -0,0 +1,144 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\admin_toolbar_tools;
++
++use Drupal\Core\DestructableInterface;
++use Drupal\Core\Menu\MenuLinkManagerInterface;
++use Symfony\Component\EventDispatcher\EventDispatcherInterface;
++use Symfony\Component\HttpKernel\Event\ResponseEvent;
++use Symfony\Component\HttpKernel\KernelEvents;
++
++/**
++ * Defers menu link rebuilds, coalescing multiple requests into one rebuild.
++ *
++ * Entity hooks in admin_toolbar_tools trigger menu link rebuilds when
++ * relevant entities (menus, roles, views, bundle types) are created,
++ * updated, or deleted. During module installation, hundreds of config
++ * entities may be created in sequence, each triggering a full rebuild.
++ * This service collects those requests and performs a single rebuild
++ * instead.
++ *
++ * The rebuild is flushed at the earliest of two points:
++ * - The 'kernel.response' event, which fires before the response is sent
++ *   to the client. This ensures interactive requests (e.g. saving a role
++ *   or menu through a form, which redirects afterwards) always see fresh
++ *   menu links on the very next page load, with no race condition.
++ * - Request termination, via DestructableInterface. This is a fallback
++ *   for contexts that never dispatch 'kernel.response' (e.g. Drush/CLI),
++ *   where Drupal still guarantees destruct() is called.
++ *
++ * Unlike a statically tagged 'event_subscriber', the 'kernel.response'
++ * listener is only registered on demand, the first time requestRebuild()
++ * is actually called. This means requests that never save a tracked
++ * entity type (e.g. anonymous, Page Cache-served page views) never
++ * instantiate this service or touch the event dispatcher at all.
++ *
++ * Both flush paths call the same logic, and the internal flag is reset
++ * once a rebuild has run, so it is safe for both to fire in the same
++ * request.
++ *
++ * @internal
++ */
++class MenuLinkRebuildManager implements DestructableInterface {
++
++  /**
++   * Whether a menu link rebuild has been requested.
++   *
++   * @var bool
++   */
++  protected bool $needsRebuild = FALSE;
++
++  /**
++   * Whether the 'kernel.response' listener has been registered.
++   *
++   * @var bool
++   */
++  protected bool $listenerRegistered = FALSE;
++
++  /**
++   * The menu link manager.
++   *
++   * @var \Drupal\Core\Menu\MenuLinkManagerInterface
++   */
++  protected MenuLinkManagerInterface $menuLinkManager;
++
++  /**
++   * The event dispatcher.
++   *
++   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
++   */
++  protected EventDispatcherInterface $eventDispatcher;
++
++  /**
++   * Constructs a MenuLinkRebuildManager object.
++   *
++   * @param \Drupal\Core\Menu\MenuLinkManagerInterface $menu_link_manager
++   *   The menu link manager.
++   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
++   *   The event dispatcher.
++   */
++  public function __construct(MenuLinkManagerInterface $menu_link_manager, EventDispatcherInterface $event_dispatcher) {
++    $this->menuLinkManager = $menu_link_manager;
++    $this->eventDispatcher = $event_dispatcher;
++  }
++
++  /**
++   * Marks that a menu link rebuild is needed.
++   *
++   * On the first call within a request, this also registers a
++   * 'kernel.response' listener so the rebuild is flushed before the
++   * response is sent to the client.
++   */
++  public function requestRebuild(): void {
++    $this->needsRebuild = TRUE;
++    if (!$this->listenerRegistered) {
++      $this->listenerRegistered = TRUE;
++      $this->eventDispatcher->addListener(KernelEvents::RESPONSE, [$this, 'onKernelResponse']);
++    }
++  }
++
++  /**
++   * Rebuilds the menu links immediately and clears any pending request.
++   *
++   * Meant for explicit user actions (e.g. flushing the menu or saving the
++   * module settings), so the deferred rebuild does not run a second time at
++   * the end of the request.
++   */
++  public function rebuildNow(): void {
++    $this->needsRebuild = FALSE;
++    $this->menuLinkManager->rebuild();
++  }
++
++  /**
++   * Performs the rebuild if one has been requested.
++   */
++  protected function flushIfNeeded(): void {
++    if ($this->needsRebuild) {
++      $this->rebuildNow();
++    }
++  }
++
++  /**
++   * Flushes a pending rebuild before the response is sent to the client.
++   *
++   * Ignores subrequests (e.g. ESI/render subrequests), which do not
++   * correspond to a response actually being delivered to the client.
++   */
++  public function onKernelResponse(ResponseEvent $event): void {
++    // Drupal 9.5 (Symfony 4.4) has neither isMainRequest() nor the MAIN_REQUEST
++    // constant, only MASTER_REQUEST: they all have the value 1.
++    if ($event->getRequestType() === 1) {
++      $this->flushIfNeeded();
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function destruct(): void {
++    $this->flushIfNeeded();
++  }
++
++}
+diff --git a/admin_toolbar_tools/src/Plugin/Derivative/ExtraLinks.php b/admin_toolbar_tools/src/Plugin/Derivative/ExtraLinks.php
+index 88248bbe2e8c0e424f6b788e3d7885843054fd11..1849c451f1679d0686ca375311e4ba37f1751858 100644
+--- a/admin_toolbar_tools/src/Plugin/Derivative/ExtraLinks.php
++++ b/admin_toolbar_tools/src/Plugin/Derivative/ExtraLinks.php
+@@ -65,6 +65,13 @@ class ExtraLinks extends DeriverBase implements ContainerDeriverInterface {
+    */
+   protected $currentUser;
+ 
++  /**
++   * Cache of existing route names keyed by route name.
++   *
++   * @var array<string, bool>|null
++   */
++  protected ?array $existingRoutes = NULL;
++
+   /**
+    * {@inheritdoc}
+    */
+@@ -101,6 +108,9 @@ class ExtraLinks extends DeriverBase implements ContainerDeriverInterface {
+    *   An array of menu links plugin definitions.
+    */
+   public function getDerivativeDefinitions($base_plugin_definition) {
++    // Routes can change between two builds in the same request (router
++    // rebuild), so the route names cache only lives for one build.
++    $this->existingRoutes = NULL;
+     $links = [];
+     $admin_toolbar_tools_settings = $this->configFactory->get('admin_toolbar_tools.settings');
+     $max_bundle_number = $admin_toolbar_tools_settings->get('max_bundle_number');
+@@ -816,7 +826,20 @@ class ExtraLinks extends DeriverBase implements ContainerDeriverInterface {
+    *   Whether a route with that route name exists.
+    */
+   public function routeExists($route_name) {
+-    return (count($this->routeProvider->getRoutesByNames([$route_name])) === 1);
++    if (!isset($this->existingRoutes)) {
++      $this->preloadRouteCache();
++    }
++    return isset($this->existingRoutes[$route_name]);
++  }
++
++  /**
++   * Preloads all routes into a local cache to avoid repeated route rebuilds.
++   */
++  protected function preloadRouteCache(): void {
++    $this->existingRoutes = [];
++    foreach ($this->routeProvider->getAllRoutes() as $name => $route) {
++      $this->existingRoutes[$name] = TRUE;
++    }
+   }
+ 
+   /**
+diff --git a/admin_toolbar_tools/tests/src/Functional/AdminToolbarToolsExtraLinksTest.php b/admin_toolbar_tools/tests/src/Functional/AdminToolbarToolsExtraLinksTest.php
+index 2030c4d57c25d65fdc5503c8277e905977141849..e16a05e6a77de57606e055b282d1a5c8dbe884d1 100644
+--- a/admin_toolbar_tools/tests/src/Functional/AdminToolbarToolsExtraLinksTest.php
++++ b/admin_toolbar_tools/tests/src/Functional/AdminToolbarToolsExtraLinksTest.php
+@@ -503,6 +503,10 @@ class AdminToolbarToolsExtraLinksTest extends BrowserTestBase {
+       }
+     }
+ 
++    // Flush the deferred menu link rebuild so deleted/updated entities
++    // are reflected in menu links before the next page load.
++    \Drupal::service('admin_toolbar_tools.menu_link_rebuild_manager')->destruct();
++
+     // Reload the admin page to ensure the HTML and JS are reloaded.
+     $this->drupalGet('admin');
+ 
+diff --git a/admin_toolbar_tools/tests/src/Kernel/MenuLinkRebuildManagerIntegrationTest.php b/admin_toolbar_tools/tests/src/Kernel/MenuLinkRebuildManagerIntegrationTest.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..8883fb53ed44bfc1d53064be0e0f287ede98049f
+--- /dev/null
++++ b/admin_toolbar_tools/tests/src/Kernel/MenuLinkRebuildManagerIntegrationTest.php
+@@ -0,0 +1,138 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Tests\admin_toolbar_tools\Kernel;
++
++use Drupal\KernelTests\KernelTestBase;
++use Drupal\user\Entity\Role;
++use Drupal\user\Entity\User;
++use Symfony\Component\HttpFoundation\Request;
++use Symfony\Component\HttpFoundation\Response;
++use Symfony\Component\HttpKernel\Event\ResponseEvent;
++use Symfony\Component\HttpKernel\HttpKernelInterface;
++use Symfony\Component\HttpKernel\KernelEvents;
++use PHPUnit\Framework\Attributes\IgnoreDeprecations;
++
++/**
++ * Tests the end-to-end wiring of the deferred menu link rebuild.
++ *
++ * Unlike \Drupal\Tests\admin_toolbar_tools\Unit\MenuLinkRebuildManagerTest,
++ * which exercises the service in isolation with mocked collaborators, this
++ * test uses the real service container and real entity hooks to confirm
++ * that admin_toolbar_tools_entity_insert()/_update()/_delete() correctly
++ * resolve and call the 'admin_toolbar_tools.menu_link_rebuild_manager'
++ * service, and that the rebuild is deferred until either the
++ * 'kernel.response' event or destruct() (request termination) runs.
++ *
++ * @group admin_toolbar
++ * @group admin_toolbar_tools
++ */
++#[IgnoreDeprecations]
++class MenuLinkRebuildManagerIntegrationTest extends KernelTestBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  protected static $modules = [
++    'system',
++    'user',
++    'admin_toolbar_tools',
++  ];
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setUp(): void {
++    parent::setUp();
++    $this->installConfig(['admin_toolbar_tools']);
++  }
++
++  /**
++   * Reads the protected $needsRebuild flag off the rebuild manager service.
++   *
++   * The service intentionally exposes no public getter for this internal
++   * state, since production code has no need for one. Reflection is used
++   * here purely for test observability of the real, container-resolved
++   * singleton.
++   */
++  protected function needsRebuild(object $manager): bool {
++    $property = new \ReflectionProperty($manager, 'needsRebuild');
++    return $property->getValue($manager);
++  }
++
++  /**
++   * Tests that saving tracked entities defers the rebuild until destruct().
++   */
++  public function testEntitySavesDeferRebuildUntilDestruct(): void {
++    $manager = \Drupal::service('admin_toolbar_tools.menu_link_rebuild_manager');
++    $this->assertFalse($this->needsRebuild($manager), 'No rebuild is needed before any relevant entity is saved.');
++
++    // 'user_role' is one of the entity types tracked by
++    // AdminToolbarToolsHelper::getRebuildEntityTypes(), so saving one
++    // should trigger admin_toolbar_tools_entity_insert() and, in turn,
++    // requestRebuild() on the real container-resolved service.
++    Role::create(['id' => 'test_role_1', 'label' => 'Test role 1'])->save();
++    $this->assertTrue($this->needsRebuild($manager), 'Saving a tracked entity type requests a rebuild.');
++
++    // Saving a second tracked entity before destruct() confirms the hooks
++    // keep resolving and flagging the same singleton service, without
++    // performing the rebuild itself yet.
++    Role::create(['id' => 'test_role_2', 'label' => 'Test role 2'])->save();
++    $this->assertTrue($this->needsRebuild($manager));
++
++    $manager->destruct();
++    $this->assertFalse($this->needsRebuild($manager), 'The flag is reset once the deferred rebuild has run.');
++  }
++
++  /**
++   * Tests that the service is really wired to the kernel.response event.
++   *
++   * This confirms that requestRebuild() actually registers a listener on
++   * the real, compiled event dispatcher (not just a mock), so a
++   * main-request response flushes a pending rebuild before it reaches
++   * the client.
++   */
++  public function testKernelResponseEventFlushesRebuildOnRealDispatcher(): void {
++    $manager = \Drupal::service('admin_toolbar_tools.menu_link_rebuild_manager');
++    Role::create(['id' => 'test_role_3', 'label' => 'Test role 3'])->save();
++    $this->assertTrue($this->needsRebuild($manager));
++
++    $event = new ResponseEvent(
++      $this->createMock(HttpKernelInterface::class),
++      Request::create('/'),
++      // The main request type has a different name before Symfony 5.3.
++      1,
++      new Response(),
++    );
++    \Drupal::service('event_dispatcher')->dispatch($event, KernelEvents::RESPONSE);
++
++    $this->assertFalse($this->needsRebuild($manager), 'The kernel.response event flushed the pending rebuild.');
++  }
++
++  /**
++   * Tests that saving an untracked entity type does not request a rebuild.
++   *
++   * Also confirms that no 'kernel.response' listener gets registered on
++   * the real event dispatcher in this case, since the listener is only
++   * attached on demand from within requestRebuild(). This is what keeps
++   * the vast majority of requests (which never save a tracked entity
++   * type) from touching this service or the event dispatcher at all.
++   */
++  public function testUnrelatedEntityTypeDoesNotRequestRebuild(): void {
++    $this->installEntitySchema('user');
++    $manager = \Drupal::service('admin_toolbar_tools.menu_link_rebuild_manager');
++    /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher */
++    $event_dispatcher = \Drupal::service('event_dispatcher');
++    $listeners_before = $event_dispatcher->getListeners(KernelEvents::RESPONSE);
++
++    // 'user' is a content entity type without bundles, so it is not part
++    // of AdminToolbarToolsHelper::getRebuildEntityTypes(); saving one
++    // should not mark a rebuild as needed.
++    User::create(['name' => 'test user'])->save();
++
++    $this->assertFalse($this->needsRebuild($manager));
++    $this->assertCount(count($listeners_before), $event_dispatcher->getListeners(KernelEvents::RESPONSE), 'No kernel.response listener was registered for an untracked entity type.');
++  }
++
++}
+diff --git a/admin_toolbar_tools/tests/src/Traits/AdminToolbarToolsEntityCreationTrait.php b/admin_toolbar_tools/tests/src/Traits/AdminToolbarToolsEntityCreationTrait.php
+index 2ba8aa478fe6c2166a37714b69124d4d7b6fe5d0..a5723086ea388c1badfa4bbb585d1a0e23f4d393 100644
+--- a/admin_toolbar_tools/tests/src/Traits/AdminToolbarToolsEntityCreationTrait.php
++++ b/admin_toolbar_tools/tests/src/Traits/AdminToolbarToolsEntityCreationTrait.php
+@@ -406,6 +406,10 @@ trait AdminToolbarToolsEntityCreationTrait {
+     // array $testEntityTypesExtraLinks['bundle_ids'] in 'raw' and 'chunked'.
+     $this->createRandomEntityTypeBundles($max_bundle_number, $entity_bundle_ids_count);
+ 
++    // Flush the deferred menu link rebuild so links created above are
++    // available for subsequent HTTP requests in the test.
++    \Drupal::service('admin_toolbar_tools.menu_link_rebuild_manager')->destruct();
++
+     // Remove the 'permissions' operation link for 'comment_type' and
+     // 'contact_form' entity types for Drupal 10 and below, since they do not
+     // have a 'Manage permissions' link in these versions.
+diff --git a/admin_toolbar_tools/tests/src/Unit/MenuLinkRebuildManagerTest.php b/admin_toolbar_tools/tests/src/Unit/MenuLinkRebuildManagerTest.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..3ee092aa0fe4703b72a29d3e67141f0ecf079a08
+--- /dev/null
++++ b/admin_toolbar_tools/tests/src/Unit/MenuLinkRebuildManagerTest.php
+@@ -0,0 +1,272 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Tests\admin_toolbar_tools\Unit;
++
++use Drupal\Core\Menu\MenuLinkManagerInterface;
++use Drupal\Tests\UnitTestCase;
++use Drupal\admin_toolbar_tools\MenuLinkRebuildManager;
++use PHPUnit\Framework\Attributes\IgnoreDeprecations;
++use Symfony\Component\EventDispatcher\EventDispatcherInterface;
++use Symfony\Component\HttpFoundation\Request;
++use Symfony\Component\HttpFoundation\Response;
++use Symfony\Component\HttpKernel\Event\ResponseEvent;
++use Symfony\Component\HttpKernel\HttpKernelInterface;
++use Symfony\Component\HttpKernel\KernelEvents;
++
++/**
++ * Tests the deferred menu link rebuild manager.
++ *
++ * @coversDefaultClass \Drupal\admin_toolbar_tools\MenuLinkRebuildManager
++ * @group admin_toolbar
++ * @group admin_toolbar_tools
++ */
++#[IgnoreDeprecations]
++class MenuLinkRebuildManagerTest extends UnitTestCase {
++
++  /**
++   * The main request type (named MASTER_REQUEST before Symfony 5.3).
++   */
++  protected const MAIN_REQUEST = 1;
++
++  /**
++   * Creates a ResponseEvent for the given request type.
++   */
++  protected function createResponseEvent(int $requestType): ResponseEvent {
++    return new ResponseEvent(
++      $this->createMock(HttpKernelInterface::class),
++      Request::create('/'),
++      $requestType,
++      new Response(),
++    );
++  }
++
++  /**
++   * Tests that destruct() does nothing when no rebuild was requested.
++   *
++   * Also confirms the event dispatcher is never touched: a request that
++   * never saves a tracked entity type must not register any listener.
++   *
++   * @covers ::destruct
++   */
++  public function testDestructWithoutRequestDoesNotRebuild(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $menuLinkManager->expects($this->never())->method('rebuild');
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++    $eventDispatcher->expects($this->never())->method('addListener');
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    $manager->destruct();
++  }
++
++  /**
++   * Tests that requestRebuild() registers a 'kernel.response' listener.
++   *
++   * @covers ::requestRebuild
++   */
++  public function testRequestRebuildRegistersResponseListener(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++    $eventDispatcher->expects($this->once())
++      ->method('addListener')
++      ->with(
++        KernelEvents::RESPONSE,
++        $this->callback(fn ($listener) => is_array($listener) && $listener[1] === 'onKernelResponse'),
++      );
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    $manager->requestRebuild();
++  }
++
++  /**
++   * Tests that repeated requests only register the listener once.
++   *
++   * This is what keeps the service cheap for the common case: the
++   * listener is only ever attached once per request, no matter how many
++   * tracked entities are saved.
++   *
++   * @covers ::requestRebuild
++   */
++  public function testRepeatedRebuildRequestsOnlyRegisterListenerOnce(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++    $eventDispatcher->expects($this->once())->method('addListener');
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    for ($i = 0; $i < 50; $i++) {
++      $manager->requestRebuild();
++    }
++  }
++
++  /**
++   * Tests that a single rebuild request results in exactly one rebuild.
++   *
++   * @covers ::requestRebuild
++   * @covers ::destruct
++   */
++  public function testSingleRebuildRequestTriggersOneRebuild(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $menuLinkManager->expects($this->once())->method('rebuild');
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    $manager->requestRebuild();
++    $manager->destruct();
++  }
++
++  /**
++   * Tests that multiple rebuild requests are coalesced into one rebuild.
++   *
++   * This is the core fix for issue #3385337: creating/updating/deleting
++   * many entities in a single request (e.g. during config import or bulk
++   * content creation) must trigger only a single menu link rebuild.
++   *
++   * @covers ::requestRebuild
++   * @covers ::destruct
++   */
++  public function testMultipleRebuildRequestsTriggerOnlyOneRebuild(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $menuLinkManager->expects($this->once())->method('rebuild');
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    for ($i = 0; $i < 50; $i++) {
++      $manager->requestRebuild();
++    }
++    $manager->destruct();
++  }
++
++  /**
++   * Tests that calling destruct() twice only rebuilds once.
++   *
++   * The $needsRebuild flag is reset after a rebuild, so a second call to
++   * destruct() (e.g. a manual flush in a test, followed by the real
++   * kernel terminate event) does not trigger a redundant rebuild.
++   *
++   * @covers ::requestRebuild
++   * @covers ::destruct
++   */
++  public function testDestructResetsFlagAfterRebuild(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $menuLinkManager->expects($this->once())->method('rebuild');
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    $manager->requestRebuild();
++    $manager->destruct();
++    $manager->destruct();
++  }
++
++  /**
++   * Tests that a rebuild can be requested again after a previous flush.
++   *
++   * Also confirms the listener is only ever registered once per manager
++   * instance, even across multiple request/flush cycles.
++   *
++   * @covers ::requestRebuild
++   * @covers ::destruct
++   */
++  public function testRebuildCanBeRequestedAgainAfterDestruct(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $menuLinkManager->expects($this->exactly(2))->method('rebuild');
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++    $eventDispatcher->expects($this->once())->method('addListener');
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    $manager->requestRebuild();
++    $manager->destruct();
++    $manager->requestRebuild();
++    $manager->destruct();
++  }
++
++  /**
++   * Tests that a main request response flushes a pending rebuild.
++   *
++   * This is what makes interactive form submissions (e.g. saving a role
++   * or menu) see fresh menu links on the very next page load: the
++   * rebuild now runs before the response is sent to the client, instead
++   * of racing with it via DestructableInterface.
++   *
++   * @covers ::onKernelResponse
++   */
++  public function testMainRequestResponseFlushesPendingRebuild(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $menuLinkManager->expects($this->once())->method('rebuild');
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    $manager->requestRebuild();
++    $manager->onKernelResponse($this->createResponseEvent(self::MAIN_REQUEST));
++  }
++
++  /**
++   * Tests that a subrequest response does not flush a pending rebuild.
++   *
++   * @covers ::onKernelResponse
++   */
++  public function testSubRequestResponseDoesNotFlushPendingRebuild(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $menuLinkManager->expects($this->never())->method('rebuild');
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    $manager->requestRebuild();
++    $manager->onKernelResponse($this->createResponseEvent(HttpKernelInterface::SUB_REQUEST));
++  }
++
++  /**
++   * Tests that destruct() is a safe no-op once kernel.response has flushed.
++   *
++   * Covers the CLI fallback path: onKernelResponse() (HTTP) and destruct()
++   * (kernel.terminate, always called for CLI/Drush) can both fire in the
++   * same request without triggering a second rebuild.
++   *
++   * @covers ::onKernelResponse
++   * @covers ::destruct
++   */
++  public function testDestructIsNoOpAfterKernelResponseFlushed(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $menuLinkManager->expects($this->once())->method('rebuild');
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    $manager->requestRebuild();
++    $manager->onKernelResponse($this->createResponseEvent(self::MAIN_REQUEST));
++    $manager->destruct();
++  }
++
++  /**
++   * Tests that rebuildNow() rebuilds immediately, even without a request.
++   *
++   * @covers ::rebuildNow
++   */
++  public function testRebuildNowRebuildsImmediately(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $menuLinkManager->expects($this->once())->method('rebuild');
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    $manager->rebuildNow();
++  }
++
++  /**
++   * Tests that rebuildNow() clears a pending request and rebuilds only once.
++   *
++   * @covers ::rebuildNow
++   * @covers ::destruct
++   */
++  public function testRebuildNowClearsPendingRequest(): void {
++    $menuLinkManager = $this->createMock(MenuLinkManagerInterface::class);
++    $menuLinkManager->expects($this->once())->method('rebuild');
++    $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
++
++    $manager = new MenuLinkRebuildManager($menuLinkManager, $eventDispatcher);
++    $manager->requestRebuild();
++    $manager->rebuildNow();
++    // Neither the response listener nor the termination must rebuild again.
++    $manager->onKernelResponse($this->createResponseEvent(self::MAIN_REQUEST));
++    $manager->destruct();
++  }
++
++}
+diff --git a/admin_toolbar_tools/tests/src/Unit/Plugin/Derivative/ExtraLinksTest.php b/admin_toolbar_tools/tests/src/Unit/Plugin/Derivative/ExtraLinksTest.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..9b3921d156081f95185f0131b782f56067549a5c
+--- /dev/null
++++ b/admin_toolbar_tools/tests/src/Unit/Plugin/Derivative/ExtraLinksTest.php
+@@ -0,0 +1,151 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Tests\admin_toolbar_tools\Unit\Plugin\Derivative;
++
++use Drupal\Core\Config\ConfigFactoryInterface;
++use Drupal\Core\Config\ImmutableConfig;
++use Drupal\Core\Entity\EntityStorageInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Extension\ModuleHandlerInterface;
++use Drupal\Core\Extension\ThemeHandlerInterface;
++use Drupal\Core\Routing\RouteProviderInterface;
++use Drupal\Core\Session\AccountInterface;
++use Drupal\Tests\UnitTestCase;
++use Drupal\admin_toolbar_tools\Plugin\Derivative\ExtraLinks;
++use Symfony\Component\Routing\Route;
++use PHPUnit\Framework\Attributes\IgnoreDeprecations;
++
++/**
++ * Tests the route existence cache in the ExtraLinks deriver.
++ *
++ * @coversDefaultClass \Drupal\admin_toolbar_tools\Plugin\Derivative\ExtraLinks
++ * @group admin_toolbar
++ * @group admin_toolbar_tools
++ */
++#[IgnoreDeprecations]
++class ExtraLinksTest extends UnitTestCase {
++
++  /**
++   * Creates an ExtraLinks deriver backed by the given route provider.
++   */
++  protected function createExtraLinks(RouteProviderInterface $route_provider): ExtraLinks {
++    return new ExtraLinks(
++      $this->createMock(EntityTypeManagerInterface::class),
++      $this->createMock(ModuleHandlerInterface::class),
++      $route_provider,
++      $this->createMock(ThemeHandlerInterface::class),
++      $this->createMock(ConfigFactoryInterface::class),
++      $this->createMock(AccountInterface::class),
++    );
++  }
++
++  /**
++   * @covers ::routeExists
++   */
++  public function testRouteExistsReturnsTrueForKnownRoute(): void {
++    $route_provider = $this->createMock(RouteProviderInterface::class);
++    $route_provider->expects($this->once())
++      ->method('getAllRoutes')
++      ->willReturn(['entity.node.canonical' => new Route('/node/{node}')]);
++
++    $extra_links = $this->createExtraLinks($route_provider);
++
++    $this->assertTrue($extra_links->routeExists('entity.node.canonical'));
++  }
++
++  /**
++   * @covers ::routeExists
++   */
++  public function testRouteExistsReturnsFalseForUnknownRoute(): void {
++    $route_provider = $this->createMock(RouteProviderInterface::class);
++    $route_provider->expects($this->once())
++      ->method('getAllRoutes')
++      ->willReturn(['entity.node.canonical' => new Route('/node/{node}')]);
++
++    $extra_links = $this->createExtraLinks($route_provider);
++
++    $this->assertFalse($extra_links->routeExists('entity.does_not_exist.canonical'));
++  }
++
++  /**
++   * @covers ::routeExists
++   * @covers ::preloadRouteCache
++   */
++  public function testRouteExistsOnlyLoadsRoutesOnce(): void {
++    $route_provider = $this->createMock(RouteProviderInterface::class);
++    $route_provider->expects($this->once())
++      ->method('getAllRoutes')
++      ->willReturn([
++        'entity.node.canonical' => new Route('/node/{node}'),
++        'entity.node.edit_form' => new Route('/node/{node}/edit'),
++      ]);
++
++    $extra_links = $this->createExtraLinks($route_provider);
++
++    // Call routeExists() many times, for both existing and missing
++    // routes. getAllRoutes() must only be invoked once (asserted above
++    // via expects($this->once())), regardless of how many times
++    // routeExists() is called.
++    for ($i = 0; $i < 10; $i++) {
++      $this->assertTrue($extra_links->routeExists('entity.node.canonical'));
++      $this->assertTrue($extra_links->routeExists('entity.node.edit_form'));
++      $this->assertFalse($extra_links->routeExists('entity.node.delete_form'));
++    }
++  }
++
++  /**
++   * Tests the route cache does not outlive a single derivative build.
++   *
++   * @covers ::getDerivativeDefinitions
++   * @covers ::routeExists
++   */
++  public function testRouteCacheIsResetForEachDerivativeBuild(): void {
++    // The route only exists for the second build, as if the router was rebuilt
++    // in between during the same request.
++    $route_provider = $this->createMock(RouteProviderInterface::class);
++    $route_provider->expects($this->exactly(2))
++      ->method('getAllRoutes')
++      ->willReturnOnConsecutiveCalls(
++        [],
++        ['project_browser.browse' => new Route('/admin/modules/browse/{source}')],
++      );
++
++    $config = $this->createMock(ImmutableConfig::class);
++    $config->method('get')->willReturnCallback(
++      fn (string $key) => $key === 'enabled_sources' ? ['source_a' => []] : NULL,
++    );
++    $config_factory = $this->createMock(ConfigFactoryInterface::class);
++    $config_factory->method('get')->willReturn($config);
++
++    $module_handler = $this->createMock(ModuleHandlerInterface::class);
++    $module_handler->method('moduleExists')
++      ->willReturnCallback(fn (string $module) => $module === 'project_browser');
++
++    $entity_type_manager = $this->createMock(EntityTypeManagerInterface::class);
++    $entity_type_manager->method('getDefinitions')->willReturn([]);
++    $storage = $this->createMock(EntityStorageInterface::class);
++    $storage->method('loadMultiple')->willReturn([]);
++    $storage->method('loadByProperties')->willReturn([]);
++    $entity_type_manager->method('getStorage')->willReturn($storage);
++
++    $theme_handler = $this->createMock(ThemeHandlerInterface::class);
++    $theme_handler->method('listInfo')->willReturn([]);
++
++    $extra_links = new ExtraLinks(
++      $entity_type_manager,
++      $module_handler,
++      $route_provider,
++      $theme_handler,
++      $config_factory,
++      $this->createMock(AccountInterface::class),
++    );
++    $extra_links->setStringTranslation($this->getStringTranslationStub());
++
++    $base_plugin_definition = ['id' => 'admin_toolbar_tools.extra_links'];
++    $this->assertArrayNotHasKey('project_browser.browse.source_a', $extra_links->getDerivativeDefinitions($base_plugin_definition));
++    $this->assertArrayHasKey('project_browser.browse.source_a', $extra_links->getDerivativeDefinitions($base_plugin_definition));
++  }
++
++}

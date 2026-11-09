@@ -1239,3 +1239,121 @@ function openy_update_11003(): string {
   openy_optout_syncer_bundles_from_trash();
   return 'Syncer-owned bundles excluded from Trash where applicable.';
 }
+
+/**
+ * Install text_with_summary on sites that predate the D12 core split.
+ *
+ * Drupal 12 moved the text_with_summary field type/formatter/widget out of
+ * core's text module into the now-required contrib module
+ * drupal/text_with_summary. Composer always pulls the package in once a
+ * site's composer.json requires ^12, but that doesn't enable the module on
+ * a database that predates the split -- any body field using this field
+ * type (lb_accordion's accordion_item, article_lb, and others across the
+ * distro) keeps fataling with "text_with_summary plugin does not exist"
+ * until the module is explicitly installed.
+ */
+function openy_update_11004(): string {
+  if (\Drupal::moduleHandler()->moduleExists('text_with_summary')) {
+    return 'text_with_summary is already installed.';
+  }
+  // Core 11 still ships the field type inside text, and the package is not
+  // required by this profile's composer.json (it needs core ^11.5 || ^12,
+  // the profile still supports ^11.4): nothing to install without its code.
+  if (!\Drupal::service('extension.list.module')->exists('text_with_summary')) {
+    return 'text_with_summary code not present (core 11 or package not required), skipped.';
+  }
+  \Drupal::service('module_installer')->install(['text_with_summary']);
+  return 'Installed text_with_summary (D12 core split from text).';
+}
+
+/**
+ * Uninstall toolbar-dependent modules and remove removed core modules
+ * (toolbar, history) from the enabled module list ahead of D12.
+ *
+ * Per W4-D3: the admin UI moves to core Navigation; toolbar has no D12
+ * release and no replacement is planned. admin_toolbar(+_tools) depend
+ * on core's removed toolbar module and must be uninstalled first (their
+ * code still exists, so the normal uninstall path works). toolbar and
+ * history no longer have providing code at all in D12, so they can't go
+ * through the normal uninstall path; removing them from core.extension
+ * directly is Drupal's own documented recommendation for core-removed
+ * modules still listed as enabled after a major upgrade.
+ */
+function openy_update_11005(): string {
+  // Uninstalling toolbar strips 'access toolbar' from every role, so remember
+  // the holders for openy_update_11006() (moves them to 'access navigation').
+  $holders = \Drupal::state()->get('openy_update_11005.toolbar_roles', []);
+  foreach (\Drupal\user\Entity\Role::loadMultiple() as $role) {
+    if (!$role->isAdmin() && in_array('access toolbar', $role->getPermissions(), TRUE)) {
+      $holders[] = $role->id();
+    }
+  }
+  if ($holders) {
+    \Drupal::state()->set('openy_update_11005.toolbar_roles', array_values(array_unique($holders)));
+  }
+
+  $uninstalled = [];
+  $installer = \Drupal::service('module_installer');
+  foreach (['admin_toolbar_tools', 'admin_toolbar'] as $module) {
+    if (\Drupal::moduleHandler()->moduleExists($module)) {
+      $installer->uninstall([$module]);
+      $uninstalled[] = $module;
+    }
+  }
+
+  $removed = [];
+  foreach (['toolbar', 'history'] as $module) {
+    if (\Drupal::config('core.extension')->get("module.$module") === NULL) {
+      continue;
+    }
+    if (\Drupal::service('extension.list.module')->exists($module)) {
+      // 11.x: code present, a real uninstall removes config, permissions and schema.
+      $installer->uninstall([$module]);
+    }
+    else {
+      // 12: code gone, only the extension entry and schema version can be dropped.
+      \Drupal::configFactory()->getEditable('core.extension')->clear("module.$module")->save(TRUE);
+      \Drupal::keyValue('system.schema')->delete($module);
+    }
+    $removed[] = $module;
+  }
+
+  return sprintf(
+    'Uninstalled: %s. Toolbar/history removed (uninstalled when code present, else dropped from core.extension): %s.',
+    $uninstalled ? implode(', ', $uninstalled) : 'none',
+    $removed ? implode(', ', $removed) : 'none'
+  );
+}
+
+/**
+ * Install core Navigation and move 'access toolbar' roles to 'access navigation'.
+ *
+ * Navigation first: Role::calculateDependencies() strips permissions no
+ * installed module provides, so the grant must follow the install.
+ */
+function openy_update_11006(): string {
+  if (!\Drupal::moduleHandler()->moduleExists('navigation')) {
+    \Drupal::service('module_installer')->install(['navigation']);
+  }
+  // Roles recorded by 11005 (its toolbar uninstall already stripped the
+  // permission) plus any role still holding 'access toolbar'.
+  $holders = \Drupal::state()->get('openy_update_11005.toolbar_roles', []);
+  $moved = [];
+  foreach (\Drupal\user\Entity\Role::loadMultiple() as $role) {
+    // isAdmin() first: hasPermission() is TRUE for admin roles.
+    if ($role->isAdmin()) {
+      continue;
+    }
+    $had = in_array('access toolbar', $role->getPermissions(), TRUE);
+    if (!$had && !in_array($role->id(), $holders, TRUE)) {
+      continue;
+    }
+    if ($had) {
+      $role->revokePermission('access toolbar');
+    }
+    $role->grantPermission('access navigation')->save();
+    $moved[] = $role->id();
+  }
+  \Drupal::state()->delete('openy_update_11005.toolbar_roles');
+  return 'Navigation enabled. Roles moved to "access navigation": ' . ($moved ? implode(', ', $moved) : 'none') . '.';
+}

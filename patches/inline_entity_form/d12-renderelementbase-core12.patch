@@ -1,0 +1,74 @@
+diff --git a/inline_entity_form.info.yml b/inline_entity_form.info.yml
+index 7756db5..4a97ba2 100644
+--- a/inline_entity_form.info.yml
++++ b/inline_entity_form.info.yml
+@@ -2,5 +2,5 @@ name: Inline Entity Form
+ description: "Provides a widget for inline management (creation, modification, removal) of referenced entities. "
+ type: module
+ package: Fields
+-core_version_requirement: ^8.8 || ^9 || ^10 || ^11
++core_version_requirement: ^8.8 || ^9 || ^10 || ^11 || ^12
+ php: 7.1
+diff --git a/inline_entity_form.module b/inline_entity_form.module
+index a48a930..7fa244c 100644
+--- a/inline_entity_form.module
++++ b/inline_entity_form.module
+@@ -63,6 +63,10 @@ function inline_entity_form_theme() {
+   return [
+     'inline_entity_form_entity_table' => [
+       'render element' => 'form',
++      // Core no longer auto-discovers template_preprocess_HOOK() in .module
++      // files; register it explicitly.
++      // @see https://www.drupal.org/node/3542527
++      'initial preprocess' => 'template_preprocess_inline_entity_form_entity_table',
+     ],
+   ];
+ }
+diff --git a/src/Element/InlineEntityForm.php b/src/Element/InlineEntityForm.php
+index 6a5d43a..f3156cc 100644
+--- a/src/Element/InlineEntityForm.php
++++ b/src/Element/InlineEntityForm.php
+@@ -6,7 +6,7 @@ use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+ use Drupal\Core\Entity\EntityInterface;
+ use Drupal\Core\Entity\RevisionLogInterface;
+ use Drupal\Core\Form\FormStateInterface;
+-use Drupal\Core\Render\Element\RenderElement;
++use Drupal\Core\Render\Element\RenderElementBase;
+ use Drupal\Core\TypedData\TranslatableInterface;
+ use Drupal\inline_entity_form\ElementSubmit;
+ use Drupal\inline_entity_form\TranslationHelper;
+@@ -30,7 +30,7 @@ use Drupal\inline_entity_form\TranslationHelper;
+  *
+  * @RenderElement("inline_entity_form")
+  */
+-class InlineEntityForm extends RenderElement {
++class InlineEntityForm extends RenderElementBase {
+ 
+   /**
+    * {@inheritdoc}
+diff --git a/tests/modules/inline_entity_form_test/inline_entity_form_test.info.yml b/tests/modules/inline_entity_form_test/inline_entity_form_test.info.yml
+index f78b877..75ba39a 100644
+--- a/tests/modules/inline_entity_form_test/inline_entity_form_test.info.yml
++++ b/tests/modules/inline_entity_form_test/inline_entity_form_test.info.yml
+@@ -1,7 +1,7 @@
+ name: "IEF test"
+ type: module
+ description: "Support module for the Inline entity form module tests."
+-core_version_requirement: ^8.7.7 || ^9 || ^10 || ^11
++core_version_requirement: ^8.7.7 || ^9 || ^10 || ^11 || ^12
+ package: Testing
+ dependencies:
+   - inline_entity_form:inline_entity_form
+diff --git a/tests/modules/inline_entity_form_translation_test/inline_entity_form_translation_test.info.yml b/tests/modules/inline_entity_form_translation_test/inline_entity_form_translation_test.info.yml
+index 2158516..6da4067 100644
+--- a/tests/modules/inline_entity_form_translation_test/inline_entity_form_translation_test.info.yml
++++ b/tests/modules/inline_entity_form_translation_test/inline_entity_form_translation_test.info.yml
+@@ -1,7 +1,7 @@
+ name: "IEF translation test"
+ type: module
+ description: "Support module for the Inline entity form module tests."
+-core_version_requirement: ^8.7.7 || ^9 || ^10 || ^11
++core_version_requirement: ^8.7.7 || ^9 || ^10 || ^11 || ^12
+ package: Testing
+ dependencies:
+   - inline_entity_form_test:inline_entity_form_test

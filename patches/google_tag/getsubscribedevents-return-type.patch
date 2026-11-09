@@ -1,0 +1,13 @@
+diff --git a/src/EventSubscriber/ResponseSubscriber.php b/src/EventSubscriber/ResponseSubscriber.php
+index b5394ba1d68f98f034465b6361dd2533289e3148..ae1c59a42a2c54e6586a2ffcb99b1fb227793727 100644
+--- a/src/EventSubscriber/ResponseSubscriber.php
++++ b/src/EventSubscriber/ResponseSubscriber.php
+@@ -47,7 +47,7 @@ final class ResponseSubscriber implements EventSubscriberInterface {
+   /**
+    * {@inheritDoc}
+    */
+-  public static function getSubscribedEvents() {
++  public static function getSubscribedEvents(): array {
+     return [
+       KernelEvents::RESPONSE => ['onResponse', 0],
+     ];

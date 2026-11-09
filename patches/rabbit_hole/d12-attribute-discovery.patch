@@ -1,0 +1,242 @@
+diff --git a/modules/rh_commerce/rh_commerce.info.yml b/modules/rh_commerce/rh_commerce.info.yml
+index 8d9026e..84b8e3d 100644
+--- a/modules/rh_commerce/rh_commerce.info.yml
++++ b/modules/rh_commerce/rh_commerce.info.yml
+@@ -1,7 +1,7 @@
+ name: Rabbit Hole commerce
+ type: module
+ description: Adds Rabbit Hole functionality for commerce products.
+-core_version_requirement: ^9.5 || ^10 || ^11
++core_version_requirement: ^9.5 || ^10 || ^11 || ^12
+ dependencies:
+   - rabbit_hole:rabbit_hole
+   - commerce:commerce_product
+diff --git a/modules/rh_file/rh_file.info.yml b/modules/rh_file/rh_file.info.yml
+index 04e3878..b1be840 100644
+--- a/modules/rh_file/rh_file.info.yml
++++ b/modules/rh_file/rh_file.info.yml
+@@ -1,7 +1,7 @@
+ name: Rabbit Hole files
+ type: module
+ description: Adds Rabbit Hole functionality for files.
+-core_version_requirement: ^9.5 || ^10 || ^11
++core_version_requirement: ^9.5 || ^10 || ^11 || ^12
+ dependencies:
+   - rabbit_hole:rabbit_hole
+   - file_entity:file_entity
+diff --git a/modules/rh_group/rh_group.info.yml b/modules/rh_group/rh_group.info.yml
+index 1463c25..12dacd1 100644
+--- a/modules/rh_group/rh_group.info.yml
++++ b/modules/rh_group/rh_group.info.yml
+@@ -1,7 +1,7 @@
+ name: Rabbit Hole group
+ type: module
+ description: Adds Rabbit Hole functionality for Group.
+-core_version_requirement: ^9.5 || ^10 || ^11
++core_version_requirement: ^9.5 || ^10 || ^11 || ^12
+ dependencies:
+   - rabbit_hole:rabbit_hole
+   - group:group
+diff --git a/modules/rh_media/rh_media.info.yml b/modules/rh_media/rh_media.info.yml
+index 4e855ec..b95247d 100644
+--- a/modules/rh_media/rh_media.info.yml
++++ b/modules/rh_media/rh_media.info.yml
+@@ -1,7 +1,7 @@
+ name: Rabbit Hole media entity
+ type: module
+ description: Adds Rabbit Hole functionality for media entity.
+-core_version_requirement: ^9.5 || ^10 || ^11
++core_version_requirement: ^9.5 || ^10 || ^11 || ^12
+ dependencies:
+   - rabbit_hole:rabbit_hole
+   - drupal:media
+diff --git a/modules/rh_node/rh_node.info.yml b/modules/rh_node/rh_node.info.yml
+index a95cc79..5b991cb 100644
+--- a/modules/rh_node/rh_node.info.yml
++++ b/modules/rh_node/rh_node.info.yml
+@@ -1,7 +1,7 @@
+ name: Rabbit Hole nodes
+ type: module
+ description: Adds Rabbit Hole functionality for nodes.
+-core_version_requirement: ^9.5 || ^10 || ^11
++core_version_requirement: ^9.5 || ^10 || ^11 || ^12
+ dependencies:
+   - rabbit_hole:rabbit_hole
+   - drupal:node
+diff --git a/modules/rh_paragraphs_library/rh_paragraphs_library.info.yml b/modules/rh_paragraphs_library/rh_paragraphs_library.info.yml
+index 6a250bc..ba07c32 100644
+--- a/modules/rh_paragraphs_library/rh_paragraphs_library.info.yml
++++ b/modules/rh_paragraphs_library/rh_paragraphs_library.info.yml
+@@ -1,7 +1,7 @@
+ name: Rabbit Hole Paragraphs Library
+ type: module
+ description: Adds Rabbit Hole functionality for paragraphs library items.
+-core_version_requirement: ^9.5 || ^10 || ^11
++core_version_requirement: ^9.5 || ^10 || ^11 || ^12
+ dependencies:
+   - rabbit_hole:rabbit_hole
+   - paragraphs:paragraphs_library
+diff --git a/modules/rh_taxonomy/rh_taxonomy.info.yml b/modules/rh_taxonomy/rh_taxonomy.info.yml
+index f7aaf84..6039534 100644
+--- a/modules/rh_taxonomy/rh_taxonomy.info.yml
++++ b/modules/rh_taxonomy/rh_taxonomy.info.yml
+@@ -1,7 +1,7 @@
+ name: Rabbit Hole taxonomy
+ type: module
+ description: Adds Rabbit Hole functionality for taxonomy.
+-core_version_requirement: ^9.5 || ^10 || ^11
++core_version_requirement: ^9.5 || ^10 || ^11 || ^12
+ dependencies:
+   - rabbit_hole:rabbit_hole
+   - drupal:taxonomy
+diff --git a/modules/rh_user/rh_user.info.yml b/modules/rh_user/rh_user.info.yml
+index a24f2e3..0cd77dd 100644
+--- a/modules/rh_user/rh_user.info.yml
++++ b/modules/rh_user/rh_user.info.yml
+@@ -1,7 +1,7 @@
+ name: Rabbit Hole users
+ type: module
+ description: Adds Rabbit Hole functionality for users.
+-core_version_requirement: ^9.5 || ^10 || ^11
++core_version_requirement: ^9.5 || ^10 || ^11 || ^12
+ dependencies:
+   - rabbit_hole:rabbit_hole
+   - drupal:user
+diff --git a/rabbit_hole.info.yml b/rabbit_hole.info.yml
+index 67787c6..3e636a6 100644
+--- a/rabbit_hole.info.yml
++++ b/rabbit_hole.info.yml
+@@ -1,5 +1,5 @@
+ name: Rabbit Hole
+ type: module
+ description: Basic functionality that is shared among the different Rabbit Hole modules.
+-core_version_requirement: ^9.5 || ^10 || ^11
++core_version_requirement: ^9.5 || ^10 || ^11 || ^12
+ package: Other
+diff --git a/src/Attribute/RabbitHoleBehaviorPlugin.php b/src/Attribute/RabbitHoleBehaviorPlugin.php
+new file mode 100644
+index 0000000..afeaffe
+--- /dev/null
++++ b/src/Attribute/RabbitHoleBehaviorPlugin.php
+@@ -0,0 +1,35 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\rabbit_hole\Attribute;
++
++use Drupal\Component\Plugin\Attribute\Plugin;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
++
++/**
++ * Defines a Rabbit hole behavior plugin item attribute object.
++ *
++ * @see \Drupal\rabbit_hole\Plugin\RabbitHoleBehaviorPluginManager
++ * @see plugin_api
++ */
++#[\Attribute(\Attribute::TARGET_CLASS)]
++class RabbitHoleBehaviorPlugin extends Plugin {
++
++  /**
++   * Constructs a RabbitHoleBehaviorPlugin attribute.
++   *
++   * @param string $id
++   *   The plugin ID.
++   * @param \Drupal\Core\StringTranslation\TranslatableMarkup $label
++   *   The label of the plugin.
++   * @param class-string|null $deriver
++   *   (optional) The deriver class.
++   */
++  public function __construct(
++    public readonly string $id,
++    public readonly TranslatableMarkup $label,
++    public readonly ?string $deriver = NULL,
++  ) {}
++
++}
+diff --git a/src/Attribute/RabbitHoleEntityPlugin.php b/src/Attribute/RabbitHoleEntityPlugin.php
+new file mode 100644
+index 0000000..eef8f4f
+--- /dev/null
++++ b/src/Attribute/RabbitHoleEntityPlugin.php
+@@ -0,0 +1,38 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\rabbit_hole\Attribute;
++
++use Drupal\Component\Plugin\Attribute\Plugin;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
++
++/**
++ * Defines a Rabbit hole entity plugin item attribute object.
++ *
++ * @see \Drupal\rabbit_hole\Plugin\RabbitHoleEntityPluginManager
++ * @see plugin_api
++ */
++#[\Attribute(\Attribute::TARGET_CLASS)]
++class RabbitHoleEntityPlugin extends Plugin {
++
++  /**
++   * Constructs a RabbitHoleEntityPlugin attribute.
++   *
++   * @param string $id
++   *   The plugin ID.
++   * @param \Drupal\Core\StringTranslation\TranslatableMarkup $label
++   *   The label of the plugin.
++   * @param string $entityType
++   *   The string id of the affected entity.
++   * @param class-string|null $deriver
++   *   (optional) The deriver class.
++   */
++  public function __construct(
++    public readonly string $id,
++    public readonly TranslatableMarkup $label,
++    public readonly string $entityType,
++    public readonly ?string $deriver = NULL,
++  ) {}
++
++}
+diff --git a/src/Plugin/RabbitHoleBehaviorPluginManager.php b/src/Plugin/RabbitHoleBehaviorPluginManager.php
+index 4c471ab..8189ac6 100644
+--- a/src/Plugin/RabbitHoleBehaviorPluginManager.php
++++ b/src/Plugin/RabbitHoleBehaviorPluginManager.php
+@@ -5,6 +5,7 @@ namespace Drupal\rabbit_hole\Plugin;
+ use Drupal\Core\Cache\CacheBackendInterface;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
+ use Drupal\Core\Plugin\DefaultPluginManager;
++use Drupal\rabbit_hole\Attribute\RabbitHoleBehaviorPlugin as RabbitHoleBehaviorPluginAttribute;
+ 
+ /**
+  * Provides the Rabbit hole behavior plugin plugin manager.
+@@ -23,7 +24,7 @@ class RabbitHoleBehaviorPluginManager extends DefaultPluginManager {
+    *   The module handler to invoke the alter hook with.
+    */
+   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
+-    parent::__construct('Plugin/RabbitHoleBehaviorPlugin', $namespaces, $module_handler, 'Drupal\rabbit_hole\Plugin\RabbitHoleBehaviorPluginInterface', 'Drupal\rabbit_hole\Annotation\RabbitHoleBehaviorPlugin');
++    parent::__construct('Plugin/RabbitHoleBehaviorPlugin', $namespaces, $module_handler, 'Drupal\rabbit_hole\Plugin\RabbitHoleBehaviorPluginInterface', RabbitHoleBehaviorPluginAttribute::class, 'Drupal\rabbit_hole\Annotation\RabbitHoleBehaviorPlugin');
+ 
+     $this->alterInfo('rabbit_hole_rabbit_hole_behavior_plugin_info');
+     $this->setCacheBackend($cache_backend, 'rabbit_hole_rabbit_hole_behavior_plugin_plugins');
+diff --git a/src/Plugin/RabbitHoleEntityPluginManager.php b/src/Plugin/RabbitHoleEntityPluginManager.php
+index d76d5e2..2b85e2f 100644
+--- a/src/Plugin/RabbitHoleEntityPluginManager.php
++++ b/src/Plugin/RabbitHoleEntityPluginManager.php
+@@ -6,6 +6,7 @@ use Drupal\Core\Cache\CacheBackendInterface;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
+ use Drupal\Core\Plugin\DefaultPluginManager;
++use Drupal\rabbit_hole\Attribute\RabbitHoleEntityPlugin as RabbitHoleEntityPluginAttribute;
+ 
+ /**
+  * Provides the Rabbit hole entity plugin manager.
+@@ -33,7 +34,7 @@ class RabbitHoleEntityPluginManager extends DefaultPluginManager {
+    *   The entity type manager.
+    */
+   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler, EntityTypeManagerInterface $entity_type_manager) {
+-    parent::__construct('Plugin/RabbitHoleEntityPlugin', $namespaces, $module_handler, 'Drupal\rabbit_hole\Plugin\RabbitHoleEntityPluginInterface', 'Drupal\rabbit_hole\Annotation\RabbitHoleEntityPlugin');
++    parent::__construct('Plugin/RabbitHoleEntityPlugin', $namespaces, $module_handler, 'Drupal\rabbit_hole\Plugin\RabbitHoleEntityPluginInterface', RabbitHoleEntityPluginAttribute::class, 'Drupal\rabbit_hole\Annotation\RabbitHoleEntityPlugin');
+ 
+     $this->alterInfo('rabbit_hole_rabbit_hole_entity_plugin_info');
+     $this->setCacheBackend($cache_backend, 'rabbit_hole_rabbit_hole_entity_plugin_plugins');

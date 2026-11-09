@@ -1,0 +1,285 @@
+diff --git a/config/schema/google_tag.schema.yml b/config/schema/google_tag.schema.yml
+index d7cfccb..157c58a 100644
+--- a/config/schema/google_tag.schema.yml
++++ b/config/schema/google_tag.schema.yml
+@@ -45,7 +45,8 @@ google_tag.container.*:
+             label: 'Type'
+             constraints:
+               NotNull: []
+-              AllowedValues: ['dimension', 'metric']
++              AllowedValues:
++                choices: ['dimension', 'metric']
+           name:
+             type: string
+             label: 'Name'
+diff --git a/google_tag.info.yml b/google_tag.info.yml
+index f705ba1..e59fc4f 100644
+--- a/google_tag.info.yml
++++ b/google_tag.info.yml
+@@ -1,5 +1,5 @@
+ name: Google Tag
+ description: Sets up Google Tag
+ type: module
+-core_version_requirement: ^9.5 || ^10 || ^11
++core_version_requirement: ^9.5 || ^10 || ^11 || ^12
+ configure: google_tag.settings_form
+\ No newline at end of file
+diff --git a/google_tag.module b/google_tag.module
+index 4cd7f52..4b1f8fe 100644
+--- a/google_tag.module
++++ b/google_tag.module
+@@ -15,12 +15,14 @@ declare(strict_types=1);
+ use Drupal\commerce_checkout\Plugin\Commerce\CheckoutFlow\CheckoutFlowInterface;
+ use Drupal\commerce_product\Entity\ProductInterface;
+ use Drupal\commerce_product\ProductVariationStorageInterface;
+-use Drupal\Core\Cache\CacheableDependencyInterface;
+ use Drupal\Core\Cache\CacheableMetadata;
+ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Hook\Attribute\LegacyHook;
++use Drupal\Core\Hook\Attribute\LegacyModuleImplementsAlter;
+ use Drupal\Core\Routing\RouteMatchInterface;
+ use Drupal\Core\Url;
++use Drupal\google_tag\Hook\GoogleTagHooks;
+ use Drupal\search\SearchPageInterface;
+ 
+ /**
+@@ -39,6 +41,7 @@ function google_tag_theme() {
+ /**
+  * Implements hook_module_implements_alter().
+  */
++#[LegacyModuleImplementsAlter]
+ function google_tag_module_implements_alter(&$implementations, $hook) {
+   if ($hook === 'page_attachments') {
+     // Ensure this module's implementation of the `page_attachments` hook runs
+@@ -97,60 +100,9 @@ function google_tag_page_top(array &$page) {
+ /**
+  * Implements hook_page_attachments().
+  */
++#[LegacyHook]
+ function google_tag_page_attachments(array &$attachments) {
+-  $definition = \Drupal::entityTypeManager()->getDefinition('google_tag_container');
+-  $cacheable_metadata = CacheableMetadata::createFromRenderArray($attachments);
+-  $cacheable_metadata->addCacheTags($definition->getListCacheTags());
+-
+-  /** @var \Drupal\google_tag\Entity\TagContainer|null $config */
+-  $config = \Drupal::service('google_tag.tag_container_resolver')->resolve();
+-
+-  if ($config === NULL) {
+-    $cacheable_metadata->applyTo($attachments);
+-    return;
+-  }
+-  $cacheable_metadata->addCacheableDependency($config);
+-  $cacheable_metadata->applyTo($attachments);
+-
+-  // @todo Put this data into their own respective methods?
+-  // GTM JS embed.
+-  if ($config->getGtmIds() !== []) {
+-    $attachments['#attached']['library'][] = 'google_tag/gtm';
+-    $gtm = [
+-      'tagIds' => $config->getGtmIds(),
+-    ];
+-    $settings = $config->getGtmSettings();
+-    $gtm['settings'] = $settings;
+-    if (isset($settings['include_classes']) && $settings['include_classes'] === TRUE) {
+-      $gtm['settings']['allowlist_classes'] = explode(PHP_EOL, $settings['allowlist_classes']);
+-      $gtm['settings']['blocklist_classes'] = explode(PHP_EOL, $settings['blocklist_classes']);
+-    }
+-    $attachments['#attached']['drupalSettings']['gtm'] = $gtm;
+-  }
+-
+-  // ^ returns the config which is active and the main tag ID.
+-  // @todo if no config, only send events to datalayer.
+-  $attachments['#attached']['library'][] = 'google_tag/gtag';
+-  $attachments['#attached']['library'][] = 'google_tag/gtag.ajax';
+-  $attachments['#attached']['drupalSettings']['gtag'] = [
+-    'tagId' => $config->getDefaultTagId(),
+-    'otherIds' => $config->getAdditionalIds(),
+-    'consentMode' => $config->getConsentMode(),
+-    'events' => [],
+-    'additionalConfigInfo' => \Drupal::service('google_tag.dimensions_metrics_processor')->getValues($config),
+-  ];
+-
+-  $collector = \Drupal::getContainer()->get('google_tag.event_collector');
+-  foreach ($collector->getEvents() as $event) {
+-    $attachments['#attached']['drupalSettings']['gtag']['events'][] = [
+-      'name' => $event->getName(),
+-      'data' => $event->getData(),
+-    ];
+-    if ($event instanceof CacheableDependencyInterface) {
+-      $cacheable_metadata->addCacheableDependency($event);
+-    }
+-  }
+-  $cacheable_metadata->applyTo($attachments);
++  \Drupal::service(GoogleTagHooks::class)->pageAttachments($attachments);
+ }
+ 
+ /**
+diff --git a/google_tag.services.yml b/google_tag.services.yml
+index f7d1741..a335fea 100644
+--- a/google_tag.services.yml
++++ b/google_tag.services.yml
+@@ -47,3 +47,6 @@ services:
+     arguments: [ '@google_tag.event_collector' ]
+     tags:
+       - { name: 'event_subscriber' }
++
++  Drupal\google_tag\Hook\GoogleTagHooks:
++    class: Drupal\google_tag\Hook\GoogleTagHooks
+diff --git a/src/Attribute/GoogleTagEvent.php b/src/Attribute/GoogleTagEvent.php
+new file mode 100644
+index 0000000..ee09710
+--- /dev/null
++++ b/src/Attribute/GoogleTagEvent.php
+@@ -0,0 +1,48 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\google_tag\Attribute;
++
++use Drupal\Component\Plugin\Attribute\Plugin;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
++
++/**
++ * Attribute class for Google tag event plugins.
++ *
++ * @see \Drupal\google_tag\Annotation\GoogleTagEvent
++ * @see \Drupal\google_tag\GoogleTagEventManager
++ * @see plugin_api
++ */
++#[\Attribute(\Attribute::TARGET_CLASS)]
++final class GoogleTagEvent extends Plugin {
++
++  /**
++   * Constructs a GoogleTagEvent attribute.
++   *
++   * @param string $id
++   *   The plugin ID.
++   * @param \Drupal\Core\StringTranslation\TranslatableMarkup $label
++   *   The plugin label.
++   * @param string|null $event_name
++   *   (optional) The event name.
++   * @param \Drupal\Core\StringTranslation\TranslatableMarkup|null $description
++   *   (optional) A short description of the event.
++   * @param string|null $dependency
++   *   (optional) A module dependency, if any.
++   * @param array $context_definitions
++   *   (optional) An array of context definitions describing the context used
++   *   by the plugin, keyed by context names.
++   */
++  public function __construct(
++    public readonly string $id,
++    public readonly TranslatableMarkup $label,
++    public readonly ?string $event_name = NULL,
++    public readonly ?TranslatableMarkup $description = NULL,
++    public readonly ?string $dependency = NULL,
++    public readonly array $context_definitions = [],
++  ) {
++    parent::__construct($id);
++  }
++
++}
+diff --git a/src/GoogleTagEventManager.php b/src/GoogleTagEventManager.php
+index 860e2a9..dfcb5fc 100644
+--- a/src/GoogleTagEventManager.php
++++ b/src/GoogleTagEventManager.php
+@@ -10,6 +10,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
+ use Drupal\Core\Plugin\DefaultPluginManager;
+ use Drupal\Core\Utility\Token;
+ use Drupal\google_tag\Annotation\GoogleTagEvent;
++use Drupal\google_tag\Attribute\GoogleTagEvent as GoogleTagEventAttribute;
+ use Drupal\google_tag\Plugin\GoogleTag\Event\ConfigurableEventBase;
+ use Drupal\google_tag\Plugin\GoogleTag\Event\GoogleTagEventInterface;
+ 
+@@ -44,6 +45,7 @@ final class GoogleTagEventManager extends DefaultPluginManager {
+       $namespaces,
+       $module_handler,
+       GoogleTagEventInterface::class,
++      GoogleTagEventAttribute::class,
+       GoogleTagEvent::class,
+     );
+     $this->alterInfo('google_tag_event_info');
+diff --git a/src/Hook/GoogleTagHooks.php b/src/Hook/GoogleTagHooks.php
+new file mode 100644
+index 0000000..ad9ef3b
+--- /dev/null
++++ b/src/Hook/GoogleTagHooks.php
+@@ -0,0 +1,77 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\google_tag\Hook;
++
++use Drupal\Core\Cache\CacheableDependencyInterface;
++use Drupal\Core\Cache\CacheableMetadata;
++use Drupal\Core\Hook\Attribute\Hook;
++use Drupal\Core\Hook\Order\Order;
++
++/**
++ * Hook implementations for the Google Tag module.
++ */
++class GoogleTagHooks {
++
++  /**
++   * Implements hook_page_attachments().
++   */
++  #[Hook('page_attachments', order: Order::Last)]
++  public function pageAttachments(array &$attachments): void {
++    $definition = \Drupal::entityTypeManager()->getDefinition('google_tag_container');
++    $cacheable_metadata = CacheableMetadata::createFromRenderArray($attachments);
++    $cacheable_metadata->addCacheTags($definition->getListCacheTags());
++
++    /** @var \Drupal\google_tag\Entity\TagContainer|null $config */
++    $config = \Drupal::service('google_tag.tag_container_resolver')->resolve();
++
++    if ($config === NULL) {
++      $cacheable_metadata->applyTo($attachments);
++      return;
++    }
++    $cacheable_metadata->addCacheableDependency($config);
++    $cacheable_metadata->applyTo($attachments);
++
++    // @todo Put this data into their own respective methods?
++    // GTM JS embed.
++    if ($config->getGtmIds() !== []) {
++      $attachments['#attached']['library'][] = 'google_tag/gtm';
++      $gtm = [
++        'tagIds' => $config->getGtmIds(),
++      ];
++      $settings = $config->getGtmSettings();
++      $gtm['settings'] = $settings;
++      if (isset($settings['include_classes']) && $settings['include_classes'] === TRUE) {
++        $gtm['settings']['allowlist_classes'] = explode(PHP_EOL, $settings['allowlist_classes']);
++        $gtm['settings']['blocklist_classes'] = explode(PHP_EOL, $settings['blocklist_classes']);
++      }
++      $attachments['#attached']['drupalSettings']['gtm'] = $gtm;
++    }
++
++    // ^ returns the config which is active and the main tag ID.
++    // @todo if no config, only send events to datalayer.
++    $attachments['#attached']['library'][] = 'google_tag/gtag';
++    $attachments['#attached']['library'][] = 'google_tag/gtag.ajax';
++    $attachments['#attached']['drupalSettings']['gtag'] = [
++      'tagId' => $config->getDefaultTagId(),
++      'otherIds' => $config->getAdditionalIds(),
++      'consentMode' => $config->getConsentMode(),
++      'events' => [],
++      'additionalConfigInfo' => \Drupal::service('google_tag.dimensions_metrics_processor')->getValues($config),
++    ];
++
++    $collector = \Drupal::getContainer()->get('google_tag.event_collector');
++    foreach ($collector->getEvents() as $event) {
++      $attachments['#attached']['drupalSettings']['gtag']['events'][] = [
++        'name' => $event->getName(),
++        'data' => $event->getData(),
++      ];
++      if ($event instanceof CacheableDependencyInterface) {
++        $cacheable_metadata->addCacheableDependency($event);
++      }
++    }
++    $cacheable_metadata->applyTo($attachments);
++  }
++
++}
