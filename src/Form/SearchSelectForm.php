@@ -20,7 +20,7 @@ class SearchSelectForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, array &$install_state = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?array &$install_state = NULL) {
     $form['#title'] = $this->t('Select Website Services Search');
 
     $form['service'] = [
